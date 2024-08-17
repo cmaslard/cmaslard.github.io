@@ -1,0 +1,13 @@
+---
+title: "Tools"
+listing:
+  image-align: left
+  image-height: "3cm"
+  categories: true
+  sort: 
+    - "date desc"
+    - "title"
+  sort-ui: true
+  contents: 
+    - "tools/*qmd"
+---

@@ -1,0 +1,10 @@
+---
+title: "deep_learning_segmentation"
+subtitle: "This tool enables fast, deep learning (Reinforcement Learning) segmentation of high-resolution images. The script then performs measurements such as projected area, shape width and height, perimeter, skeleton..."
+format: html
+editor: visual
+author: Corentin Maslard
+date: 2021-01-01
+image: "media/deep_learning_segmentation/overlay_modif.png"
+categories: [root, image, deep learning, python]
+---

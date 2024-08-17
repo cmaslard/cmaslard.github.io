@@ -1,5 +1,12 @@
 [
   {
+    "objectID": "tools.html",
+    "href": "tools.html",
+    "title": "Tools",
+    "section": "",
+    "text": "Order By\n       Default\n         \n          Title\n        \n         \n          Date - Oldest\n        \n         \n          Date - Newest\n        \n         \n          Author\n        \n     \n  \n\n\n\n\n\n\n\n\n\n\nmacro_angle\n\n\nThe purpose of this tool is to quickly measure the angles formed by the roots for each branch\n\n\n\nroot\n\n\nimage\n\n\njava\n\n\nfiji\n\n\n\n\n\n\n\n\n\nJan 1, 2022\n\n\nCorentin Maslard\n\n\n\n\n\n\n\n\n\n\n\n\ndeep_learning_segmentation\n\n\nThis tool enables fast, deep learning (Reinforcement Learning) segmentation of high-resolution images. The script then performs measurements such as projected area, shape width and height, perimeter, skeleton…\n\n\n\nroot\n\n\nimage\n\n\ndeep learning\n\n\npython\n\n\n\n\n\n\n\n\n\nJan 1, 2021\n\n\nCorentin Maslard\n\n\n\n\n\n\nNo matching items"
+  },
+  {
     "objectID": "me.html",
     "href": "me.html",
     "title": "About",
@@ -25,6 +32,6 @@
     "href": "index.html",
     "title": "Welcome !",
     "section": "",
-    "text": "Hi, I am Corentin (he/him) and this is my research website!\nMy research aims to understand how plants can better adapt to changes in water availability and rising temperatures throughout their growth cycle. To do this, I’m focus on the study of root structures and their interactions with micro-organisms. My broader aim is to contribute to the development of sustainable agroecosystems capable of withstanding future challenges such as increasing temperatures and drought event frequencies, while optimizing crop yields and soil health.\nGiven the complexity of the relationships between plants and micro-organisms, this research requires innovative and integrative strategies. I use plant phenotyping techniques alongside advanced data analysis tools, including deep learning and omics approaches such as high-throughput sequencing, metabolomics and ionomics. By merging computational methods with cutting-edge biological knowledge, I aim to push the boundaries of plant research and contribute to the creation of resilient agricultural systems.\nI believe in Open Science, the importance of science communication and good bread.\nI am currently a post-doctoral student at INRAe (National Research Institute for Agriculture, Food and the Environment) in the UMR Agroécologie in Dijon."
+    "text": "Hi, I am Corentin (he/him) and this is my research website!\nMy research aims to understand how plants can better adapt to changes in water availability and rising temperatures throughout their growth cycle. To do this, I’m focus on the study of root structures and their interactions with micro-organisms. My broader aim is to contribute to the development of sustainable agroecosystems capable of withstanding future challenges such as increasing temperatures and drought event frequencies, while optimizing crop yields and soil health.\nGiven the complexity of the relationships between plants and micro-organisms, this research requires innovative and integrative strategies. I use plant phenotyping techniques alongside advanced data analysis tools, including deep learning and omics approaches such as high-throughput sequencing, metabolomics and ionomics. By merging computational methods with cutting-edge biological knowledge, I aim to push the boundaries of plant research and contribute to the creation of resilient agricultural systems.\nI believe in Open Science and the importance of science communication.\nI am currently a post-doctoral student at INRAe (National Research Institute for Agriculture, Food and the Environment) in the UMR Agroécologie in Dijon."
   }
 ]

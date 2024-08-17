@@ -1,0 +1,10 @@
+---
+title: "macro_angle"
+subtitle: "The purpose of this tool is to quickly measure the angles formed by the roots for each branch"
+format: html
+editor: visual
+author: Corentin Maslard
+date: 2022-01-01
+categories: [root, image, java, fiji]
+image: "media/macro_angle/exemple.png"
+---
