@@ -1,3 +1,5 @@
-# cmaslard.github.io
+# Welcome !
 
-Dr. Corentin Maslard is a research scientist in plant biology.
+Hi, I am Corentin (he/him) and this is my research website!
+
+I believe in Open Science, the importance of science communication and good bread.
