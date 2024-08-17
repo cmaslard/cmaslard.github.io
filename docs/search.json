@@ -2,29 +2,29 @@
   {
     "objectID": "me.html",
     "href": "me.html",
-    "title": "Maslard Corentin",
+    "title": "About",
     "section": "",
-    "text": "Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see https://quarto.org."
+    "text": "Finley Malloc is the Chief Data Scientist at Wengo Analytics. When not innovating on data platforms, Finley enjoys spending time unicycling and playing with her pet iguana.\n\n\nUniversity of California, San Diego | San Diego, CA PhD in Mathematics | Sept 2011 - June 2015\nMacalester College | St. Paul MA B.A in Economics | Sept 2007 - June 2011\n\n\n\nWengo Analytics | Head Data Scientist | April 2018 - present\nGeoScynce | Chief Analyst | Sept 2012 - April 2018"
   },
   {
-    "objectID": "me.html#about",
-    "href": "me.html#about",
-    "title": "Maslard Corentin",
+    "objectID": "me.html#education",
+    "href": "me.html#education",
+    "title": "About",
     "section": "",
-    "text": "Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see https://quarto.org."
+    "text": "University of California, San Diego | San Diego, CA PhD in Mathematics | Sept 2011 - June 2015\nMacalester College | St. Paul MA B.A in Economics | Sept 2007 - June 2011"
   },
   {
-    "objectID": "me.html#running-code",
-    "href": "me.html#running-code",
-    "title": "Maslard Corentin",
-    "section": "Running Code",
-    "text": "Running Code\nWhen you click the Render button a document will be generated that includes both content and the output of embedded code. You can embed code like this:\n\n1 + 2\n\n[1] 3\n\n\nYou can add options to executable code like this\n\n\n[1] 4\n\n\nThe echo: false option disables the printing of code (only output is displayed)."
+    "objectID": "me.html#experience",
+    "href": "me.html#experience",
+    "title": "About",
+    "section": "",
+    "text": "Wengo Analytics | Head Data Scientist | April 2018 - present\nGeoScynce | Chief Analyst | Sept 2012 - April 2018"
   },
   {
     "objectID": "index.html",
     "href": "index.html",
     "title": "Welcome !",
     "section": "",
-    "text": "page content excluded for brevity ~"
+    "text": "Hi, I am Corentin (he/him) and this is my research website!\nMy research aims to understand how plants can better adapt to changes in water availability and rising temperatures throughout their growth cycle. To do this, I’m focus on the study of root structures and their interactions with micro-organisms. My broader aim is to contribute to the development of sustainable agroecosystems capable of withstanding future challenges such as increasing temperatures and drought event frequencies, while optimizing crop yields and soil health.\nGiven the complexity of the relationships between plants and micro-organisms, this research requires innovative and integrative strategies. I use plant phenotyping techniques alongside advanced data analysis tools, including deep learning and omics approaches such as high-throughput sequencing, metabolomics and ionomics. By merging computational methods with cutting-edge biological knowledge, I aim to push the boundaries of plant research and contribute to the creation of resilient agricultural systems.\nI believe in Open Science, the importance of science communication and good bread.\nI am currently a post-doctoral student at INRAe (National Research Institute for Agriculture, Food and the Environment) in the UMR Agroécologie in Dijon."
   }
 ]

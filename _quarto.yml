@@ -4,15 +4,15 @@ project:
 lang: en
 
 website:
-  title: "Maslard Corentin"
+  title: "Corentin Maslard"
   navbar:
     left:
       - href: index.qmd
-        text: Home
+        text: " "
       - href: me.qmd
 
 format:
   html:
     theme: cosmo
     css: styles.css
-    toc: true
+    toc: false

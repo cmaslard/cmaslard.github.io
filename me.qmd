@@ -1,5 +1,6 @@
 ---
-subtitle: About me
+title: About
+subtitle: Where to find me online
 image: media/headshot.jpg
 toc: false
 about: 
@@ -26,23 +27,26 @@ about:
       aria-label: "ORCID logo linking to ORCID account"
 ---
 
-## About
+### This content appears above the formatted about page content.
 
-Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <https://quarto.org>.
+:::{#hero-heading}
 
-## Running Code
+Finley Malloc is the Chief Data Scientist at Wengo Analytics. When not innovating on data platforms, Finley enjoys spending time unicycling and playing with her pet iguana.
 
-When you click the **Render** button a document will be generated that includes both content and the output of embedded code. You can embed code like this:
+## Education
 
-```{r}
-1 + 2
-```
+University of California, San Diego | San Diego, CA
+PhD in Mathematics | Sept 2011 - June 2015
 
-You can add options to executable code like this
+Macalester College | St. Paul MA
+B.A in Economics | Sept 2007 - June 2011
 
-```{r}
-#| echo: false
-2 * 2
-```
+## Experience
 
-The `echo: false` option disables the printing of code (only output is displayed).
+Wengo Analytics | Head Data Scientist | April 2018 - present
+
+GeoScynce | Chief Analyst | Sept 2012 - April 2018
+
+:::
+
+### This content appears below the formatted about page content.
