@@ -7,12 +7,23 @@ about:
   image-shape: round
   image-width: 15em
   links:
+    - text: "{{< iconify fa6-solid:envelope >}} Email"
+      href: "mailto:maslard.corentin@gmail.com"
+      aria-label: "envelope logo for email"
     - icon: github
       text: Github
       href: https://github.com/cmaslard
     - icon: linkedin
       text: LinkedIn
       href: https://www.linkedin.com/in/corentin-maslard
+    - text: "{{< iconify fa6-brands square-x-twitter >}} X (Twiter)"
+      href: https://x.com/cmaslard
+    - text: "{{< iconify fa6-brands:orcid >}} ORCID"
+      href: "https://orcid.org/0000-0002-6951-1963"
+      aria-label: "ORCID logo linking to ORCID account"
+    - text: "{{< iconify fa6-brands:researchgate >}} ResearchGate"
+      href: "https://orcid.org/0000-0002-6951-1963"
+      aria-label: "ORCID logo linking to ORCID account"
 ---
 
 ## ME page 2 hello word test 
