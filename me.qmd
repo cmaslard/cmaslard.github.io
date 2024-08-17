@@ -26,7 +26,7 @@ about:
       aria-label: "ORCID logo linking to ORCID account"
 ---
 
-## ME page 2 hello word test 
+## About
 
 Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <https://quarto.org>.
 
