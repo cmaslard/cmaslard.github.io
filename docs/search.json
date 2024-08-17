@@ -2,22 +2,29 @@
   {
     "objectID": "me.html",
     "href": "me.html",
-    "title": "me",
+    "title": "Maslard Corentin",
     "section": "",
     "text": "Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see https://quarto.org."
   },
   {
     "objectID": "me.html#me-page-2-hello-word-test",
     "href": "me.html#me-page-2-hello-word-test",
-    "title": "me",
+    "title": "Maslard Corentin",
     "section": "",
     "text": "Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see https://quarto.org."
   },
   {
     "objectID": "me.html#running-code",
     "href": "me.html#running-code",
-    "title": "me",
+    "title": "Maslard Corentin",
     "section": "Running Code",
     "text": "Running Code\nWhen you click the Render button a document will be generated that includes both content and the output of embedded code. You can embed code like this:\n\n1 + 2\n\n[1] 3\n\n\nYou can add options to executable code like this\n\n\n[1] 4\n\n\nThe echo: false option disables the printing of code (only output is displayed)."
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Welcome !",
+    "section": "",
+    "text": "page content excluded for brevity ~"
   }
 ]

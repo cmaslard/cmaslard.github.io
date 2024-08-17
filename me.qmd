@@ -1,7 +1,18 @@
 ---
-title: "me"
-format: html
-editor: visual
+subtitle: About me
+image: media/headshot.jpg
+toc: false
+about: 
+  template: trestles
+  image-shape: round
+  image-width: 15em
+  links:
+    - icon: github
+      text: Github
+      href: https://github.com/cmaslard
+    - icon: linkedin
+      text: LinkedIn
+      href: https://www.linkedin.com/in/corentin-maslard
 ---
 
 ## ME page 2 hello word test 

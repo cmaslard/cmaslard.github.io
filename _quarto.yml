@@ -2,3 +2,17 @@ project:
   type: website
   output-dir: docs
 lang: en
+
+website:
+  title: "Maslard Corentin"
+  navbar:
+    left:
+      - href: index.qmd
+        text: Home
+      - href: me.qmd
+
+format:
+  html:
+    theme: cosmo
+    css: styles.css
+    toc: true
