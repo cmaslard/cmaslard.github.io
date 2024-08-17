@@ -23,8 +23,8 @@ about:
       href: "https://orcid.org/0000-0002-6951-1963"
       aria-label: "ORCID logo linking to ORCID account"
     - text: "{{< iconify fa6-brands:researchgate >}} ResearchGate"
-      href: "https://orcid.org/0000-0002-6951-1963"
-      aria-label: "ORCID logo linking to ORCID account"
+      href: "https://www.researchgate.net/profile/Corentin-Maslard"
+      aria-label: "ResearchGate logo linking to ResearchGate account"
 ---
 
 ### This content appears above the formatted about page content.
