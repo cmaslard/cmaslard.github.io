@@ -14,9 +14,33 @@ website:
       - href: tools.qmd
       - href: publications.qmd
 
+  page-footer: 
+      border: true
+      left: 
+        - icon: badge-cc-fill
+          url: https://creativecommons.org/licenses/by-nc-sa/4.0/
+        - text: "Corentin Maslard"
+          href: "https://www.cmaslard.xyz/"
+      right:
+        - text: "{{< iconify fa6-solid:envelope >}} Email"
+          href: "mailto:maslard.corentin@gmail.com"
+          aria-label: "envelope logo for email"
+        - text: "{{< iconify fa6-brands:github >}} GitHub"
+          href: https://github.com/cmaslard
+        - text: "{{< iconify fa6-brands:linkedin >}} GitHub"
+          href: https://www.linkedin.com/in/corentin-maslard
+        - text: "{{< iconify fa6-brands square-x-twitter >}} X (Twiter)"
+          href: https://x.com/cmaslard
+        - text: "{{< iconify fa6-brands:orcid >}} ORCID"
+          href: "https://orcid.org/0000-0002-6951-1963"
+          aria-label: "ORCID logo linking to ORCID account"
+        - text: "{{< iconify fa6-brands:researchgate >}} ResearchGate"
+          href: "https://www.researchgate.net/profile/Corentin-Maslard"
+          aria-label: "ResearchGate logo linking to ResearchGate account"
 format:
   html:
     theme: 
       light: cosmo
       dark: [cosmo, theme-dark.scss]
     toc: false
+    
