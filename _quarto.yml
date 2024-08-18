@@ -5,6 +5,7 @@ lang: en
 
 website:
   title: "Corentin Maslard"
+  favicon: media/growing-plant.png
   navbar:
     left:
       - href: index.qmd
@@ -15,6 +16,7 @@ website:
 
 format:
   html:
-    theme: cosmo
-    css: styles.css
+    theme: 
+      light: cosmo
+      dark: [cosmo, theme-dark.scss]
     toc: false
