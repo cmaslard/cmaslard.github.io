@@ -22,19 +22,19 @@ website:
         - text: "Corentin Maslard"
           href: "https://www.cmaslard.xyz/"
       right:
-        - text: "{{< iconify fa6-solid:envelope >}} Email"
+        - text: "{{< iconify fa6-solid:envelope >}}"
           href: "mailto:maslard.corentin@gmail.com"
           aria-label: "envelope logo for email"
-        - text: "{{< iconify fa6-brands:github >}} GitHub"
+        - text: "{{< iconify fa6-brands:github >}}"
           href: https://github.com/cmaslard
-        - text: "{{< iconify fa6-brands:linkedin >}} GitHub"
+        - text: "{{< iconify fa6-brands:linkedin >}}"
           href: https://www.linkedin.com/in/corentin-maslard
-        - text: "{{< iconify fa6-brands square-x-twitter >}} X (Twiter)"
+        - text: "{{< iconify fa6-brands square-x-twitter >}}"
           href: https://x.com/cmaslard
-        - text: "{{< iconify fa6-brands:orcid >}} ORCID"
+        - text: "{{< iconify fa6-brands:orcid >}}"
           href: "https://orcid.org/0000-0002-6951-1963"
           aria-label: "ORCID logo linking to ORCID account"
-        - text: "{{< iconify fa6-brands:researchgate >}} ResearchGate"
+        - text: "{{< iconify fa6-brands:researchgate >}}"
           href: "https://www.researchgate.net/profile/Corentin-Maslard"
           aria-label: "ResearchGate logo linking to ResearchGate account"
 format:
