@@ -3,3 +3,8 @@ title: "Publications"
 format: html
 editor: visual
 ---
+
+|N° | Title       | Author      | Journal | File          |
+|---|----------------|----------------|----------------|-------------------|
+|2| Root architecture characterization in relation to biomass allocation and biological nitrogen fixation in a collection of European soybean genotypes| Corentin Maslard, Mustapha Arkoun, Christophe Salon and Marion Prudent | OCL | <span class="faux-block">[{{< iconify line-md:download-loop width="1.2em" height="1.2em" >}}](media/publications/2.pdf) [{{< iconify line-md link width="1.2em" height="1.2em" >}}](https://doi.org/10.1051/ocl/2021033) <iconify-icon icon="mdi:unlocked-variant-outline" width="1.2em" height="1.2em"  style="color: #58a53b"></iconify-icon> <iconify-icon icon="line-md:cog-loop" width="1.2em" height="1.2em"  style="color: #58a53b"></iconify-icon></span> |
+|1| Pentadecaibins I−V: 15-Residue Peptaibols Produced by a Marine-Derived *Trichoderma* sp. of the *Harzianum* Clade         | Anne-Isaline van Bohemen, Nicolas Ruiz,* Aurore Zalouk-Vergnoux, Aurore Michaud, Thibaut Robiou du Pont, Irina Druzhinina, Lea Atanasova, Soizic Prado, Bernard Bodo, Laurence Meslet-Cladiere, Bastien Cochereau, Franck Bastide, **Corentin Maslard**, Muriel Marchi, Thomas Guillemette and Yves François Pouchus | Journal of Natural Products| <span class="faux-block">[{{< iconify line-md:download-loop width="1.2em" height="1.2em" >}}]( media/publications/1.pdf) [{{< iconify line-md link width="1.2em" height="1.2em" >}}](https://dx.doi.org/10.1021/acs.jnatprod.0c01355)</span>|

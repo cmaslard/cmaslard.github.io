@@ -142,6 +142,33 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<table class="table">
+<thead>
+<tr class="header">
+<th>N°</th>
+<th>Title</th>
+<th>Author</th>
+<th>Journal</th>
+<th>File</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>2</td>
+<td>Root architecture characterization in relation to biomass allocation and biological nitrogen fixation in a collection of European soybean genotypes</td>
+<td>Corentin Maslard, Mustapha Arkoun, Christophe Salon and Marion Prudent</td>
+<td>OCL</td>
+<td><span class="faux-block"><a href="media/publications/2.pdf"><iconify-icon role="img" inline="" icon="line-md:download-loop" aria-label="Icon download-loop from line-md Iconify.design set." title="Icon download-loop from line-md Iconify.design set." width="1.2em" height="1.2em"></iconify-icon></a> <a href="https://doi.org/10.1051/ocl/2021033"><iconify-icon role="img" inline="" icon="line-md:link" aria-label="Icon link from line-md Iconify.design set." title="Icon link from line-md Iconify.design set." width="1.2em" height="1.2em"></iconify-icon></a> <iconify-icon icon="mdi:unlocked-variant-outline" width="1.2em" height="1.2em" style="color: #58a53b"></iconify-icon> <iconify-icon icon="line-md:cog-loop" width="1.2em" height="1.2em" style="color: #58a53b"></iconify-icon></span></td>
+</tr>
+<tr class="even">
+<td>1</td>
+<td>Pentadecaibins I−V: 15-Residue Peptaibols Produced by a Marine-Derived <em>Trichoderma</em> sp. of the <em>Harzianum</em> Clade</td>
+<td>Anne-Isaline van Bohemen, Nicolas Ruiz,* Aurore Zalouk-Vergnoux, Aurore Michaud, Thibaut Robiou du Pont, Irina Druzhinina, Lea Atanasova, Soizic Prado, Bernard Bodo, Laurence Meslet-Cladiere, Bastien Cochereau, Franck Bastide, <strong>Corentin Maslard</strong>, Muriel Marchi, Thomas Guillemette and Yves François Pouchus</td>
+<td>Journal of Natural Products</td>
+<td><span class="faux-block"><a href="media/publications/1.pdf"><iconify-icon role="img" inline="" icon="line-md:download-loop" aria-label="Icon download-loop from line-md Iconify.design set." title="Icon download-loop from line-md Iconify.design set." width="1.2em" height="1.2em"></iconify-icon></a> <a href="https://dx.doi.org/10.1021/acs.jnatprod.0c01355"><iconify-icon role="img" inline="" icon="line-md:link" aria-label="Icon link from line-md Iconify.design set." title="Icon link from line-md Iconify.design set." width="1.2em" height="1.2em"></iconify-icon></a></span></td>
+</tr>
+</tbody>
+</table>
 
 
 
@@ -371,7 +398,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   });
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp('/' + window.location.host + '/');
+      var filterRegex = new RegExp("https:\/\/cmaslard\.xyz");
     var isInternal = (href) => {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }
@@ -712,15 +739,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   </li>  
     <li class="nav-item">
     <a class="nav-link" href="https://www.cmaslard.xyz/">
-<p>Corentin Maslard</p>
+<p>Corentin Maslard 2024</p>
 </a>
   </li>  
 </ul>
     </div>   
     <div class="nav-footer-center">
-      &nbsp;
-    </div>
-    <div class="nav-footer-right">
       <ul class="footer-items list-unstyled">
     <li class="nav-item">
     <a class="nav-link" href="mailto:maslard.corentin@gmail.com">
@@ -754,6 +778,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   </li>  
 </ul>
     </div>
+    <div class="nav-footer-right">
+<p><span class="faux-block">Made with <iconify-icon role="img" inline="" icon="fa6-brands:r-project" aria-label="Icon r-project from fa6-brands Iconify.design set." title="Icon r-project from fa6-brands Iconify.design set."></iconify-icon> and <a href="https://quarto.org/">Quarto</a></span> | <span class="faux-block"><a href="&quot;https://github.com/cmaslard/cmaslard.github.io&quot;">View the source at <iconify-icon role="img" inline="" icon="fa6-brands:github" aria-label="Icon github from fa6-brands Iconify.design set." title="Icon github from fa6-brands Iconify.design set."></iconify-icon> GitHub</a></span></p>
+</div>
   </div>
 </footer>
 

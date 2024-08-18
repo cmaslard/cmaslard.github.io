@@ -6,6 +6,8 @@ lang: en
 website:
   title: "Corentin Maslard"
   favicon: media/growing-plant.png
+  site-url: "https://cmaslard.xyz"
+  repo-url: "https://github.com/cmaslard/cmaslard.github.io"
   navbar:
     left:
       - href: index.qmd
@@ -19,9 +21,10 @@ website:
       left: 
         - icon: badge-cc-fill
           url: https://creativecommons.org/licenses/by-nc-sa/4.0/
-        - text: "Corentin Maslard"
-          href: "https://www.cmaslard.xyz/"
-      right:
+        - text: "Corentin Maslard 2024"
+          href: "https://www.cmaslard.xyz/" 
+        
+      center:
         - text: "{{< iconify fa6-solid:envelope >}}"
           href: "mailto:maslard.corentin@gmail.com"
           aria-label: "envelope logo for email"
@@ -37,6 +40,10 @@ website:
         - text: "{{< iconify fa6-brands:researchgate >}}"
           href: "https://www.researchgate.net/profile/Corentin-Maslard"
           aria-label: "ResearchGate logo linking to ResearchGate account"
+      right:
+          <span class="faux-block">Made with {{< iconify fa6-brands r-project >}} and [Quarto](https://quarto.org/)</span> |
+          <span class="faux-block">[View the source at {{< iconify fa6-brands github >}} GitHub]( "https://github.com/cmaslard/cmaslard.github.io")</span>
+
 format:
   html:
     theme: 
