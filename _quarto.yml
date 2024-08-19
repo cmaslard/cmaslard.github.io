@@ -4,6 +4,12 @@ project:
 lang: en
 
 website:
+  announcement: 
+    icon: info-circle
+    dismissable: true
+    content: "**Alert** I am available for a postdoctoral position starting January 2025. Feel free to contact me for opportunities or collaborations 😉"
+    type: danger
+    position: below-navbar
   title: "Corentin Maslard"
   favicon: media/growing-plant.png
   site-url: "https://cmaslard.xyz"
