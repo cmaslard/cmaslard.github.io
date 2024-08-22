@@ -27,24 +27,28 @@ about:
       aria-label: "ResearchGate logo linking to ResearchGate account"
 ---
 
-### This content appears above the formatted about page content.
+### Hi there !
 
 :::{#hero-heading}
 
-Finley Malloc is the Chief Data Scientist at Wengo Analytics. When not innovating on data platforms, Finley enjoys spending time unicycling and playing with her pet iguana.
+Hi there! I'm a passionate **postdoctoral researcher** with a deep love for exploring the fascinating world of **plants and their intricate interactions with the environment**. My work focuses on understanding how plants respond to challenging conditions like water stress and extreme temperatures, as well as the role **microorganisms** play in these responses. This area of research is especially important as we seek to understand and mitigate the impacts of climate change.
+
+I thrive in **multidisciplinary settings**, combining lab work, bioinformatics, microbiology, and field studies to uncover the secrets of plant resilience. I'm particularly drawn to the power of omics data and its analysis, which allows us to delve deeper into the molecular mechanisms that drive plant and microbe interactions under stress conditions.
+
+When I’m not immersed in research, I love spending quality time with my family and friends, and staying active through sports.
 
 ## Education
 
-University of California, San Diego | San Diego, CA
-PhD in Mathematics | Sept 2011 - June 2015
+University of Burgundy, Dijon | France
+PhD in Biology | April 2021 - September 2024
 
-Macalester College | St. Paul MA
-B.A in Economics | Sept 2007 - June 2011
+University of Angers| France
+Master's Degree in Plant Biology | Sept 2018 - June 2020
 
 ## Experience
 
-Wengo Analytics | Head Data Scientist | April 2018 - present
+Postdoctoral researcher | Data Scientist | Septembre 2024 - present
 
-GeoScynce | Chief Analyst | Sept 2012 - April 2018
+INRAe | PhD Student | April 2021 - September 2024
 
 :::

@@ -1,3 +1,3 @@
 # Welcome !
 
-Hi, I am Corentin (he/him) and this is my research website!
+Hi, I am Corentin and this is my research website!

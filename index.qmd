@@ -7,7 +7,7 @@ about:
   template: solana
 ---
 
-Hi, I am Corentin (he/him) and this is my research website!
+Hi, I am Corentin and this is my research website!
 
 My research aims to understand how **plants** can better adapt to changes in water availability and rising temperatures throughout their growth cycle. To do this, I'm focus on the study of **root** structures and their interactions with **micro-organisms**. My broader aim is to contribute to the development of sustainable agroecosystems capable of withstanding future challenges such as **increasing temperatures** and **drought** event frequencies, while optimizing crop yields and soil health.
 

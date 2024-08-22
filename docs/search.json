@@ -7,38 +7,45 @@
     "text": "Order By\n       Default\n         \n          Title\n        \n         \n          Date - Oldest\n        \n         \n          Date - Newest\n        \n         \n          Author\n        \n     \n  \n\n\n\n\n\n\n\n\n\n\nmacro_angle\n\n\nThe purpose of this tool is to quickly measure the angles formed by the roots for each branch\n\n\n\nroot\n\n\nimage\n\n\njava\n\n\nfiji\n\n\n\n\n\n\n\n\n\nJan 1, 2022\n\n\nCorentin Maslard\n\n\n\n\n\n\n\n\n\n\n\n\ndeep_learning_segmentation\n\n\nThis tool enables fast, deep learning (Reinforcement Learning) segmentation of high-resolution images. The script then performs measurements such as projected area, shape width and height, perimeter, skeleton…\n\n\n\nroot\n\n\nimage\n\n\ndeep learning\n\n\npython\n\n\n\n\n\n\n\n\n\nJan 1, 2021\n\n\nCorentin Maslard\n\n\n\n\n\n\nNo matching items"
   },
   {
-    "objectID": "me.html",
-    "href": "me.html",
-    "title": "About",
+    "objectID": "projects.html",
+    "href": "projects.html",
+    "title": "Projects",
     "section": "",
-    "text": "Finley Malloc is the Chief Data Scientist at Wengo Analytics. When not innovating on data platforms, Finley enjoys spending time unicycling and playing with her pet iguana.\n\n\nUniversity of California, San Diego | San Diego, CA PhD in Mathematics | Sept 2011 - June 2015\nMacalester College | St. Paul MA B.A in Economics | Sept 2007 - June 2011\n\n\n\nWengo Analytics | Head Data Scientist | April 2018 - present\nGeoScynce | Chief Analyst | Sept 2012 - April 2018"
-  },
-  {
-    "objectID": "me.html#education",
-    "href": "me.html#education",
-    "title": "About",
-    "section": "",
-    "text": "University of California, San Diego | San Diego, CA PhD in Mathematics | Sept 2011 - June 2015\nMacalester College | St. Paul MA B.A in Economics | Sept 2007 - June 2011"
-  },
-  {
-    "objectID": "me.html#experience",
-    "href": "me.html#experience",
-    "title": "About",
-    "section": "",
-    "text": "Wengo Analytics | Head Data Scientist | April 2018 - present\nGeoScynce | Chief Analyst | Sept 2012 - April 2018"
+    "text": "No matching items"
   },
   {
     "objectID": "index.html",
     "href": "index.html",
     "title": "Welcome !",
     "section": "",
-    "text": "Hi, I am Corentin (he/him) and this is my research website!\nMy research aims to understand how plants can better adapt to changes in water availability and rising temperatures throughout their growth cycle. To do this, I’m focus on the study of root structures and their interactions with micro-organisms. My broader aim is to contribute to the development of sustainable agroecosystems capable of withstanding future challenges such as increasing temperatures and drought event frequencies, while optimizing crop yields and soil health.\nGiven the complexity of the relationships between plants and micro-organisms, this research requires innovative and integrative strategies. I use plant phenotyping techniques alongside advanced data analysis tools, including deep learning and omics approaches such as high-throughput sequencing, metabolomics and ionomics. By merging computational methods with cutting-edge biological knowledge, I aim to push the boundaries of plant research and contribute to the creation of resilient agricultural systems.\nI believe in Open Science and the importance of science communication.\nI am currently a post-doctoral student at INRAe (National Research Institute for Agriculture, Food and the Environment) in the UMR Agroécologie in Dijon."
+    "text": "Hi, I am Corentin and this is my research website!\nMy research aims to understand how plants can better adapt to changes in water availability and rising temperatures throughout their growth cycle. To do this, I’m focus on the study of root structures and their interactions with micro-organisms. My broader aim is to contribute to the development of sustainable agroecosystems capable of withstanding future challenges such as increasing temperatures and drought event frequencies, while optimizing crop yields and soil health.\nGiven the complexity of the relationships between plants and micro-organisms, this research requires innovative and integrative strategies. I use plant phenotyping techniques alongside advanced data analysis tools, including deep learning and omics approaches such as high-throughput sequencing, metabolomics and ionomics. By merging computational methods with cutting-edge biological knowledge, I aim to push the boundaries of plant research and contribute to the creation of resilient agricultural systems.\nI believe in Open Science and the importance of science communication.\nI am currently a post-doctoral student at INRAe (National Research Institute for Agriculture, Food and the Environment) in the UMR Agroécologie in Dijon."
+  },
+  {
+    "objectID": "me.html",
+    "href": "me.html",
+    "title": "About",
+    "section": "",
+    "text": "Hi there! I’m a passionate postdoctoral researcher with a deep love for exploring the fascinating world of plants and their intricate interactions with the environment. My work focuses on understanding how plants respond to challenging conditions like water stress and extreme temperatures, as well as the role microorganisms play in these responses. This area of research is especially important as we seek to understand and mitigate the impacts of climate change.\nI thrive in multidisciplinary settings, combining lab work, bioinformatics, microbiology, and field studies to uncover the secrets of plant resilience. I’m particularly drawn to the power of omics data and its analysis, which allows us to delve deeper into the molecular mechanisms that drive plant and microbe interactions under stress conditions.\nWhen I’m not immersed in research, I love spending quality time with my family and friends, and staying active through sports.\n\n\nUniversity of Burgundy, Dijon | France PhD in Biology | April 2021 - September 2024\nUniversity of Angers| France Master’s Degree in Plant Biology | Sept 2018 - June 2020\n\n\n\nPostdoctoral researcher | Data Scientist | Septembre 2024 - present\nINRAe | PhD Student | April 2021 - September 2024"
+  },
+  {
+    "objectID": "me.html#education",
+    "href": "me.html#education",
+    "title": "About",
+    "section": "",
+    "text": "University of Burgundy, Dijon | France PhD in Biology | April 2021 - September 2024\nUniversity of Angers| France Master’s Degree in Plant Biology | Sept 2018 - June 2020"
+  },
+  {
+    "objectID": "me.html#experience",
+    "href": "me.html#experience",
+    "title": "About",
+    "section": "",
+    "text": "Postdoctoral researcher | Data Scientist | Septembre 2024 - present\nINRAe | PhD Student | April 2021 - September 2024"
   },
   {
     "objectID": "publications.html",
     "href": "publications.html",
     "title": "Publications",
     "section": "",
-    "text": "N°\nTitle\nAuthor\nYears\nJournal\n\n\n\n\n\n4\nDecoding the Double Stress Puzzle: Investigating Nutrient Uptake Efficiency and Root Architecture in Soybean under Heat- and Water- Stresses\nCorentin Maslard, Mustapha Arkoun, Fanny Leroy, Sylvie Girodet, Christophe Salon and Marion Prudent\n2024\nPlant, Cell & Environment\n \n\n\n3\nEctopic expression of the grape hexose transporter VvHT5 restores STP13-deficiency in Arabidopsis and promotes fungal resistance to Botrytis cinerea\nBenoit Monnereau, Cécile Gaillard, Corentin Maslard, Pierre-Antoine Noceto, Anne Cantereau, Pierre Coutos-Thévenot and Sylvain La Camera\n2024\n-\n \n\n\n2\nRoot architecture characterization in relation to biomass allocation and biological nitrogen fixation in a collection of European soybean genotypes\nCorentin Maslard, Mustapha Arkoun, Christophe Salon and Marion Prudent\n2021\nOCL\n  \n\n\n1\nPentadecaibins I−V: 15-Residue Peptaibols Produced by a Marine-Derived Trichoderma sp. of the Harzianum Clade\nAnne-Isaline van Bohemen, Nicolas Ruiz, Aurore Zalouk-Vergnoux, Aurore Michaud, Thibaut Robiou du Pont, Irina Druzhinina, Lea Atanasova, Soizic Prado, Bernard Bodo, Laurence Meslet-Cladiere, Bastien Cochereau, Franck Bastide, Corentin Maslard, Muriel Marchi, Thomas Guillemette and Yves François Pouchus\n2021\nJournal of Natural Products"
+    "text": ": Download publication ; : Link of the publication ; : Open-access articles ; : Article under review ;\n\n\n\nN°\nTitle\nAuthor\nYears\nJournal\n\n\n\n\n4\nDecoding the Double Stress Puzzle: Investigating Nutrient Uptake Efficiency and Root Architecture in Soybean under Heat- and Water- Stresses  \nCorentin Maslard, Mustapha Arkoun, Fanny Leroy, Sylvie Girodet, Christophe Salon and Marion Prudent\n2024\nPlant, Cell & Environment\n\n\n3\nEctopic expression of the grape hexose transporter VvHT5 restores STP13-deficiency in Arabidopsis and promotes fungal resistance to Botrytis cinerea  \nBenoit Monnereau, Cécile Gaillard, Corentin Maslard, Pierre-Antoine Noceto, Anne Cantereau, Pierre Coutos-Thévenot and Sylvain La Camera\n2024\n-\n\n\n2\nRoot architecture characterization in relation to biomass allocation and biological nitrogen fixation in a collection of European soybean genotypes   \nCorentin Maslard, Mustapha Arkoun, Christophe Salon and Marion Prudent\n2021\nOCL\n\n\n1\nPentadecaibins I−V: 15-Residue Peptaibols Produced by a Marine-Derived Trichoderma sp. of the Harzianum Clade  \nAnne-Isaline van Bohemen, Nicolas Ruiz, Aurore Zalouk-Vergnoux, Aurore Michaud, Thibaut Robiou du Pont, Irina Druzhinina, Lea Atanasova, Soizic Prado, Bernard Bodo, Laurence Meslet-Cladiere, Bastien Cochereau, Franck Bastide, Corentin Maslard, Muriel Marchi, Thomas Guillemette and Yves François Pouchus\n2021\nJournal of Natural Products"
   }
 ]

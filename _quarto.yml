@@ -20,6 +20,7 @@ website:
         text: " "
       - href: me.qmd
       - href: tools.qmd
+      - href: projects.qmd
       - href: publications.qmd
 
   page-footer: 
