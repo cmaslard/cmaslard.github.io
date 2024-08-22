@@ -11,14 +11,7 @@
     "href": "projects.html",
     "title": "Projects",
     "section": "",
-    "text": "No matching items"
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Welcome !",
-    "section": "",
-    "text": "Hi, I am Corentin and this is my research website!\nMy research aims to understand how plants can better adapt to changes in water availability and rising temperatures throughout their growth cycle. To do this, I’m focus on the study of root structures and their interactions with micro-organisms. My broader aim is to contribute to the development of sustainable agroecosystems capable of withstanding future challenges such as increasing temperatures and drought event frequencies, while optimizing crop yields and soil health.\nGiven the complexity of the relationships between plants and micro-organisms, this research requires innovative and integrative strategies. I use plant phenotyping techniques alongside advanced data analysis tools, including deep learning and omics approaches such as high-throughput sequencing, metabolomics and ionomics. By merging computational methods with cutting-edge biological knowledge, I aim to push the boundaries of plant research and contribute to the creation of resilient agricultural systems.\nI believe in Open Science and the importance of science communication.\nI am currently a post-doctoral student at INRAe (National Research Institute for Agriculture, Food and the Environment) in the UMR Agroécologie in Dijon."
+    "text": "Order By\n       Default\n         \n          Title\n        \n         \n          Date - Oldest\n        \n         \n          Date - Newest\n        \n         \n          Author\n        \n     \n  \n\n\n\n\n\n\n\n\n\n\nGarden analysis\n\n\nThis page just shows the distribution of gains from my personal garden over the years. \n\n\n\ngarden\n\n\nanalyse\n\n\nperso\n\n\n\n\n\n\n\n\n\nAug 22, 2024\n\n\nCorentin Maslard\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "me.html",
@@ -40,6 +33,27 @@
     "title": "About",
     "section": "",
     "text": "Postdoctoral researcher | Data Scientist | Septembre 2024 - present\nINRAe | PhD Student | April 2021 - September 2024"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Welcome !",
+    "section": "",
+    "text": "Hi, I am Corentin and this is my research website!\nMy research aims to understand how plants can better adapt to changes in water availability and rising temperatures throughout their growth cycle. To do this, I’m focus on the study of root structures and their interactions with micro-organisms. My broader aim is to contribute to the development of sustainable agroecosystems capable of withstanding future challenges such as increasing temperatures and drought event frequencies, while optimizing crop yields and soil health.\nGiven the complexity of the relationships between plants and micro-organisms, this research requires innovative and integrative strategies. I use plant phenotyping techniques alongside advanced data analysis tools, including deep learning and omics approaches such as high-throughput sequencing, metabolomics and ionomics. By merging computational methods with cutting-edge biological knowledge, I aim to push the boundaries of plant research and contribute to the creation of resilient agricultural systems.\nI believe in Open Science and the importance of science communication.\nI am currently a post-doctoral student at INRAe (National Research Institute for Agriculture, Food and the Environment) in the UMR Agroécologie in Dijon."
+  },
+  {
+    "objectID": "projects/analyse_garden.html",
+    "href": "projects/analyse_garden.html",
+    "title": "Garden analysis",
+    "section": "",
+    "text": "Code\ndf_harvest_price &lt;- read_excel(\"data_analyse_garden/recolte_total.xlsx\") %&gt;% \n  rename(\"date\"=Date_récolte) %&gt;% \n  rename(\"qty\"=`Quantité récolté`) %&gt;% \n  rename(\"unite\"=Expr1002) %&gt;% \n  rename(\"price\"=`Prix en magasin BIO`) %&gt;% \n  rename(\"name\"=`Nom (s) commun (s)`) %&gt;% \n  rename(\"type\"=`Type (Rotation)`) %&gt;% \n  rename(\"total\"=Expr1) %&gt;% \n  dplyr::select(-Unités)"
+  },
+  {
+    "objectID": "projects/analyse_garden.html#by-years",
+    "href": "projects/analyse_garden.html#by-years",
+    "title": "Garden analysis",
+    "section": "By Years",
+    "text": "By Years\n\n\nCode\ndf_harvest_price=df_harvest_price %&gt;% \n    mutate(year = lubridate::year(date))\n\n(df_harvest_price %&gt;% \n    dplyr::group_by(year) %&gt;% \n    dplyr::summarise(sum_price=sum(price),.groups = NULL) %&gt;% \n    ggplot( aes(x = year, y=sum_price, fill=as.factor(year))) +\n    geom_bar(stat = \"identity\") +\n    labs(x = \"Année\",\n         y = \"Total en fin d'année\") +\n    theme_minimal()+\n    theme(legend.position = \"none\")+\n    geom_text(aes(label = scales::dollar(sum_price,suffix = \"€\",prefix = \"\"), y = sum_price), vjust = -0.5, color = \"black\",size=3) +\n    scale_fill_grey(start = 0.8, end = 0.1) +\n    scale_x_continuous(breaks = unique(df_harvest_price$year))+\n    scale_y_continuous(labels = scales::dollar_format(prefix = \"€\"))\n)|(\ndf_harvest_price %&gt;% \n    dplyr::group_by(year,type) %&gt;% \n    dplyr::summarise(sum_price=sum(price),.groups = NULL) %&gt;% \n    ggplot( aes(x = year, y=sum_price, fill=as.factor(type))) +\n    geom_bar(stat = \"identity\") +\n    labs(x = \"Years\",\n         y = \"Year-end total\",\n         fill= \"Type of legume\") +\n    theme_minimal()+\n    scale_fill_manual(values = wesanderson::wes_palette(\"Darjeeling1\", 7, type = \"continuous\"))+\n    scale_x_continuous(breaks = unique(df_harvest_price$year))+\n    scale_y_continuous(labels = scales::dollar_format(prefix = \"€\"))\n)"
   },
   {
     "objectID": "publications.html",
