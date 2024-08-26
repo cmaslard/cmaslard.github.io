@@ -9,7 +9,7 @@ about:
 
 Hi, I am Corentin and this is my research website!
 
-My research aims to understand how **plants** can better adapt to changes in water availability and rising temperatures throughout their growth cycle. To do this, I'm focus on the study of **root** structures and their interactions with **micro-organisms**. My broader aim is to contribute to the development of sustainable agroecosystems capable of withstanding future challenges such as **increasing temperatures** and **drought** event frequencies, while optimizing crop yields and soil health.
+My research aims to understand how **plants** can better adapt to changes in **water availability** and rising temperatures throughout their growth cycle. To do this, I'm studying root structures and their interactions with **micro-organisms**. My broader aim is to contribute to the development of sustainable agroecosystems capable of withstanding future challenges such as increasing temperatures and drought event frequencies, while optimizing crop yields and soil health.
 
 Given the complexity of the relationships between plants and micro-organisms, this research requires innovative and **integrative** strategies. I use plant phenotyping techniques alongside advanced data analysis tools, including deep learning and omics approaches such as high-throughput sequencing, metabolomics and ionomics. By merging computational methods with cutting-edge biological knowledge, I aim to push the boundaries of plant research and contribute to the creation of resilient agricultural systems.
 
