@@ -15,4 +15,4 @@ Given the complexity of the relationships between plants and micro-organisms, th
 
 I believe in **Open Science** and the importance of science communication.
 
-I am currently a post-doctoral student at [INRAe](https://www.inrae.fr/en) (National Research Institute for Agriculture, Food and the Environment) in the [UMR Agroécologie](https://eng-umr-agroecologie.dijon.hub.inrae.fr/) in Dijon.
+I am currently a post-doctoral student at [INRAE](https://www.inrae.fr/en) (National Research Institute for Agriculture, Food and the Environment) in the [UMR Agroécologie](https://eng-umr-agroecologie.dijon.hub.inrae.fr/) in Dijon.
