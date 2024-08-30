@@ -1,10 +1,40 @@
 ---
-title: "deep_learning_segmentation"
-subtitle: "This tool enables fast, deep learning (Reinforcement Learning) segmentation of high-resolution images. The script then performs measurements such as projected area, shape width and height, perimeter, skeleton..."
+title: "Deep learning segmentation & measure of traits"
+subtitle: "For roots or aerial parts"
+abstract: "This tool enables fast, deep learning (Reinforcement Learning) segmentation of high-resolution images. The script then performs measurements such as projected area, shape width and height, perimeter, skeleton..."
 format: html
 editor: visual
 author: Corentin Maslard
 date: 2021-01-01
 image: "media/deep_learning_segmentation/overlay_modif.png"
-categories: [root, image, deep learning, python]
+categories: [image, deep learning, python]
 ---
+
+## Background
+
+This script has been used and published in [OCL journal in 2021](https://doi.org/10.1051/ocl/2021033) Please quote this source if you use this script.
+
+## Graphical overview
+
+![](media/deep_learning_segmentation/flow_chart.png)
+
+**Flow chart representing the different steps of root trait analysis.**
+
+(A) High-throughput phenotyping on the 4PMI platform; true color high resolution image (12 000 x 12 000 pixels) of soybean roots.
+(B) Cutting of the large image into small images.
+(C) Segmentation by using ilastik
+    1.  Learning at different positions on the images obtained from several RhizoTubes®. Creation of a predictive model. Adjustment of the model by correcting segmentation errors.
+    2.  Use of the model on all the small images. After segmentation, each pixel of the image was worth the value 0, 1 or 2 and corresponded respectively to the background, the roots or the nodules (black image).
+(D) Image conversion into white, black and red images (respectively the background, the roots and the nodules). These segmented images were then reassembled.
+(E) The two plants were extracted from the image to be analyzed individually.
+(F) The root projected area, nodule projected area were then measured as well as the width, depth, area and perimeter of the convex hull. Once the template is created it takes approximately 14 minutes from C2 to F.
+
+## Article Information
+
+### How to cite
+Readers should cite the original research article where this protocol was used:
+
+1. Maslard C, Arkoun M, Salon C, Prudent M (2021) Root architecture characterization in relation to biomass allocation and biological nitrogen fixation in a collection of European soybean genotypes. OCL 28: 48. doi: [10.1051/ocl/2021033](https://doi.org/10.1051/ocl/2021033)
+
+
+

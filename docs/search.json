@@ -4,7 +4,35 @@
     "href": "tools.html",
     "title": "Tools",
     "section": "",
-    "text": "Order By\n       Default\n         \n          Title\n        \n         \n          Date - Oldest\n        \n         \n          Date - Newest\n        \n         \n          Author\n        \n     \n  \n\n\n\n\n\n\n\n\n\n\nmacro_angle\n\n\nThe purpose of this tool is to quickly measure the angles formed by the roots for each branch\n\n\n\nroot\n\n\nimage\n\n\njava\n\n\nfiji\n\n\n\n\n\n\n\n\n\nJan 1, 2022\n\n\nCorentin Maslard\n\n\n\n\n\n\n\n\n\n\n\n\ndeep_learning_segmentation\n\n\nThis tool enables fast, deep learning (Reinforcement Learning) segmentation of high-resolution images. The script then performs measurements such as projected area, shape width and height, perimeter, skeleton…\n\n\n\nroot\n\n\nimage\n\n\ndeep learning\n\n\npython\n\n\n\n\n\n\n\n\n\nJan 1, 2021\n\n\nCorentin Maslard\n\n\n\n\n\n\nNo matching items"
+    "text": "Order By\n       Default\n         \n          Title\n        \n         \n          Date - Oldest\n        \n         \n          Date - Newest\n        \n         \n          Author\n        \n     \n  \n\n\n\n\n\n\n\n\n\n\nmacro_angle\n\n\nThe purpose of this tool is to quickly measure the angles formed by the roots for each branch\n\n\n\nroot\n\n\nimage\n\n\njava\n\n\nfiji\n\n\n\n\n\n\n\n\n\nJan 1, 2022\n\n\nCorentin Maslard\n\n\n\n\n\n\n\n\n\n\n\n\nDeep learning segmentation & measure of traits\n\n\nFor roots or aerial parts\n\n\n\nimage\n\n\ndeep learning\n\n\npython\n\n\n\nThis tool enables fast, deep learning (Reinforcement Learning) segmentation of high-resolution images. The script then performs measurements such as projected area, shape width and height, perimeter, skeleton…\n\n\n\n\n\nJan 1, 2021\n\n\nCorentin Maslard\n\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "tools/deep_learning_segmentation.html",
+    "href": "tools/deep_learning_segmentation.html",
+    "title": "Deep learning segmentation & measure of traits",
+    "section": "",
+    "text": "This script has been used and published in OCL journal in 2021 Please quote this source if you use this script."
+  },
+  {
+    "objectID": "tools/deep_learning_segmentation.html#background",
+    "href": "tools/deep_learning_segmentation.html#background",
+    "title": "Deep learning segmentation & measure of traits",
+    "section": "",
+    "text": "This script has been used and published in OCL journal in 2021 Please quote this source if you use this script."
+  },
+  {
+    "objectID": "tools/deep_learning_segmentation.html#graphical-overview",
+    "href": "tools/deep_learning_segmentation.html#graphical-overview",
+    "title": "Deep learning segmentation & measure of traits",
+    "section": "Graphical overview",
+    "text": "Graphical overview\n\nFlow chart representing the different steps of root trait analysis.\n\nHigh-throughput phenotyping on the 4PMI platform; true color high resolution image (12 000 x 12 000 pixels) of soybean roots.\nCutting of the large image into small images.\nSegmentation by using ilastik\n\nLearning at different positions on the images obtained from several RhizoTubes®. Creation of a predictive model. Adjustment of the model by correcting segmentation errors.\nUse of the model on all the small images. After segmentation, each pixel of the image was worth the value 0, 1 or 2 and corresponded respectively to the background, the roots or the nodules (black image).\n\nImage conversion into white, black and red images (respectively the background, the roots and the nodules). These segmented images were then reassembled.\nThe two plants were extracted from the image to be analyzed individually.\nThe root projected area, nodule projected area were then measured as well as the width, depth, area and perimeter of the convex hull. Once the template is created it takes approximately 14 minutes from C2 to F."
+  },
+  {
+    "objectID": "tools/deep_learning_segmentation.html#article-information",
+    "href": "tools/deep_learning_segmentation.html#article-information",
+    "title": "Deep learning segmentation & measure of traits",
+    "section": "Article Information",
+    "text": "Article Information\n\nHow to cite\nReaders should cite the original research article where this protocol was used:\n\nMaslard C, Arkoun M, Salon C, Prudent M (2021) Root architecture characterization in relation to biomass allocation and biological nitrogen fixation in a collection of European soybean genotypes. OCL 28: 48. doi: 10.1051/ocl/2021033"
   },
   {
     "objectID": "projects.html",

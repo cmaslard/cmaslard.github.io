@@ -9,7 +9,7 @@
 <meta name="author" content="Corentin Maslard">
 <meta name="dcterms.date" content="2021-01-01">
 
-<title>deep_learning_segmentation – Corentin Maslard</title>
+<title>Deep learning segmentation &amp; measure of traits – Corentin Maslard</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -134,10 +134,9 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">deep_learning_segmentation</h1>
-<p class="subtitle lead">This tool enables fast, deep learning (Reinforcement Learning) segmentation of high-resolution images. The script then performs measurements such as projected area, shape width and height, perimeter, skeleton…</p>
+<h1 class="title">Deep learning segmentation &amp; measure of traits</h1>
+<p class="subtitle lead">For roots or aerial parts</p>
   <div class="quarto-categories">
-    <div class="quarto-category">root</div>
     <div class="quarto-category">image</div>
     <div class="quarto-category">deep learning</div>
     <div class="quarto-category">python</div>
@@ -165,13 +164,50 @@ ul.task-list li input[type="checkbox"] {
     
   </div>
   
+<div>
+  <div class="abstract">
+    <div class="block-title">Abstract</div>
+    This tool enables fast, deep learning (Reinforcement Learning) segmentation of high-resolution images. The script then performs measurements such as projected area, shape width and height, perimeter, skeleton…
+  </div>
+</div>
 
 
 </header>
 
 
+<section id="background" class="level2">
+<h2 class="anchored" data-anchor-id="background">Background</h2>
+<p>This script has been used and published in <a href="https://doi.org/10.1051/ocl/2021033">OCL journal in 2021</a> Please quote this source if you use this script.</p>
+</section>
+<section id="graphical-overview" class="level2">
+<h2 class="anchored" data-anchor-id="graphical-overview">Graphical overview</h2>
+<p><img src="media/deep_learning_segmentation/flow_chart.png" class="img-fluid"></p>
+<p><strong>Flow chart representing the different steps of root trait analysis.</strong></p>
+<ol type="A">
+<li>High-throughput phenotyping on the 4PMI platform; true color high resolution image (12 000 x 12 000 pixels) of soybean roots.</li>
+<li>Cutting of the large image into small images.</li>
+<li>Segmentation by using ilastik
+<ol type="1">
+<li>Learning at different positions on the images obtained from several RhizoTubes®. Creation of a predictive model. Adjustment of the model by correcting segmentation errors.</li>
+<li>Use of the model on all the small images. After segmentation, each pixel of the image was worth the value 0, 1 or 2 and corresponded respectively to the background, the roots or the nodules (black image).</li>
+</ol></li>
+<li>Image conversion into white, black and red images (respectively the background, the roots and the nodules). These segmented images were then reassembled.</li>
+<li>The two plants were extracted from the image to be analyzed individually.</li>
+<li>The root projected area, nodule projected area were then measured as well as the width, depth, area and perimeter of the convex hull. Once the template is created it takes approximately 14 minutes from C2 to F.</li>
+</ol>
+</section>
+<section id="article-information" class="level2">
+<h2 class="anchored" data-anchor-id="article-information">Article Information</h2>
+<section id="how-to-cite" class="level3">
+<h3 class="anchored" data-anchor-id="how-to-cite">How to cite</h3>
+<p>Readers should cite the original research article where this protocol was used:</p>
+<ol type="1">
+<li>Maslard C, Arkoun M, Salon C, Prudent M (2021) Root architecture characterization in relation to biomass allocation and biological nitrogen fixation in a collection of European soybean genotypes. OCL 28: 48. doi: <a href="https://doi.org/10.1051/ocl/2021033">10.1051/ocl/2021033</a></li>
+</ol>
 
 
+</section>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
