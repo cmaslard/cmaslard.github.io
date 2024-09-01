@@ -7,18 +7,18 @@ editor: visual
 author: Corentin Maslard
 date: 2021-01-01
 image: "media/deep_learning_segmentation/overlay_modif.png"
-categories: [image, deep learning, python]
+categories: [Image, Deep learning, Python]
 ---
 
 ## Background
 
-This script has been used and published in [OCL journal in 2021](https://doi.org/10.1051/ocl/2021033) Please quote this source if you use this script.
+This script has been used and published in [OCL journal in 2021](https://doi.org/10.1051/ocl/2021033). Please quote this source if you use this script.
 
 ## Graphical overview
 
 ![](media/deep_learning_segmentation/flow_chart.png)
 
-**Flow chart representing the different steps of root trait analysis.**
+### Flow chart representing the different steps of root trait analysis.
 
 (A) High-throughput phenotyping on the 4PMI platform; true color high resolution image (12 000 x 12 000 pixels) of soybean roots.
 (B) Cutting of the large image into small images.
@@ -35,6 +35,3 @@ This script has been used and published in [OCL journal in 2021](https://doi.org
 Readers should cite the original research article where this protocol was used:
 
 1. Maslard C, Arkoun M, Salon C, Prudent M (2021) Root architecture characterization in relation to biomass allocation and biological nitrogen fixation in a collection of European soybean genotypes. OCL 28: 48. doi: [10.1051/ocl/2021033](https://doi.org/10.1051/ocl/2021033)
-
-
-
