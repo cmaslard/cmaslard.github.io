@@ -22,7 +22,12 @@ website:
         text: " "
       - href: me.qmd
       - href: tools.qmd
-      - href: projects.qmd
+      - text: Projects
+        menu: 
+          - text: Work
+            href: work_projects.qmd
+          - text: Personal
+            href: perso_projects.qmd
       - href: publications.qmd
 
   page-footer: 

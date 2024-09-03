@@ -1,0 +1,141 @@
+---
+title: "Garden analysis"
+subtitle: "This page just shows the distribution of gains from my personal garden over the years. "
+format:
+  html:
+    code-fold: true
+editor: visual
+author: Corentin Maslard
+date: 2022-08-22
+#image: "media/deep_learning_segmentation/overlay_modif.png"
+categories: [Garden, Analyse, Perso]
+editor_options: 
+  chunk_output_type: console
+---
+
+The aim of this project was simply to record the weights of each fruit and vegetable harvested over the years, in order to predict the possible gains from creating your own garden.
+
+```{r, echo=F, warning=F, message=FALSE}
+library(readxl)
+library(dplyr)
+library(ggplot2)
+library(patchwork)
+library(treemap)
+```
+
+# Data importation
+
+```{r, dfImport}
+df_harvest_price <- read_excel(here::here("perso_projects/media/data_analyse_garden/recolte_total.xlsx")) %>% 
+  rename("date"=Date_récolte) %>% 
+  rename("qty"=`Quantité récolté`) %>% 
+  rename("unite"=Expr1002) %>% 
+  rename("price"=`Prix en magasin BIO`) %>% 
+  rename("name"=`Nom (s) commun (s)`) %>% 
+  rename("type"=`Type (Rotation)`) %>% 
+  rename("total"=Expr1) %>% 
+  dplyr::select(-Unités)
+```
+
+# Analyse
+
+## By Years
+
+```{r, ByYears,warning=F,message=F}
+df_harvest_price=df_harvest_price %>% 
+    mutate(year = lubridate::year(date))
+
+(df_harvest_price %>% 
+    dplyr::group_by(year) %>% 
+    dplyr::summarise(sum_price=sum(price),.groups = NULL) %>% 
+    ggplot( aes(x = year, y=sum_price, fill=as.factor(year))) +
+    geom_bar(stat = "identity") +
+    labs(x = "Année",
+         y = "Total en fin d'année") +
+    theme_minimal()+
+    theme(legend.position = "none")+
+    geom_text(aes(label = scales::dollar(sum_price,suffix = "€",prefix = ""), y = sum_price), vjust = -0.5, color = "black",size=3) +
+    scale_fill_grey(start = 0.8, end = 0.1) +
+    scale_x_continuous(breaks = unique(df_harvest_price$year))+
+    scale_y_continuous(labels = scales::dollar_format(prefix = "€"))
+)|(
+df_harvest_price %>% 
+    dplyr::group_by(year,type) %>% 
+    dplyr::summarise(sum_price=sum(price),.groups = NULL) %>% 
+    ggplot( aes(x = year, y=sum_price, fill=as.factor(type))) +
+    geom_bar(stat = "identity") +
+    labs(x = "Years",
+         y = "Year-end total",
+         fill= "Type of legume") +
+    theme_minimal()+
+    scale_fill_manual(values = wesanderson::wes_palette("Darjeeling1", 7, type = "continuous"))+
+    scale_x_continuous(breaks = unique(df_harvest_price$year))+
+    scale_y_continuous(labels = scales::dollar_format(prefix = "€"))
+)
+```
+
+# Evolution from 2017 to 2023
+
+```{r,treemap, eval=F}
+# basic treemap
+for (year_i in levels(as.factor(df_harvest_price$year))){
+  png(filename=paste0("data_analyse_garden/plot/",year_i,"_treemap.png"),width=800, height=300)
+  p <- treemap(df_harvest_price %>% filter(year==year_i),
+              index=c("type","name"),
+              vSize="total",
+              type="index",
+              palette = wesanderson::wes_palette("Darjeeling1", 7, type = "continuous"),     
+              fontsize.labels=c(15,12),                # size of labels. Give the size per level of aggregation: size for group, size for subgroup, sub-subgroups...
+      fontcolor.labels=c("white","black"),    # Color of labels
+      border.col=c("black","white"),             # Color of borders of groups, of subgroups, of subsubgroups ....
+    border.lwds=c(2,1) ,                        # Width of colors
+      fontface.labels=c(2,1),                  # Font of labels: 1,2,3,4 for normal, bold, italic, bold-italic...
+      bg.labels=c("transparent"),              # Background color of labels
+      align.labels=list(
+          c("center", "center"), 
+          c("right", "bottom")
+          ),                                   # Where to place labels in the rectangle?
+      overlap.labels=0.5,                      # number between 0 and 1 that determines the tolerance of the overlap between labels. 0 means that labels of lower levels are not printed if higher level labels overlap, 1  means that labels are always printed. In-between values, for instance the default value .5, means that lower level labels are printed if other labels do not overlap with more than .5  times their area size.
+      inflate.labels=F,  
+      title=""
+        #title=year_i
+            )       
+  dev.off()
+}
+```
+
+![2017](media/data_analyse_garden/plot/2017_treemap.png) *Année 2017*
+
+![2018](media/data_analyse_garden/plot/2018_treemap.png) *Année 2018*
+
+![2019](media/data_analyse_garden/plot/2019_treemap.png) *Année 2019*
+
+![2020](media/data_analyse_garden/plot/2020_treemap.png) *Année 2020*
+
+![2021](media/data_analyse_garden/plot/2021_treemap.png) *Année 2021*
+
+![2022](media/data_analyse_garden/plot/2022_treemap.png) *Année 2022*
+
+![2023](media/data_analyse_garden/plot/2023_treemap.png) *Année 2023*
+
+```{r, YearByYears}
+Name="Concombre"
+df_harvest_price %>% 
+  filter(name==Name) %>% 
+  mutate(day=as.numeric(format(as.Date(date), "%d"))) %>% 
+  mutate(month=as.numeric(format(as.Date(date), "%m"))) %>% 
+  mutate(month_day=as.Date(paste(as.numeric(format(as.Date(Sys.Date()), "%y")), month, day, sep = "-"), format = "%Y-%m-%d")) %>% 
+  arrange(month_day) %>% 
+  dplyr::group_by(year) %>% 
+  mutate(cum_sum=cumsum(qty)) %>%
+ggplot( aes(x = month_day, y = cum_sum, color = as.factor(year), group=as.factor(year))) +
+  geom_line() +
+  geom_point()+
+  theme_minimal()+
+  labs(title = paste0("Quantité: ",Name ),
+       x = "Date of harvest",
+       y = "Quantity",
+       color = "Years")+
+  scale_color_brewer(palette = "Dark2")
+
+```

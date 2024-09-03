@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://cmaslard.xyz/work_projects.html</loc>
+    <lastmod>2024-09-03T13:08:52.791Z</lastmod>
+  </url>
+  <url>
     <loc>https://cmaslard.xyz/tools.html</loc>
     <lastmod>2024-08-17T22:52:26.955Z</lastmod>
   </url>
@@ -9,28 +13,24 @@
     <lastmod>2024-08-30T16:34:38.223Z</lastmod>
   </url>
   <url>
-    <loc>https://cmaslard.xyz/projects.html</loc>
-    <lastmod>2024-08-22T14:39:09.276Z</lastmod>
+    <loc>https://cmaslard.xyz/perso_projects.html</loc>
+    <lastmod>2024-09-03T13:09:13.222Z</lastmod>
   </url>
   <url>
-    <loc>https://cmaslard.xyz/projects/phd_soybean_2021_2024.html</loc>
-    <lastmod>2024-08-30T13:15:30.754Z</lastmod>
-  </url>
-  <url>
-    <loc>https://cmaslard.xyz/me.html</loc>
-    <lastmod>2024-08-21T13:06:38.367Z</lastmod>
+    <loc>https://cmaslard.xyz/perso_projects/analyse_garden.html</loc>
+    <lastmod>2024-09-03T13:09:48.151Z</lastmod>
   </url>
   <url>
     <loc>https://cmaslard.xyz/index.html</loc>
     <lastmod>2024-08-30T15:13:29.143Z</lastmod>
   </url>
   <url>
-    <loc>https://cmaslard.xyz/projects/analyse_garden.html</loc>
-    <lastmod>2024-08-26T12:25:31.716Z</lastmod>
+    <loc>https://cmaslard.xyz/me.html</loc>
+    <lastmod>2024-08-21T13:06:38.367Z</lastmod>
   </url>
   <url>
-    <loc>https://cmaslard.xyz/projects/strava_report.html</loc>
-    <lastmod>2024-09-01T21:16:25.504Z</lastmod>
+    <loc>https://cmaslard.xyz/perso_projects/strava_report.html</loc>
+    <lastmod>2024-09-03T13:07:24.821Z</lastmod>
   </url>
   <url>
     <loc>https://cmaslard.xyz/publications.html</loc>
@@ -39,5 +39,9 @@
   <url>
     <loc>https://cmaslard.xyz/tools/macro_angle.html</loc>
     <lastmod>2024-08-30T16:28:58.550Z</lastmod>
+  </url>
+  <url>
+    <loc>https://cmaslard.xyz/work_projects/phd_soybean_2021_2024.html</loc>
+    <lastmod>2024-09-03T13:03:03.810Z</lastmod>
   </url>
 </urlset>

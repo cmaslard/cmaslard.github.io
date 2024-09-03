@@ -1,5 +1,11 @@
 [
   {
+    "listing": "/work_projects.html",
+    "items": [
+      "/work_projects/phd_soybean_2021_2024.html"
+    ]
+  },
+  {
     "listing": "/tools.html",
     "items": [
       "/tools/macro_angle.html",
@@ -7,11 +13,10 @@
     ]
   },
   {
-    "listing": "/projects.html",
+    "listing": "/perso_projects.html",
     "items": [
-      "/projects/phd_soybean_2021_2024.html",
-      "/projects/strava_report.html",
-      "/projects/analyse_garden.html"
+      "/perso_projects/strava_report.html",
+      "/perso_projects/analyse_garden.html"
     ]
   }
 ]
