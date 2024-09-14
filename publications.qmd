@@ -1,5 +1,12 @@
 ---
 title: "Publications"
+toc: true
+toc-location: right
+number-sections: false
+execute: 
+  echo: false
+  message: false
+  warning: false
 format: 
   html:
       page-layout: full
@@ -17,50 +24,103 @@ editor_options:
 ---
 
 ```{r, echo=FALSE, warning=FALSE, message=F}
-# Maj citation
-library(rcrossref)
-library(rAltmetric)
-library(scholar)
-library(dplyr)
-library(ggplot2)
-
-# function
-find_url_rAltmetric<- function(doi_x){
-  url_x <- altmetric_data(altmetrics(doi = doi_x,apikey = ""))$details_url
-  return(url_x)
-}
-
-find_img_rAltmetric<- function(doi_x){
-  url_x <- altmetric_data(altmetrics(doi = doi_x,apikey = ""))$images.medium
-  return(url_x)
-}
-
-# cosmetic
-## Dark_mode also for graph (i add image-dark-light.js from https://github.com/quarto-dev/quarto-cli/discussions/5439)
-library(ggdark)
-library(devoid)
-darksvg = function(file, width, height) {
-  on.exit({
-    ggplot2::reset_theme_settings()
-    # invert_geom_defaults()
-  }
-    )
-  theme_set(dark_mode(theme_get()))
-  ggsave(filename = file, width = width, height=height, dev='svg', bg = 'transparent')
-  void_dev()
-}
+source("src.R")
 ```
 
-{{< iconify line-md:download-loop width="1.2em" height="1.2em" >}}: Download publication ; {{< iconify line-md link width="1.2em" height="1.2em" >}}: Link of the publication ; <iconify-icon icon="mdi:unlocked-variant-outline" width="1.2em" height="1.2em"  style="color: #58a53b"></iconify-icon>: Open-access articles ; <iconify-icon icon="line-md:cog-loop" width="1.2em" height="1.2em"  style="color: #58a53b"></iconify-icon>: Article under review ; Last update on: **`r Sys.Date()`**
+::: {.column-margin}
+<iconify-icon icon="material-symbols:construction-rounded" width="1.2em" height="1.2em" style="color: #58a53b"></iconify-icon>: Manuscript in preparation  
+<iconify-icon icon="line-md:cog-loop" width="1.2em" height="1.2em"  style="color: #58a53b"></iconify-icon>: Article under review  
+<iconify-icon icon="mdi:unlocked-variant-outline" width="1.2em" height="1.2em"  style="color: #58a53b"></iconify-icon>: Open-access articles  
+{{< iconify line-md link width="1.2em" height="1.2em" >}}: Link of the publication  
+{{< iconify line-md:download-loop width="1.2em" height="1.2em" >}}: Download publication  
+{{< iconify line-md:github-loop width="1.2em" height="1.2em" >}}: Code & Data  
+{{< iconify academicons:biorxiv width="1.2em" height="1.2em" >}}: Biorxiv or pre-print  
+{{< iconify academicons:google-scholar width="1.2em" height="1.2em" >}}: Google Scholar  
+{{< iconify academicons:researchgate width="1.2em" height="1.2em" >}}: Researchgate  
+{{< iconify academicons:hal width="1.2em" height="1.2em" >}}: HAL  
+Last update on: **`r Sys.Date()`**
+:::
 
-| N°  | Title                                                                                                                                                                                                                                                                                                                                                                                                                                                       | Author                                                                                                                                                                                                                                                                                                              | Years | Journal                     | Citation|Altmetric|
-|------------|------------|------------|------------|------------|------------|------------|
-| 4   | Decoding the Double Stress Puzzle: Investigating Nutrient Uptake Efficiency and Root Architecture in Soybean under Heat- and Water- Stresses <iconify-icon icon="mdi:unlocked-variant-outline" width="1.2em" height="1.2em"  style="color: #58a53b"></iconify-icon> <iconify-icon icon="line-md:cog-loop" width="1.2em" height="1.2em"  style="color: #58a53b"></iconify-icon>                                                                              | **Corentin Maslard**, Mustapha Arkoun, Fanny Leroy, Sylvie Girodet, Christophe Salon and Marion Prudent                                                                                                                                                                                                             | 2024  | \-                          | \-                                                              |\-|
-| 3   | Ectopic expression of the grape hexose transporter VvHT5 restores STP13-deficiency in *Arabidopsis* and promotes fungal resistance to *Botrytis cinerea* </iconify-icon> <iconify-icon icon="line-md:cog-loop" width="1.2em" height="1.2em"  style="color: #58a53b"></iconify-icon>                                                                                                                                                                         | Benoit Monnereau, Cécile Gaillard, **Corentin Maslard**, Pierre-Antoine Noceto, Anne Cantereau, Pierre Coutos-Thévenot and Sylvain La Camera                                                                                                                                                                        | 2024  | \-                          | \-                                                              |\-|
-| 2   | Root architecture characterization in relation to biomass allocation and biological nitrogen fixation in a collection of European soybean genotypes [{{< iconify line-md:download-loop width="1.2em" height="1.2em" >}}](media/publications/2.pdf) [{{< iconify line-md link width="1.2em" height="1.2em" >}}](https://doi.org/10.1051/ocl/2021033) <iconify-icon icon="mdi:unlocked-variant-outline" width="1.2em" height="1.2em"  style="color: #58a53b"> | **Corentin Maslard**, Mustapha Arkoun, Christophe Salon and Marion Prudent                                                                                                                                                                                                                                          | 2021  | OCL                         | `r cr_citation_count(doi="10.1051/ocl/2021033")$count`          |<a href= `r find_url_rAltmetric("10.1051/ocl/2021033")` target="_blank"><img src=`r find_img_rAltmetric("10.1051/ocl/2021033")` width="64" height="64"></a>|
-| 1   | Pentadecaibins I−V: 15-Residue Peptaibols Produced by a Marine-Derived *Trichoderma* sp. of the *Harzianum* Clade [{{< iconify line-md:download-loop width="1.2em" height="1.2em" >}}](media/publications/1.pdf) [{{< iconify line-md link width="1.2em" height="1.2em" >}}](https://dx.doi.org/10.1021/acs.jnatprod.0c01355)                                                                                                                               | Anne-Isaline van Bohemen, Nicolas Ruiz, Aurore Zalouk-Vergnoux, Aurore Michaud, Thibaut Robiou du Pont, Irina Druzhinina, Lea Atanasova, Soizic Prado, Bernard Bodo, Laurence Meslet-Cladiere, Bastien Cochereau, Franck Bastide, **Corentin Maslard**, Muriel Marchi, Thomas Guillemette and Yves François Pouchus | 2021  | Journal of Natural Products | `r cr_citation_count(doi="10.1021/acs.jnatprod.0c01355")$count` |<a href= `r find_url_rAltmetric("10.1021/acs.jnatprod.0c01355")` target="_blank"><img src=`r find_img_rAltmetric("10.1021/acs.jnatprod.0c01355")` width="64" height="64"></a>|
+## Working Papers & Papers Under Review
+`r make_pub_list(pubs, "working")`
+
+## Peer-reviewed journal articles
+`r make_pub_list(pubs, "peer_reviewed")`
+
+## Refereed Articles in Conference Proceedings
+`r make_pub_list(pubs, "conference")`
+
+## Magazine Publications
+`r make_pub_list(pubs, "magazine")`
+
+## Theses
+`r make_pub_list(pubs, "theses")`
+
+::: {.callout-note collapse="true"}
+## Learn about these metrics
+
+- Citations are the number of other articles citing this article, calculated by Crossref. [Find more information about Crossref citation counts](https://www.crossref.org/services/cited-by/)
+- The Altmetric Attention Score is a quantitative measure of the attention that a research article has received online. Clicking on the donut icon will load a page at altmetric.com with additional details about the score and the social media presence for the given article. Find more information on the [Altmetric Attention Score and how the score is calculated](https://help.altmetric.com/support/solutions/articles/6000233311-how-is-the-altmetric-attention-score-calculated).
+:::
+
+:::: {.columns} 
+::: {.column width="25%"}
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+profile <- get_profile("TsztyiMAAAAJ&hl")
+# Updated data
+metrics <- data.frame(
+  Metric1 = c("H-Index", "Sum of Times Cited", "Publications"),
+  Value1 = c(profile$h_index,
+             profile$total_cites,
+             sum(pubs$category == "peer_reviewed")
+             )
+)
+
+# Create a 4-column table with custom styling
+kable(metrics, col.names = c("", ""), align = "c", format = "html") %>%
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed"), 
+                full_width = F) %>%
+  column_spec(1, bold = TRUE, width = "10em") %>%
+  column_spec(2, bold = TRUE, width = "10em") %>%
+  row_spec(0, bold = TRUE, color = "white", background = "black") %>%
+  row_spec(1:3)
+```
+
+:::
+
+::: {.column width="75%"}
+```{r, echo=F, warning=FALSE, message=FALSE}
+df <-get_citation_history("TsztyiMAAAAJ&hl") %>%  # my_ID (find in URL)
+  mutate(Face=ifelse(year==format(Sys.Date(), "%Y"),"bold","plain"))
+
+ggplot(df,aes(x=year,y=cites))+
+    geom_bar(stat = "identity", fill = "#2780e3",alpha=0.8, col='black')+
+    geom_text(aes(label = cites), hjust = -0.45,size = 4.8)+
+    labs(
+      x = NULL,
+      y = "Citation by years"
+  )+
+  geom_hline(yintercept=0)+
+   #scale_y_reverse(expand = expansion(mult = c(.1, 0))) +
+   theme(
+        panel.background = element_blank(),
+        plot.background = element_blank(),   # Remove plot background
+        panel.grid = element_blank(), 
+        axis.text.y=element_text(size = 13, face = df$Face),
+        axis.ticks.y=element_blank(),
+        axis.text.x=element_blank(),
+        axis.ticks.x=element_blank(),
+        axis.title.x = element_text(size = 15)
+      )+
+  coord_flip() 
+```
+
+:::
+::::
 
 ```{r, eval=F, echo=F}
+
+#################### DRAFT ###################
 #see https://github.com/ropensci/rAltmetric
 acuna2 <- altmetrics(doi = "10.1051/ocl/2021033",apikey = "") # but i need the api key
 acuna1 <- altmetrics(doi = "10.1021/acs.jnatprod.0c01355",apikey = "")
@@ -80,20 +140,12 @@ my_issns <- c("1029-8479", "0092-8674", "0028-0836", "0036-8075")
 scite_df <- scite(my_issns)
 scite_df <- scite("10.1021/acs.jnatprod.0c01355")
 
-find_url_rAltmetric("10.1016/j.plantsci.2018.09.015")
-find_img_rAltmetric("10.1016/j.plantsci.2018.09.015")
-find_img_rAltmetric("10.1111/pce.13712")
-find_url_rAltmetric("10.1111/pce.13712")
-find_url_rAltmetric("10.1007/s13593-014-0272-z")
-find_url_rAltmetric("10.1038/s41586-023-05791-5")
-
-
 cr_citation_count(doi="10.1111/pce.13712")
 
 
 # google scholar 
 # https://cran.r-project.org/web/packages/scholar/scholar.pdf (for more information)
-id <- get_publications("TsztyiMAAAAJ&hl") 
+id <- get_publications("TsztyiMAAAAJ&hl")
 impact <- get_journalrank(journals=id$journal)
 
 id <- "bg0BZ-QAAAAJ&hl"
@@ -105,53 +157,31 @@ format_publications("DO5oG40AAAAJ")
 id <- get_publications("bg0BZ-QAAAAJ&hl")
 impact <- get_journalrank(journals=id$journal)
 
-predict_h_index("TsztyiMAAAAJ")
+predict_h_index("TsztyiMAAAAJ&hl")
+
+profile$total_publications
 
 id <- get_publications("TsztyiMAAAAJ&hl")
 impact <- get_journalrank(journals=id$journal)
 
 
-
 get_journalrank("International Journal of Open Source Software and Processes", max.distance = 0.05)
 
+
+# install.packages("bibliometrix")
+library(bibliometrix)
+data(scientometrics, package = "bibliometrixData")
+
+authors <- c("SMALL H", "CHEN DZ")
+Hindex(scientometrics, field = "author", elements = authors, sep = ";")$H
+
+data(garfield, package = "bibliometrixData")
+indices=Hindex(garfield, field = "author", elements = "GARFIELD E", years=Inf, sep = ";")
+
+data(corentinmaslard, package = "bibliometrixData")
+#################### DRAFT ###################
+
+#################### DRAFT to be hinspired about ###################
+# https://github.com/jhelvy/jhelvy_quarto/blob/main/_common.R
+# https://www.jhelvy.com/research
 ```
-
-::: {.callout-note collapse="true"}
-## Learn about these metrics
-
-- Citations are the number of other articles citing this article, calculated by Crossref. [Find more information about Crossref citation counts](https://www.crossref.org/services/cited-by/)
-- The Altmetric Attention Score is a quantitative measure of the attention that a research article has received online. Clicking on the donut icon will load a page at altmetric.com with additional details about the score and the social media presence for the given article. Find more information on the [Altmetric Attention Score and how the score is calculated](https://help.altmetric.com/support/solutions/articles/6000233311-how-is-the-altmetric-attention-score-calculated).
-:::
-
-```{r, echo=F, warning=FALSE, message=FALSE}
-#| layout-nrow: 1
-#| fig-align: left
-df <-get_citation_history("TsztyiMAAAAJ&hl") %>%  # my_ID (find in URL)
-  mutate(Face=ifelse(year==format(Sys.Date(), "%Y"),"bold","plain"))
-
-ggplot(df,aes(x=year,y=cites))+
-    geom_bar(stat = "identity", fill = "#40cdf2",alpha=0.8)+
-    geom_text(aes(label = cites), hjust = -0.5)+
-    labs(
-      x = NULL,
-      y = "Citation by years"
-  )+
-  geom_hline(yintercept=0)+
-   #scale_y_reverse(expand = expansion(mult = c(.1, 0))) +
-   theme(
-        panel.background = element_blank(),
-        plot.background = element_blank(),   # Remove plot background
-        panel.grid = element_blank(), 
-        axis.text.y=element_text(size = 12, face = df$Face),
-        axis.ticks.y=element_blank(),
-        axis.text.x=element_blank(),
-        axis.ticks.x=element_blank(),
-        axis.title.x = element_text(size = 12)
-      )+
-    #scale_x_reverse(position = "top")+
-  coord_flip() 
-
-
-```
-
-

@@ -54,6 +54,9 @@ website:
         - text: "{{< iconify fa6-brands:researchgate >}}"
           href: "https://www.researchgate.net/profile/Corentin-Maslard"
           aria-label: "ResearchGate logo linking to ResearchGate account"
+        - text: "<i class='ai ai-google-scholar fa-lg'></i>"
+          href: https://scholar.google.com/citations?user=DY2D56IAAAAJ
+          target: blank
       right:
           <span class="faux-block">Made with {{< iconify fa6-brands r-project >}} and [Quarto](https://quarto.org/)</span> |
           <span class="faux-block">[View the source at {{< iconify fa6-brands github >}} GitHub](https://github.com/cmaslard/cmaslard.github.io)</span>
