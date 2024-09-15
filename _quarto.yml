@@ -14,8 +14,10 @@ website:
     position: below-navbar
   title: "Corentin Maslard"
   favicon: media/growing-plant.png
+  back-to-top-navigation: true
   site-url: "https://cmaslard.xyz"
   repo-url: "https://github.com/cmaslard/cmaslard.github.io"
+  google-analytics: "G-10GPM4RSNJ"
   navbar:
     left:
       - href: index.qmd
@@ -58,7 +60,7 @@ website:
           href: https://scholar.google.com/citations?user=DY2D56IAAAAJ
           target: blank
       right:
-          <span class="faux-block">Made with {{< iconify fa6-brands r-project >}} and [Quarto](https://quarto.org/)</span> |
+          <span class="faux-block">Made with <iconify-icon icon="line-md:heart-twotone"></iconify-icon>, <iconify-icon icon="line-md:coffee-twotone-loop"></iconify-icon>, {{< iconify fa6-brands r-project >}} and [Quarto](https://quarto.org/)</span> |
           <span class="faux-block">[View the source at {{< iconify fa6-brands github >}} GitHub](https://github.com/cmaslard/cmaslard.github.io)</span>
 
 format:

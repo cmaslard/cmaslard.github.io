@@ -47,9 +47,6 @@ Last update on: **`r Sys.Date()`**
 ## Peer-reviewed journal articles
 `r make_pub_list(pubs, "peer_reviewed")`
 
-## Refereed Articles in Conference Proceedings
-`r make_pub_list(pubs, "conference")`
-
 ## Magazine Publications
 `r make_pub_list(pubs, "magazine")`
 
