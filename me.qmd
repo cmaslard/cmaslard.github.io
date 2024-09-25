@@ -25,6 +25,8 @@ about:
     - text: "{{< iconify fa6-brands:researchgate >}} ResearchGate"
       href: "https://www.researchgate.net/profile/Corentin-Maslard"
       aria-label: "ResearchGate logo linking to ResearchGate account"
+    - text: "{{< iconify pepicons-pop:cv >}} CV"
+      href: "https://docs.google.com/document/d/1oCgrdjnAJuVjgocx3F2kmlbJxlqa6uWrSgqm5fWRhpA/edit?usp=sharing"
 ---
 
 ### Hi there !
@@ -52,3 +54,9 @@ Postdoctoral researcher | Data Scientist | Septembre 2024 - present
 INRAe | PhD Student | April 2021 - September 2024
 
 :::
+
+## CV 
+
+```{=html}
+<iframe width="800px" height="1000px" style="border:2px solid #dee2e6;" src="https://docs.google.com/document/d/1oCgrdjnAJuVjgocx3F2kmlbJxlqa6uWrSgqm5fWRhpA/edit"  allowfullscreen></iframe>
+```
