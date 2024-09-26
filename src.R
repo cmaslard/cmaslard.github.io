@@ -56,10 +56,28 @@ get_pubs <- function() {
   return(pubs)
 }
 
+get_presentations <- function() {
+  presentations <- gsheet::gsheet2tbl(
+    url = "https://docs.google.com/spreadsheets/d/1Cu1twyhPRdxY3Q4HBF6qmOK7BI_8a4qRav_IWI2n4eA/edit?gid=1523743739#gid=1523743739")
+  presentations <- make_talks(presentations)
+  #pubs$stub <- make_stubs(presentations)
+  presentations$url_scholar <- ifelse(
+    is.na(presentations$id_scholar), NA,
+    glue::glue('https://scholar.google.com/citations?view_op=view_citation&hl=fr&user=TsztyiMAAAAJ&citation_for_view=TsztyiMAAAAJ:{presentations$id_scholar}')
+  )
+  return(presentations)
+}
+
 make_citations <- function(pubs) {
   pubs$citation <- unlist(lapply(split(pubs, 1:nrow(pubs)), make_citation))
   pubs$icon <- unlist(lapply(split(pubs, 1:nrow(pubs)), make_icon))
   return(pubs)
+}
+
+make_talks <- function(presentations) {
+  presentations$citation <- unlist(lapply(split(presentations, 1:nrow(presentations)), make_talk))
+  presentations$icon <- unlist(lapply(split(presentations, 1:nrow(presentations)), make_icon))
+  return(presentations)
 }
 
 icon_open <- '<iconify-icon icon="mdi:unlocked-variant-outline" width="1.2em" height="1.2em"  style="color: #58a53b"></iconify-icon>'
@@ -102,6 +120,8 @@ make_citation <- function(pub) {
   }
   if (!is.na(pub$doi)) {
     pub$doi <- make_doi(pub$doi)
+  }else if(!is.na(pub$url_pub)){
+    pub$doi <- make_url(pub$url_pub)
   }
   if (!is.na(pub$url_pdf)) {
     pub$url_pdf <- make_pdf(pub$url_pdf)
@@ -125,6 +145,37 @@ make_citation <- function(pub) {
   ))
 }
 
+make_talk <- function(presentation) {
+  if (!is.na(presentation$host)) {
+      presentation$host <- glue::glue('_{presentation$host}_.')
+  }
+  if (!is.na(presentation$location)) {
+    presentation$location <- glue::glue("**{presentation$location}**")
+  }
+  if (!is.na(presentation$open)) {
+    if(presentation$open=="TRUE"){
+      presentation$open <- glue::glue(icon_open)
+    }else{presentation$open=""}
+  }
+  if (!is.na(presentation$url_pdf)) {
+    presentation$url_pdf <- make_pdf(presentation$url_pdf)
+  }
+  if (!is.na(presentation$url_rg)) {
+    presentation$url_rg <- make_researchgate(presentation$url_rg)
+  }
+  if (!is.na(presentation$id_scholar)) {
+    presentation$id_scholar <- make_scholar(presentation$id_scholar)
+  }
+  presentation$year <- glue::glue("{presentation$year}|")
+  presentation$title <- glue::glue('"{presentation$title}"')
+  presentation[,which(is.na(presentation))] <- ''
+  return(paste(
+    #pub$title,
+    presentation$year, presentation$author, presentation$host, presentation$location,  presentation$open #,
+    #pub$doi, pub$url_pdf, pub$url_repo, pub$id_scholar, pub$url_rg
+  ))
+}
+
 make_icon <- function(pub) {
   if (!is.na(pub$open)) {
     if(pub$open=="TRUE"){
@@ -133,6 +184,8 @@ make_icon <- function(pub) {
   }
   if (!is.na(pub$doi)) {
     pub$doi <- make_doi(pub$doi)
+  }else if(!is.na(pub$url_pub)){
+    pub$doi <- make_url(pub$url_pub)
   }
   if (!is.na(pub$url_pdf)) {
     pub$url_pdf <- make_pdf(pub$url_pdf)
@@ -161,6 +214,18 @@ make_icon <- function(pub) {
 make_doi <- function(doi) {
   return(glue::glue(
     '<a href="https://doi.org/{doi}" target="_blank" style="text-decoration: none; display: inline-flex; align-items: center;">
+      <svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="0 0 24 24" style="margin-right: 5px;">
+        <path fill="none" stroke="currentColor" stroke-dasharray="28" stroke-dashoffset="28" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 6l2 -2c1 -1 3 -1 4 0l1 1c1 1 1 3 0 4l-5 5c-1 1 -3 1 -4 0M11 18l-2 2c-1 1 -3 1 -4 0l-1 -1c-1 -1 -1 -3 0 -4l5 -5c1 -1 3 -1 4 0">
+          <animate fill="freeze" attributeName="stroke-dashoffset" dur="0.6s" values="28;0"/>
+        </path>
+      </svg>
+    </a>'
+  ))
+}
+
+make_url <- function(url_pub) {
+  return(glue::glue(
+    '<a href="{url_pub}" target="_blank" style="text-decoration: none; display: inline-flex; align-items: center;">
       <svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="0 0 24 24" style="margin-right: 5px;">
         <path fill="none" stroke="currentColor" stroke-dasharray="28" stroke-dashoffset="28" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 6l2 -2c1 -1 3 -1 4 0l1 1c1 1 1 3 0 4l-5 5c-1 1 -3 1 -4 0M11 18l-2 2c-1 1 -3 1 -4 0l-1 -1c-1 -1 -1 -3 0 -4l5 -5c1 -1 3 -1 4 0">
           <animate fill="freeze" attributeName="stroke-dashoffset" dur="0.6s" values="28;0"/>
@@ -284,6 +349,15 @@ make_pub_list <- function(pubs, category) {
   return(htmltools::HTML(paste(unlist(pub_list), collapse = "")))
 }
 
+make_talk_list <- function(talks, category) {
+  x <- talks[which(talks$category == category),]
+  talk_list <- list()
+  for (i in 1:nrow(x)) {
+    talk_list[[i]] <- make_presentation(x[i,], index = i)
+  }
+  return(htmltools::HTML(paste(unlist(talk_list), collapse = "")))
+}
+
 make_pub <- function(pub, index = NULL) {
   header <- FALSE
   altmetric <- make_altmetric(pub)
@@ -311,6 +385,35 @@ make_pub <- function(pub, index = NULL) {
     <div class="grid">
     <div class="g-col-9"> {formatted_title} </div>
     <div class="g-col-3" style="text-align: center;"> {altmetric} </div>
+    </div>'
+  )))
+}
+
+make_presentation <- function(presentation, index = NULL) {
+  header <- FALSE
+  if (is.null(index)) {
+    cite <- presentation$citation
+  } else {
+    cite <- glue::glue('{presentation$citation}')
+    if (index == 1) { header <- TRUE }
+  }
+  icon <- presentation$icon
+  
+  # Format title in bold with large font size, add index number before, reduce space after title
+  formatted_title <- glue::glue(
+    '<div style="font-size: 18px; line-height: 1.1;">
+     <span style="font-weight: normal;">{index}|</span> 
+     <span style="font-weight: bold; margin-top: 0px; margin-bottom: 4px;">{title_to_html(presentation$title)}</span>
+   </div>
+   <div style="font-size: 15px; margin-top: 5px; margin-bottom: -10px; line-height: 1.1;">{markdown_to_html(cite)}</div>
+   <div style="font-size: 16px; margin-top: 0px; margin-bottom: -10px;">{icon}</div>
+   <hr style="border: 1px solid #ccc;" />'
+  )
+  
+  return(htmltools::HTML(glue::glue(
+    '<div class="presentation">
+    <div class="grid">
+    <div class="g-col-9"> {formatted_title} </div>
     </div>'
   )))
 }
@@ -353,3 +456,5 @@ title_to_html <- function(title) {
 
 #get_pubs()
 pubs <- get_pubs()
+presentations <- get_presentations()
+

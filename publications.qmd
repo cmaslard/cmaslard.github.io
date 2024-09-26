@@ -20,47 +20,50 @@ include-after-body:
 editor: visual
 editor_options: 
   chunk_output_type: console
-
 ---
 
 ```{r, echo=FALSE, warning=FALSE, message=F}
 source("src.R")
 ```
 
-::: {.column-margin}
-<iconify-icon icon="material-symbols:construction-rounded" width="1.2em" height="1.2em" style="color: #58a53b"></iconify-icon>: Manuscript in preparation  
-<iconify-icon icon="line-md:cog-loop" width="1.2em" height="1.2em"  style="color: #58a53b"></iconify-icon>: Article under review  
-<iconify-icon icon="mdi:unlocked-variant-outline" width="1.2em" height="1.2em"  style="color: #58a53b"></iconify-icon>: Open-access articles  
-{{< iconify line-md link width="1.2em" height="1.2em" >}}: Link of the publication  
-{{< iconify line-md:download-loop width="1.2em" height="1.2em" >}}: Download publication  
-{{< iconify line-md:github-loop width="1.2em" height="1.2em" >}}: Code & Data  
-{{< iconify academicons:biorxiv width="1.2em" height="1.2em" >}}: Biorxiv or pre-print  
-{{< iconify academicons:google-scholar width="1.2em" height="1.2em" >}}: Google Scholar  
-{{< iconify academicons:researchgate width="1.2em" height="1.2em" >}}: Researchgate  
-{{< iconify academicons:hal width="1.2em" height="1.2em" >}}: HAL  
+::: column-margin
+<iconify-icon icon="material-symbols:construction-rounded" width="1.2em" height="1.2em" style="color: #58a53b"></iconify-icon>: Manuscript in preparation\
+<iconify-icon icon="line-md:cog-loop" width="1.2em" height="1.2em"  style="color: #58a53b"></iconify-icon>: Article under review\
+<iconify-icon icon="mdi:unlocked-variant-outline" width="1.2em" height="1.2em"  style="color: #58a53b"></iconify-icon>: Open-access articles\
+{{< iconify line-md link width="1.2em" height="1.2em" >}}: Link of the publication\
+{{< iconify line-md:download-loop width="1.2em" height="1.2em" >}}: Download publication\
+{{< iconify line-md:github-loop width="1.2em" height="1.2em" >}}: Code & Data\
+{{< iconify academicons:biorxiv width="1.2em" height="1.2em" >}}: Biorxiv or pre-print\
+{{< iconify academicons:google-scholar width="1.2em" height="1.2em" >}}: Google Scholar\
+{{< iconify academicons:researchgate width="1.2em" height="1.2em" >}}: Researchgate\
+{{< iconify academicons:hal width="1.2em" height="1.2em" >}}: HAL\
 Last update on: **`r Sys.Date()`**
 :::
 
 ## Working Papers & Papers Under Review
+
 `r make_pub_list(pubs, "working")`
 
 ## Peer-reviewed journal articles
+
 `r make_pub_list(pubs, "peer_reviewed")`
 
 ## Magazine Publications
+
 `r make_pub_list(pubs, "magazine")`
 
 ## Theses
+
 `r make_pub_list(pubs, "theses")`
 
 ::: {.callout-note collapse="true"}
 ## Learn about these metrics
 
-- Citations are the number of other articles citing this article, calculated by Crossref. [Find more information about Crossref citation counts](https://www.crossref.org/services/cited-by/)
-- The Altmetric Attention Score is a quantitative measure of the attention that a research article has received online. Clicking on the donut icon will load a page at altmetric.com with additional details about the score and the social media presence for the given article. Find more information on the [Altmetric Attention Score and how the score is calculated](https://help.altmetric.com/support/solutions/articles/6000233311-how-is-the-altmetric-attention-score-calculated).
+-   Citations are the number of other articles citing this article, calculated by Crossref. [Find more information about Crossref citation counts](https://www.crossref.org/services/cited-by/)
+-   The Altmetric Attention Score is a quantitative measure of the attention that a research article has received online. Clicking on the donut icon will load a page at altmetric.com with additional details about the score and the social media presence for the given article. Find more information on the [Altmetric Attention Score and how the score is calculated](https://help.altmetric.com/support/solutions/articles/6000233311-how-is-the-altmetric-attention-score-calculated).
 :::
 
-:::: {.columns} 
+::: columns
 ::: {.column width="25%"}
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 profile <- get_profile("TsztyiMAAAAJ&hl")
@@ -82,7 +85,6 @@ kable(metrics, col.names = c("", ""), align = "c", format = "html") %>%
   row_spec(0, bold = TRUE, color = "white", background = "black") %>%
   row_spec(1:3)
 ```
-
 :::
 
 ::: {.column width="75%"}
@@ -111,9 +113,8 @@ ggplot(df,aes(x=year,y=cites))+
       )+
   coord_flip() 
 ```
-
 :::
-::::
+:::
 
 ```{r, eval=F, echo=F}
 

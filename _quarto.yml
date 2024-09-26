@@ -31,6 +31,7 @@ website:
           - text: Personal
             href: perso_projects.qmd
       - href: publications.qmd
+      - href: presentations.qmd
 
   page-footer: 
       border: true
@@ -56,9 +57,15 @@ website:
         - text: "{{< iconify fa6-brands:researchgate >}}"
           href: "https://www.researchgate.net/profile/Corentin-Maslard"
           aria-label: "ResearchGate logo linking to ResearchGate account"
-        - text: "<i class='ai ai-google-scholar fa-lg'></i>"
-          href: https://scholar.google.com/citations?user=DY2D56IAAAAJ
+        - text: "{{< iconify academicons:google-scholar >}}"
+          href: https://scholar.google.com/citations?user=TsztyiMAAAAJ&hl
           target: blank
+        - text: "{{< iconify academicons:hal >}}"
+          href: https://cv.hal.science/corentinmaslard
+          aria-label: "HAL account"
+        - text: "{{< iconify pepicons-pop:cv >}}"
+          href: "https://docs.google.com/document/d/1oCgrdjnAJuVjgocx3F2kmlbJxlqa6uWrSgqm5fWRhpA/edit?usp=sharing"
+          aria-label: "CV"
       right:
           <span class="faux-block">Made with <iconify-icon icon="line-md:heart-twotone"></iconify-icon>, <iconify-icon icon="line-md:coffee-twotone-loop"></iconify-icon>, {{< iconify fa6-brands r-project >}} and [Quarto](https://quarto.org/)</span> |
           <span class="faux-block">[View the source at {{< iconify fa6-brands github >}} GitHub](https://github.com/cmaslard/cmaslard.github.io)</span>
