@@ -8,7 +8,7 @@ editor: visual
 author: Corentin Maslard
 date: 2024-09-20
 #image: "media/deep_learning_segmentation/overlay_modif.png"
-categories: [work, INRAE, Roullier, CAU, water stress, heat stress, root, microorganism, omic, soybean]
+categories: [work, INRAE, Roullier, CAU, water stress, heat stress, root, microorganism, omics, soybean]
 editor_options: 
   chunk_output_type: console
 image: "media/phd_soybean_2021_2024/preview_website_2024-08-30.png"
