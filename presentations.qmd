@@ -45,8 +45,9 @@ Last update on: **`r Sys.Date()`**
 `r make_talk_list(presentations, "conference")`
 
 ## Poster
+
 `r make_talk_list(presentations, "poster")`
 
 ## Media
-`r make_talk_list(presentations, "media")`
 
+`r make_talk_list(presentations, "media")`

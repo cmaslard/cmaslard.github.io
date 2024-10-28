@@ -1,6 +1,6 @@
 # pkg 
 library(rcrossref)
-library(rAltmetric)
+library(rAltmetric) #devtools::install_github("ropensci/rAltmetric")
 library(scholar)
 library(dplyr)
 library(ggplot2)
