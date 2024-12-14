@@ -7,17 +7,17 @@
     ]
   },
   {
-    "listing": "/tools.html",
-    "items": [
-      "/tools/macro_angle.html",
-      "/tools/deep_learning_segmentation.html"
-    ]
-  },
-  {
     "listing": "/perso_projects.html",
     "items": [
       "/perso_projects/strava_report.html",
       "/perso_projects/analyse_garden.html"
+    ]
+  },
+  {
+    "listing": "/tools.html",
+    "items": [
+      "/tools/macro_angle.html",
+      "/tools/deep_learning_segmentation.html"
     ]
   }
 ]
