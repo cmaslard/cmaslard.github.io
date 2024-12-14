@@ -39,7 +39,7 @@ website:
         - icon: badge-cc-fill
           url: https://creativecommons.org/licenses/by-nc-sa/4.0/
         - text: "Corentin Maslard 2024"
-          href: "https://www.cmaslard.xyz/" 
+          href: "https://cmaslard.xyz/" 
         
       center:
         - text: "{{< iconify fa6-solid:envelope >}}"
