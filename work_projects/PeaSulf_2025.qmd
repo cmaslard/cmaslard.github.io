@@ -1,0 +1,18 @@
+---
+title: "PeaSulf 2025"
+subtitle: "Stay-green mutants in sulfur deficiency: the role of PsSULTR4"
+format:
+  html:
+    code-fold: true
+editor: visual
+author: Corentin Maslard
+date: 2025-01-02
+categories: [work, INRAE, sulfate, pea]
+editor_options: 
+  chunk_output_type: console
+image: "media/PeaSulf/preview_website_2024-12-14.png"
+---
+
+[You can access the project (code, figure, explanation ...) through this link](https://cmaslard.xyz/PeaSulf_2025/)
+
+Under prolonged sulfur deficiency (–S), sultr4 mutants display a stay-green phenotype in vegetative leaves, suggesting that vacuolar sulfate availability may influence the progression of leaf senescence and nutrient remobilization. To investigate this phenomenon, we first examined nitrogen partitioning at maturity in wild-type and sultr4 plants grown under –S. We then focused on comparing leaf responses between sultr4 and wild-type genotypes under both –S and +S conditions, monitoring chlorophyll content throughout the reproductive period, examining transcriptional regulations at key reproductive stages when nutrients are actively remobilized, and quantifying sulfate as well as a range of metabolites, including amino acids. Our findings reveal that the stay-green phenotype in sultr4 mutants under –S consistently appears in multiple experiments, indicating a direct or indirect role for vacuolar sulfate in leaf senescence. Transcriptomic analyses show that sultr4 mutants exhibit patterns distinct from the conventional sulfur deficiency response, particularly regarding the regulation of chlorophyll degradation and leaf senescence. Autophagy and photosynthetic processes remain unaffected, but the inhibition of chlorophyll catabolism and the suppression of senescence-promoting pathways characterize the mutant phenotype. Metabolic profiling further indicates that vacuolar sulfate remobilization is pivotal for maintaining cysteine levels and balancing amino acids associated with aspartate metabolism under –S. Notably, the E568K mutant accumulates OAS early in the reproductive period, representing a precocious sulfur-starvation response dependent on SULTR4, in contrast to the W78* mutant. Overall, these results underscore the crucial function of vacuolar sulfate in modulating senescence and ensuring metabolic homeostasis during sulfur-limited conditions.
