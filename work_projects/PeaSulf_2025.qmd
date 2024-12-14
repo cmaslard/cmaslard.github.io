@@ -10,7 +10,7 @@ date: 2025-01-02
 categories: [work, INRAE, sulfate, pea]
 editor_options: 
   chunk_output_type: console
-image: "media/PeaSulf/preview_website_2024-12-14.png"
+image: "media/PeaSulf_2025/preview_website_2024-12-14.png"
 ---
 
 [You can access the project (code, figure, explanation ...) through this link](https://cmaslard.xyz/PeaSulf_2025/)
