@@ -113,7 +113,7 @@ Below is a heat map of all my recorded activities, created using leaflet.
 
 Change color depending of the different activity
 
-```{r, warning=FALSE, message=F}
+```{r map_creation, warning=FALSE, message=F}
 my_acts_select <- get_activity_list(stoken, after = as.Date('2021-01-01'))
 act_data <- compile_activities(my_acts_select) %>% 
   dplyr::filter(map.summary_polyline!="") %>% 
