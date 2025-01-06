@@ -10,7 +10,7 @@ date: 2025-01-02
 categories: [work, INRAE, pea, nodules, water stress, omics]
 editor_options: 
   chunk_output_type: console
-image: "media/PeaSulf_2025/preview_website_2025-01-06.png"
+image: "media/FABER_2025/preview_website_2025-01-06.png"
 ---
 
 [You can access the project (code, figure, explanation ...) through this link](https://cmaslard.xyz/FABER_2025/)
