@@ -1,0 +1,18 @@
+---
+title: "FABER 2025"
+subtitle: "Impact of water stress on pea roots and nodules"
+format:
+  html:
+    code-fold: true
+editor: visual
+author: Corentin Maslard
+date: 2025-01-02
+categories: [work, INRAE, pea, nodules, water stress, omics]
+editor_options: 
+  chunk_output_type: console
+image: "media/PeaSulf_2025/preview_website_2025-01-06.png"
+---
+
+[You can access the project (code, figure, explanation ...) through this link](https://cmaslard.xyz/FABER_2025/)
+
+As part of the FABER project, a controlled-environment experiment was conducted on the pea genotype Caméor to investigate the response of the nodulated root system to water deficit. In addition to analyzing water, carbon, and nitrogen fluxes in the plant, we performed metabolomic (proton NMR), enzymatic (collaboration with Y. Gibon, UMR BFP, Bordeaux), and transcriptomic analyses (microarray hybridization with 40,000 sequences, in collaboration with S. Balzergue, URGV, Evry, and V. Vernoud, UMR Agroecology) at the end of water deficit and after a rewatering period. Ecophysiological analysis confirmed that changes in water fluxes precede alterations in nitrogen fluxes. During the seven-day recovery period, no new nodules were initiated, but existing nodules rapidly grew to match the biomass of those in unstressed plants. However, nitrogen fixation activity required two weeks of rewatering to fully recover. Molecular data revealed greater plasticity in roots compared to nodules, with roots recovering faster from water deficit during the vegetative phase. Metabolomic analysis showed that stressed roots had lower malate, leucine, and choline levels but higher glucose, sucrose, and asparagine levels post-stress. After rewatering, the metabolic profiles of stressed roots were nearly indistinguishable from those of unstressed roots, suggesting rapid recovery. In contrast, nodules exhibited persistent differences in metabolite profiles, including lower fumarate and GABA levels and higher sucrose and tartrate levels, indicating incomplete recovery after one week of rewatering. Transcriptomic analysis identified over 6,000 differentially expressed genes under water deficit, with approximately 400 genes in roots and 3,200 in nodules. Notably, three LEA (Late Embryogenesis Abundant) genes were overexpressed in roots, suggesting a role in maintaining protein structure and water retention. Additionally, the gene encoding delta-1-pyrroline-5-carboxylate synthase, crucial for proline biosynthesis, was overexpressed under water stress, potentially enhancing stress resilience. These findings highlight the differences in recovery dynamics between roots and nodules, with roots exhibiting faster metabolic and molecular recovery. Functional validation of candidate genes for improved water stress tolerance in peas will involve TILLING mutants and allelic variation studies in pea germplasm collections, aiming to identify favorable alleles for better water deficit resilience and recovery. This study underscores the importance of post-stress recovery dynamics in understanding nitrogen and water flux interactions in legumes.

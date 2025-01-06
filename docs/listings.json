@@ -2,15 +2,10 @@
   {
     "listing": "/work_projects.html",
     "items": [
+      "/work_projects/EUCLEG_2021.html",
+      "/work_projects/FABER_2025.html",
       "/work_projects/PeaSulf_2025.html",
       "/work_projects/phd_soybean_2021_2024.html"
-    ]
-  },
-  {
-    "listing": "/tools.html",
-    "items": [
-      "/tools/macro_angle.html",
-      "/tools/deep_learning_segmentation.html"
     ]
   },
   {
@@ -18,6 +13,13 @@
     "items": [
       "/perso_projects/strava_report.html",
       "/perso_projects/analyse_garden.html"
+    ]
+  },
+  {
+    "listing": "/tools.html",
+    "items": [
+      "/tools/macro_angle.html",
+      "/tools/deep_learning_segmentation.html"
     ]
   }
 ]
