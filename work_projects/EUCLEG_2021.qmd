@@ -7,7 +7,7 @@ format:
 editor: visual
 author: Corentin Maslard
 date: 2025-01-02
-categories: [work, INRAE, sulfate, water_stress, pea, nitrogen, nodule]
+categories: [work, INRAE, sulfate, water stress, pea, nitrogen, nodule]
 editor_options: 
   chunk_output_type: console
 image: "media/EUCLEG_2021/preview_website_2025-01-06.png"

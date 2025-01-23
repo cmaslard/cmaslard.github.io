@@ -7,7 +7,7 @@ format:
 editor: visual
 author: Corentin Maslard
 date: 2025-01-02
-categories: [work, INRAE, pea, nodules, water stress, omics]
+categories: [work, INRAE, pea, nodule, water stress, omics]
 editor_options: 
   chunk_output_type: console
 image: "media/FABER_2025/preview_website_2025-01-06.png"

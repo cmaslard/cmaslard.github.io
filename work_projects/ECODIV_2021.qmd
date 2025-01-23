@@ -1,0 +1,18 @@
+---
+title: "ECODIV 2021"
+subtitle: "Determination of cardinal germination temperatures for various seed legumes"
+format:
+  html:
+    code-fold: true
+editor: visual
+author: Corentin Maslard
+date: 2025-01-23
+categories: [work, INRAE, legume plant, temperature, pea, soybean, lupin, faba bean, lentils, chickpea]
+editor_options: 
+  chunk_output_type: console
+image: "media/ECODIV_2021/preview_website_2025-01-23.png"
+---
+
+[You can access the project (code, figure, explanation ...) through this link](https://cmaslard.xyz/ECODIV_2021/)
+
+Comparative ecophysiology of diversification (**É**cophysiologie **CO**mparée des cultures de **DIV**ersification) crops (legumes/spring) to guide their inclusion in cropping successions The diversification of cropping systems is an essential lever for improving their resilience. The Ecodiv project is fully committed to the acquisition of knowledge and the development of solutions for diversification. Using comparative ecophysiology approaches, it aims to provide aims to provide farmers with a tool to help them choose crops for species that are currently under-valued, such as sunflowers and legumes. This project will facilitate their integration into cropping systems and extend their cultivation area in the various French regions, based on a better understanding of their agronomic properties and their potential to adapt to soil and climate conditions. This work will will map out possible growing areas for each of the species studied.
