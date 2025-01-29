@@ -51,6 +51,8 @@ website:
           href: https://www.linkedin.com/in/corentin-maslard
         - text: "{{< iconify fa6-brands square-x-twitter >}}"
           href: https://x.com/cmaslard
+        - text: "{{< iconify fa6-brands bluesky >}}"
+          href: https://bsky.app/profile/cmaslard.bsky.social
         - text: "{{< iconify fa6-brands:orcid >}}"
           href: "https://orcid.org/0000-0002-6951-1963"
           aria-label: "ORCID logo linking to ORCID account"
