@@ -1,0 +1,40 @@
+---
+title: "Awards"
+toc: true
+toc-location: right
+number-sections: false
+execute: 
+  echo: false
+  message: false
+  warning: false
+format: 
+  html:
+      page-layout: full
+knitr: 
+  opts_chunk: 
+    dev: [svg, darksvg]
+    fig.ext: [.-light.svg, .-dark.svg]
+include-after-body:
+  text: |
+    <script type="application/javascript" src="image-dark-light.js"></script>
+editor: visual
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r, echo=FALSE, warning=FALSE, message=F}
+source("src.R")
+```
+
+::: column-margin
+{{< iconify line-md link width="1.2em" height="1.2em" >}}: Link of the presentation\
+{{< iconify line-md:download-loop width="1.2em" height="1.2em" >}}: Download presentation\
+{{< iconify line-md:github-loop width="1.2em" height="1.2em" >}}: Code & Data\
+{{< iconify academicons:biorxiv width="1.2em" height="1.2em" >}}: Biorxiv or pre-print\
+{{< iconify academicons:google-scholar width="1.2em" height="1.2em" >}}: Google Scholar\
+{{< iconify academicons:researchgate width="1.2em" height="1.2em" >}}: Researchgate\
+{{< iconify academicons:hal width="1.2em" height="1.2em" >}}: HAL\
+Last update on: **`r Sys.Date()`**
+:::
+
+`r make_award_list(awards, "research")`

@@ -23,7 +23,6 @@ website:
       - href: index.qmd
         text: " "
       - href: me.qmd
-      - href: tools.qmd
       - text: Projects
         menu: 
           - text: Work
@@ -32,6 +31,12 @@ website:
             href: perso_projects.qmd
       - href: publications.qmd
       - href: presentations.qmd
+      - text: Others
+        menu: 
+          - text: Awards
+            href: awards.qmd
+          - text: Tools
+            href: tools.qmd
 
   page-footer: 
       border: true

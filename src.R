@@ -137,6 +137,13 @@ get_presentations <- function() {
   return(presentations)
 }
 
+get_awards <- function() {
+  awards <- gsheet::gsheet2tbl(
+    url = "https://docs.google.com/spreadsheets/d/1Cu1twyhPRdxY3Q4HBF6qmOK7BI_8a4qRav_IWI2n4eA/edit?gid=1780301191#gid=1780301191")
+  awards <- make_awards(awards)
+  return(awards)
+}
+
 make_citations <- function(pubs) {
   pubs$citation <- unlist(lapply(split(pubs, 1:nrow(pubs)), make_citation))
   pubs$icon <- unlist(lapply(split(pubs, 1:nrow(pubs)), make_icon))
@@ -147,6 +154,11 @@ make_talks <- function(presentations) {
   presentations$citation <- unlist(lapply(split(presentations, 1:nrow(presentations)), make_talk))
   presentations$icon <- unlist(lapply(split(presentations, 1:nrow(presentations)), make_icon))
   return(presentations)
+}
+
+make_awards <- function(awards) {
+  awards$citation <- unlist(lapply(split(awards, 1:nrow(awards)), make_award))
+  return(awards)
 }
 
 icon_open <- '<iconify-icon icon="mdi:unlocked-variant-outline" width="1.2em" height="1.2em"  style="color: #58a53b"></iconify-icon>'
@@ -242,6 +254,27 @@ make_talk <- function(presentation) {
     #pub$title,
     presentation$year, presentation$author, presentation$host, presentation$location,  presentation$open #,
     #pub$doi, pub$url_pdf, pub$url_repo, pub$id_scholar, pub$url_rg
+  ))
+}
+
+#make_talk_list(presentations, "media")
+#make_award_list(award, "research")
+
+make_award <- function(award) {
+  if (!is.na(award$host)) {
+    award$host <- glue::glue('_{award$host}_.')
+  }
+  if (!is.na(award$location)) {
+    award$location <- glue::glue("**{award$location}**")
+  }
+  if (!is.na(award$author)) {
+    award$author <- glue::glue("{award$author},")
+  }
+  award$date <- glue::glue("{award$date}|")
+  award$description <- glue::glue('"{award$description}"')
+  award[,which(is.na(award))] <- ''
+  return(paste(
+    award$date, award$author, award$host, award$location
   ))
 }
 
@@ -430,6 +463,17 @@ make_talk_list <- function(talks, category) {
   return(htmltools::HTML(paste(unlist(talk_list), collapse = "")))
 }
 
+make_award_list <- function(awards, category) {
+  x <- awards[which(awards$category == category),]
+  award_list <- list()
+  for (i in 1:nrow(x)) {
+    award_list[[i]] <- make_award1(x[i,], index = i)
+  }
+  return(htmltools::HTML(paste(unlist(award_list), collapse = "")))
+}
+
+#make_award_list(awards = awards, "research")
+
 make_pub <- function(pub, index = NULL) {
   header <- FALSE
   altmetric <- make_altmetric(pub)
@@ -490,6 +534,33 @@ make_presentation <- function(presentation, index = NULL) {
   )))
 }
 
+make_award1 <- function(award, index = NULL) {
+  header <- FALSE
+  if (is.null(index)) {
+    cite <- award$citation
+  } else {
+    cite <- glue::glue('{award$citation}')
+    if (index == 1) { header <- TRUE }
+  }
+  
+  # Format title in bold with large font size, add index number before, reduce space after title
+  formatted_title <- glue::glue(
+    '<div style="font-size: 18px; line-height: 1.1;">
+     <span style="font-weight: normal;">{index}|</span> 
+     <span style="font-weight: bold; margin-top: 0px; margin-bottom: 4px;">{title_to_html(award$description)}</span>
+   </div>
+   <div style="font-size: 15px; margin-top: 5px; margin-bottom: -10px; line-height: 1.1;">{markdown_to_html(cite)}</div>
+   <hr style="border: 1px solid #ccc;" />'
+  )
+  
+  return(htmltools::HTML(glue::glue(
+    '<div class="presentation">
+    <div class="grid">
+    <div class="g-col-9"> {formatted_title} </div>
+    </div>'
+  )))
+}
+
 make_altmetric <- function(pub) {
   altmetric <- ""
   if (pub$category == 'peer_reviewed') {
@@ -529,6 +600,7 @@ title_to_html <- function(title) {
 #get_pubs()
 pubs <- get_pubs()
 presentations <- get_presentations()
+awards <- get_awards()
 
 # make_pub_list(pubs, "working")
 # make_pub_list(pubs, "peer_reviewed")

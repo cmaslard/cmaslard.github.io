@@ -27,9 +27,6 @@ source("src.R")
 ```
 
 ::: column-margin
-<iconify-icon icon="material-symbols:construction-rounded" width="1.2em" height="1.2em" style="color: #58a53b"></iconify-icon>: Manuscript in preparation\
-<iconify-icon icon="line-md:cog-loop" width="1.2em" height="1.2em"  style="color: #58a53b"></iconify-icon>: Article under review\
-<iconify-icon icon="mdi:unlocked-variant-outline" width="1.2em" height="1.2em"  style="color: #58a53b"></iconify-icon>: Open-access articles\
 {{< iconify line-md link width="1.2em" height="1.2em" >}}: Link of the presentation\
 {{< iconify line-md:download-loop width="1.2em" height="1.2em" >}}: Download presentation\
 {{< iconify line-md:github-loop width="1.2em" height="1.2em" >}}: Code & Data\
