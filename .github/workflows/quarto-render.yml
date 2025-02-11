@@ -34,7 +34,7 @@ jobs:
             install.packages("renv")
             renv::restore()
           } else {
-            install.packages(c("tidyverse", "ggplot2", "mixOmics", "ComplexUpset", "patchwork"))
+            install.packages(c("tidyverse", "ggplot2"))
           }
         shell: Rscript {0}
 
