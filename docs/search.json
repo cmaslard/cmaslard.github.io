@@ -11,7 +11,7 @@
     "href": "presentations.html",
     "title": "Presentations",
     "section": "",
-    "text": ": Link of the presentation\n: Download presentation\n: Code & Data\n: Biorxiv or pre-print\n: Google Scholar\n: Researchgate\n: HAL\nLast update on: 2025-02-10"
+    "text": ": Link of the presentation\n: Download presentation\n: Code & Data\n: Biorxiv or pre-print\n: Google Scholar\n: Researchgate\n: HAL\nLast update on: 2025-02-11"
   },
   {
     "objectID": "presentations.html#conference",
@@ -53,7 +53,7 @@
     "href": "publications.html",
     "title": "Publications",
     "section": "",
-    "text": ": Manuscript in preparation\n: Article under review\n: Open-access articles\n: Link of the publication\n: Download publication\n: Code & Data\n: Biorxiv or pre-print\n: Google Scholar\n: Researchgate\n: HAL\nLast update on: 2025-02-10"
+    "text": ": Manuscript in preparation\n: Article under review\n: Open-access articles\n: Link of the publication\n: Download publication\n: Code & Data\n: Biorxiv or pre-print\n: Google Scholar\n: Researchgate\n: HAL\nLast update on: 2025-02-11"
   },
   {
     "objectID": "publications.html#working-papers-papers-under-review",
@@ -88,7 +88,14 @@
     "href": "awards.html",
     "title": "Awards",
     "section": "",
-    "text": ": Link of the presentation\n: Download presentation\n: Code & Data\n: Biorxiv or pre-print\n: Google Scholar\n: Researchgate\n: HAL\nLast update on: 2025-02-10\n      1|    Young scientist award  June 2023| Corentin Maslard, Word Soybean Research Conference 11. Vienna, Austria    \n\n\n\n Back to top"
+    "text": ": Link of the award\nLast update on: 2025-02-11\n      1|    Young scientist award  June 2023| Corentin Maslard, Word Soybean Research Conference 11. Vienna, Austria    \n\n\n\n Back to top"
+  },
+  {
+    "objectID": "me.html",
+    "href": "me.html",
+    "title": "About",
+    "section": "",
+    "text": "Hi there !\n\nHi there! I’m a passionate postdoctoral researcher with a deep love for exploring the fascinating world of plants and their intricate interactions with the environment. My work focuses on understanding how plants respond to challenging conditions like water stress and extreme temperatures, as well as the role microorganisms play in these responses. This area of research is especially important as we seek to understand and mitigate the impacts of climate change.\nI thrive in multidisciplinary settings, combining lab work, bioinformatics, microbiology, and field studies to uncover the secrets of plant resilience. I’m particularly drawn to the power of omics data and its analysis, which allows us to delve deeper into the molecular mechanisms that drive plant and microbe interactions under stress conditions.\nWhen I’m not immersed in research, I love spending quality time with my family and friends, and staying active through sports.\n\n\n\n\nCV\n\n\n\n\n\n Back to top"
   },
   {
     "objectID": "tools.html",
@@ -168,11 +175,18 @@
     "text": "Back to top"
   },
   {
-    "objectID": "me.html",
-    "href": "me.html",
-    "title": "About",
+    "objectID": "grants.html",
+    "href": "grants.html",
+    "title": "Grants",
     "section": "",
-    "text": "Hi there !\n\nHi there! I’m a passionate postdoctoral researcher with a deep love for exploring the fascinating world of plants and their intricate interactions with the environment. My work focuses on understanding how plants respond to challenging conditions like water stress and extreme temperatures, as well as the role microorganisms play in these responses. This area of research is especially important as we seek to understand and mitigate the impacts of climate change.\nI thrive in multidisciplinary settings, combining lab work, bioinformatics, microbiology, and field studies to uncover the secrets of plant resilience. I’m particularly drawn to the power of omics data and its analysis, which allows us to delve deeper into the molecular mechanisms that drive plant and microbe interactions under stress conditions.\nWhen I’m not immersed in research, I love spending quality time with my family and friends, and staying active through sports.\n\n\n\n\nCV\n\n\n\n\n\n Back to top"
+    "text": ": Link of the grant\nLast update on: 2025-02-11\n      1|    Mobility grant for participation in a congress  2023-05-23| Corentin Maslard, Marion Prudent, Environments & Health (EH) doctoral school. 1 000€                                         2|    Training grant for participation in a summer school  2022-05-22| Corentin Maslard, Marion Prudent, Environments & Health (EH) doctoral school. 500€                                   \n\n\n\n\n\n\n\n\n\n Back to top"
+  },
+  {
+    "objectID": "advisees.html",
+    "href": "advisees.html",
+    "title": "Supervised Students",
+    "section": "",
+    "text": ": More about the student\nLast update on: 2025-02-11\n      |    No students advised for the moment        \n\nAlumni\n      1|    Louis Schwartz   (ms student)  From Jan.2023 to Apr.2023 | Understanding the impact of water and/or heat stress on the root and aerial architecture of two soybean genotypes with contrasting root architecture, B2IPME,Dijon SVTE University (M1), INRAE, UMR1347 Agroécologie, Dijon, France    \n\n\n\n\n Back to top"
   },
   {
     "objectID": "index.html",

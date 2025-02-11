@@ -144,6 +144,20 @@ get_awards <- function() {
   return(awards)
 }
 
+get_grants <- function() {
+  grants <- gsheet::gsheet2tbl(
+    url = "https://docs.google.com/spreadsheets/d/1Cu1twyhPRdxY3Q4HBF6qmOK7BI_8a4qRav_IWI2n4eA/edit?gid=267267554#gid=267267554")
+  grants <- make_grants(grants)
+  return(grants)
+}
+
+get_advisees <- function() {
+  advisees <- gsheet::gsheet2tbl(
+    url = "https://docs.google.com/spreadsheets/d/1Cu1twyhPRdxY3Q4HBF6qmOK7BI_8a4qRav_IWI2n4eA/edit?gid=1551997747#gid=1551997747")
+  advisees <- make_advisees(advisees)
+  return(advisees)
+}
+
 make_citations <- function(pubs) {
   pubs$citation <- unlist(lapply(split(pubs, 1:nrow(pubs)), make_citation))
   pubs$icon <- unlist(lapply(split(pubs, 1:nrow(pubs)), make_icon))
@@ -159,6 +173,24 @@ make_talks <- function(presentations) {
 make_awards <- function(awards) {
   awards$citation <- unlist(lapply(split(awards, 1:nrow(awards)), make_award))
   return(awards)
+}
+
+make_grants <- function(grants) {
+  grants$citation <- unlist(lapply(split(grants, 1:nrow(grants)), make_grant))
+  grants$icon <- unlist(lapply(split(grants, 1:nrow(grants)), make_icon))
+  return(grants)
+}
+
+make_advisees <- function(advisees) {
+  advisees$citation <- unlist(lapply(split(advisees, 1:nrow(advisees)), make_advise))
+  test = advisees %>% filter(advisees$complete == 0)
+  if(nrow(test)==0){ # if no student for the moment (to avoid errors)
+    advisees= advisees %>% 
+      bind_rows(mutate(advisees[1, ], across(everything(), ~NA))) %>%
+      mutate(complete = replace(complete, n(), 0), 
+             citation = replace(citation, n(), ""))
+  }
+  return(advisees)
 }
 
 icon_open <- '<iconify-icon icon="mdi:unlocked-variant-outline" width="1.2em" height="1.2em"  style="color: #58a53b"></iconify-icon>'
@@ -278,33 +310,78 @@ make_award <- function(award) {
   ))
 }
 
+make_grant <- function(grant) {
+  if(!is.na(grant$url_pub)){
+    grant$url_pub <- make_url(grant$url_pub)
+  }
+  if (!is.na(grant$sponsor)) {
+    grant$sponsor <- glue::glue('_{grant$sponsor}_.')
+  }
+  if (!is.na(grant$applicant)) {
+    grant$applicant <- glue::glue("{grant$applicant},")
+  }else{
+    
+  }
+  grant$submitted <- glue::glue("{grant$submitted}|")
+  grant$budget_total <- glue::glue(
+    "<span style='color:{ifelse(grant$awarded, '#58a53b', 'red')}'>**{ifelse(grant$awarded, grant$budget_total, paste0(grant$budget_total, ' (rejected)'))}**</span>"
+  )
+  grant[,which(is.na(grant))] <- ''
+  return(paste(
+    grant$submitted, grant$applicant, grant$sponsor, grant$budget_total
+  ))
+}
+
+make_advise <- function(advise) {
+  if (!is.na(advise$institution_origin)) {
+    advise$institution_origin <- glue::glue('_{advise$institution_origin}_,')
+  }
+  if (!is.na(advise$institution)) {
+    advise$institution <- glue::glue('**{advise$institution}**')
+  }
+  if (!is.na(advise$title)) {
+    advise$title <- glue::glue('{advise$title},')
+  }
+  else{advise$title = ""
+  }
+  if (!is.na(advise$start_period) && !is.na(advise$end_period)) {
+    Sys.setlocale("LC_TIME", "C")  # Force display of months in English
+    advise$period <- glue::glue("{paste0('From ',format(advise$start_period, '%b.%Y'),' to ', format(advise$end_period, '%b.%Y'))} |")
+    Sys.setlocale("LC_TIME", "fr_FR.UTF-8")  # back to french
+  }else{advise$period = ""}
+  advise[,which(is.na(advise))] <- ''
+  return(paste(
+    advise$period, advise$title, advise$institution_origin, advise$institution
+  ))
+}
+
 make_icon <- function(pub) {
-  if (!is.na(pub$open)) {
+  if (!is.null(pub$open) && !is.na(pub$open)) {
     if(pub$open=="TRUE"){
       pub$open <- glue::glue(icon_open)
     }else{pub$open=""}
   }
-  if (!is.na(pub$doi)) {
+  if (!is.null(pub$doi) && !is.na(pub$doi)) {
     pub$doi <- make_doi(pub$doi)
-  }else if(!is.na(pub$url_pub)){
+  }else if(!is.null(pub$url_pub) && !is.na(pub$url_pub)){
     pub$doi <- make_url(pub$url_pub)
   }
-  if (!is.na(pub$url_pdf)) {
+  if (!is.null(pub$url_pdf) && !is.na(pub$url_pdf)) {
     pub$url_pdf <- make_pdf(pub$url_pdf)
   }
-  if (!is.na(pub$url_repo)) {
+  if (!is.null(pub$url_repo) && !is.na(pub$url_repo)) {
     pub$url_repo <- make_repo(pub$url_repo)
   }
-  if (!is.na(pub$url_rg)) {
+  if (!is.null(pub$url_rg) && !is.na(pub$url_rg)) {
     pub$url_rg <- make_researchgate(pub$url_rg)
   }
-  if (!is.na(pub$url_preprint)) {
+  if (!is.null(pub$url_preprint) && !is.na(pub$url_preprint)) {
     pub$url_preprint <- make_preprint(pub$url_preprint)
   }
-  if (!is.na(pub$id_scholar)) {
+  if (!is.null(pub$id_scholar) && !is.na(pub$id_scholar)) {
     pub$id_scholar <- make_scholar(pub$id_scholar)
   }
-  if (!is.na(pub$url_hal)) {
+  if (!is.null(pub$url_hal) && !is.na(pub$url_hal)) {
     pub$url_hal <- make_hal(pub$url_hal)
   }
   pub[,which(is.na(pub))] <- ''
@@ -472,6 +549,25 @@ make_award_list <- function(awards, category) {
   return(htmltools::HTML(paste(unlist(award_list), collapse = "")))
 }
 
+make_grant_list <- function(grants) {
+  x <- grants
+  grant_list <- list()
+  for (i in 1:nrow(x)) {
+    grant_list[[i]] <- make_grant1(x[i,], index = i)
+  }
+  return(htmltools::HTML(paste(unlist(grant_list), collapse = "")))
+}
+
+make_advise_list <- function(advise, complete) {
+  x <- advise[which(advise$complete == complete),]
+  advise_list <- list()
+  for (i in 1:nrow(x)) {
+    advise_list[[i]] <- make_advise1(x[i,], index = i)
+  }
+  return(htmltools::HTML(paste(unlist(advise_list), collapse = "")))
+}
+
+
 #make_award_list(awards = awards, "research")
 
 make_pub <- function(pub, index = NULL) {
@@ -561,6 +657,63 @@ make_award1 <- function(award, index = NULL) {
   )))
 }
 
+make_grant1 <- function(grant, index = NULL) {
+  header <- FALSE
+  if (is.null(index)) {
+    cite <- grant$citation
+  } else {
+    cite <- glue::glue('{grant$citation}')
+    if (index == 1) { header <- TRUE }
+  }
+  
+  icon <- grant$icon
+  # Format title in bold with large font size, add index number before, reduce space after title
+  formatted_title <- glue::glue(
+    '<div style="font-size: 18px; line-height: 1.1;">
+     <span style="font-weight: normal;">{index}|</span> 
+     <span style="font-weight: bold; margin-top: 0px; margin-bottom: 4px;">{title_to_html(grant$title)}</span>
+   </div>
+   <div style="font-size: 15px; margin-top: 5px; margin-bottom: -10px; line-height: 1.1;">{markdown_to_html(cite)}</div>
+   <div style="font-size: 16px; margin-top: 0px; margin-bottom: -10px;">{icon}</div>
+   <hr style="border: 1px solid #ccc;" />'
+  )
+  
+  return(htmltools::HTML(glue::glue(
+    '<div class="presentation">
+    <div class="grid">
+    <div class="g-col-9"> {formatted_title} </div>
+    </div>'
+  )))
+}
+
+make_advise1 <- function(advise, index = NULL) {
+  header <- FALSE
+  if (is.null(index)) {
+    cite <- advise$citation
+  } else {
+    cite <- glue::glue('{advise$citation}')
+    if (index == 1) { header <- TRUE }
+  }
+  
+  # Format title in bold with large font size, add index number before, reduce space after title
+  formatted_title <- glue::glue(
+    '<div style="font-size: 18px; line-height: 1.1;">
+     <span style="font-weight: normal;">{ifelse(is.na(advise$name),"",index)}|</span> 
+     <span style="font-weight: bold; margin-top: 0px; margin-bottom: 4px;">{title_to_html(ifelse(is.na(advise$name),"No students advised for the moment",advise$name))}</span>
+     <span style="font-weight: normal; margin-top: 0px; margin-bottom: 4px;">{title_to_html(ifelse(is.na(advise$name),"",paste0(" (",advise$category, " student)")))}</span>
+   </div>
+   <div style="font-size: 15px; margin-top: 5px; margin-bottom: -10px; line-height: 1.1;">{markdown_to_html(cite)}</div>
+   <hr style="border: 1px solid #ccc;" />'
+  )
+  
+  return(htmltools::HTML(glue::glue(
+    '<div class="presentation">
+    <div class="grid">
+    <div class="g-col-9"> {formatted_title} </div>
+    </div>'
+  )))
+}
+
 make_altmetric <- function(pub) {
   altmetric <- ""
   if (pub$category == 'peer_reviewed') {
@@ -601,6 +754,8 @@ title_to_html <- function(title) {
 pubs <- get_pubs()
 presentations <- get_presentations()
 awards <- get_awards()
+grants <- get_grants()
+advisees <- get_advisees()
 
 # make_pub_list(pubs, "working")
 # make_pub_list(pubs, "peer_reviewed")

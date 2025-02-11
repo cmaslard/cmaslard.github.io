@@ -1,0 +1,37 @@
+---
+title: "Supervised Students"
+toc: true
+toc-location: right
+number-sections: false
+execute: 
+  echo: false
+  message: false
+  warning: false
+format: 
+  html:
+      page-layout: full
+knitr: 
+  opts_chunk: 
+    dev: [svg, darksvg]
+    fig.ext: [.-light.svg, .-dark.svg]
+include-after-body:
+  text: |
+    <script type="application/javascript" src="image-dark-light.js"></script>
+editor: visual
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r, echo=FALSE, warning=FALSE, message=F}
+source("src.R")
+```
+
+::: column-margin
+{{< iconify line-md link width="1.2em" height="1.2em" >}}: More about the student \
+Last update on: **`r Sys.Date()`**
+:::
+
+`r make_advise_list(advisees, 0)`  
+  
+### Alumni  
+`r make_advise_list(advisees, 1)`  

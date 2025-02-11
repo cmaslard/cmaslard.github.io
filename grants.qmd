@@ -1,0 +1,133 @@
+---
+title: "Grants"
+toc: true
+toc-location: right
+number-sections: false
+execute: 
+  echo: false
+  message: false
+  warning: false
+format: 
+  html:
+      page-layout: full
+knitr: 
+  opts_chunk: 
+    dev: [svg, darksvg]
+    fig.ext: [.-light.svg, .-dark.svg]
+include-after-body:
+  text: |
+    <script type="application/javascript" src="image-dark-light.js"></script>
+editor: visual
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r, echo=FALSE, warning=FALSE, message=F}
+source("src.R")
+```
+
+::: column-margin
+{{< iconify line-md link width="1.2em" height="1.2em" >}}: Link of the grant\
+Last update on: **`r Sys.Date()`**
+:::
+
+`r make_grant_list(grants)`
+
+```{r, echo=F, warning=FALSE, message=FALSE}
+#| out-width: 100%
+#| out-height: 100%
+
+library(plotly)
+today <- Sys.Date()
+
+df <- get_grants() %>% 
+  mutate(
+    sponsor_id = paste(sponsor, seq_along(sponsor)),
+    start_period_hatch = start_period,
+    end_period_hatch   = end_period
+  ) %>% 
+  mutate(start_period = if_else(
+      start_period < today & end_period < today, 
+      as.Date(NA), 
+      if_else(start_period < today & end_period > today, today, start_period)
+    )
+  ) %>% 
+  filter(awarded==1)
+
+p1 <- ggplot(df) +
+  geom_segment(aes(x = start_period_hatch, xend = end_period_hatch, 
+                   y = reorder(sponsor_id, as.numeric(start_period_hatch)), 
+                   yend = reorder(sponsor_id, as.numeric(start_period_hatch)),
+                   color = sponsor), 
+               size = 6, alpha = 0.5) +
+  geom_segment(aes(x = start_period, xend = end_period, 
+                   y = reorder(sponsor_id, as.numeric(start_period_hatch)), 
+                   yend = reorder(sponsor_id, as.numeric(start_period_hatch)),
+                   color = sponsor), 
+               size = 6) +
+  geom_text(aes(x = start_period_hatch + (end_period_hatch - start_period_hatch) / 2,
+                y = reorder(sponsor_id, as.numeric(start_period_hatch)),
+                label = budget_total),
+            size = 3, color = "black") +
+  theme_minimal() +
+  labs(title = "Financing Gantt chart",
+       x = "Period",
+       y = "") +
+  theme(
+        panel.background = element_blank(),
+        plot.background = element_blank(),   # Remove plot background
+        panel.grid = element_blank(),
+        axis.text.y     = element_text(size = 10),
+        axis.text.x     = element_text(size = 10),
+        axis.ticks.y    = element_blank(),
+        axis.title.x    = element_text(size = 10),
+        axis.title.y    = element_blank(),
+        legend.position = "none"
+      )+ scale_color_brewer(palette = "Dark2")
+
+# Calculer la hauteur du plot en fonction du nombre de financements
+n_financements <- nrow(df)
+# Par exemple, 50 pixels par financement + 100 pixels supplémentaires pour la marge
+plot_height <- 70 + n_financements * 50
+
+ggplotly(p1, height = plot_height) %>% 
+    layout(
+      shapes = list(
+        list(
+          type = "line",
+          x0 = as.character(today),  # Convert today's date to character
+          x1 = as.character(today),
+          y0 = 0,      # yref = "paper" pour que la ligne s'étende sur toute la hauteur du plot
+          y1 = 1,
+          xref = "x",
+          yref = "paper",
+          line = list(color = "black", dash = "dot", width = 2)
+        )
+      )
+    )
+
+
+# df <-get_citation_history("TsztyiMAAAAJ&hl") %>%  # my_ID (find in URL)
+#   mutate(Face=ifelse(year==format(Sys.Date(), "%Y"),"bold","plain"))
+# 
+# ggplot(df,aes(x=year,y=cites))+
+#     geom_bar(stat = "identity", fill = "#2780e3",alpha=0.8, col='black')+
+#     geom_text(aes(label = cites), hjust = -0.45,size = 4.8)+
+#     labs(
+#       x = NULL,
+#       y = "Citation by years"
+#   )+
+#   geom_hline(yintercept=0)+
+#    #scale_y_reverse(expand = expansion(mult = c(.1, 0))) +
+#    theme(
+#         panel.background = element_blank(),
+#         plot.background = element_blank(),   # Remove plot background
+#         panel.grid = element_blank(), 
+#         axis.text.y=element_text(size = 13, face = df$Face),
+#         axis.ticks.y=element_blank(),
+#         axis.text.x=element_blank(),
+#         axis.ticks.x=element_blank(),
+#         axis.title.x = element_text(size = 15)
+#       )+
+#   coord_flip() 
+```

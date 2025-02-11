@@ -27,13 +27,7 @@ source("src.R")
 ```
 
 ::: column-margin
-{{< iconify line-md link width="1.2em" height="1.2em" >}}: Link of the presentation\
-{{< iconify line-md:download-loop width="1.2em" height="1.2em" >}}: Download presentation\
-{{< iconify line-md:github-loop width="1.2em" height="1.2em" >}}: Code & Data\
-{{< iconify academicons:biorxiv width="1.2em" height="1.2em" >}}: Biorxiv or pre-print\
-{{< iconify academicons:google-scholar width="1.2em" height="1.2em" >}}: Google Scholar\
-{{< iconify academicons:researchgate width="1.2em" height="1.2em" >}}: Researchgate\
-{{< iconify academicons:hal width="1.2em" height="1.2em" >}}: HAL\
+{{< iconify line-md link width="1.2em" height="1.2em" >}}: Link of the award\
 Last update on: **`r Sys.Date()`**
 :::
 
