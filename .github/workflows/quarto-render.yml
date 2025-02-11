@@ -35,25 +35,28 @@ jobs:
             renv::restore()
           } else {
             install.packages(c("tidyverse", 
-            "ggplot2",
-            "rcrossref",
-            "readxl",
-            "patchwork",
-            "treemap",
-            "leaflet",
-            "htmlwidgets", 
-            "htmltools",
-            "googleway",
-            "plotly",
-            "scholar",
-            "knitr",
-            "kableExtra", 
-            "glue",
-            "stringr",
-            "readr", 
-            "devoid",
-            "devtools"
-            ))
+                               "ggplot2",
+                               "rcrossref",
+                               "readxl",
+                               "patchwork",
+                               "treemap",
+                               "leaflet",
+                               "htmlwidgets", 
+                               "htmltools",
+                               "googleway",
+                               "plotly",
+                               "scholar",
+                               "knitr",
+                               "kableExtra", 
+                               "glue",
+                               "stringr",
+                               "readr"))
+            # Supprimez ou corrigez "devoid" si ce package n'existe pas
+            install.packages("devtools")
+          }
+          # Vérification que devtools est bien installé
+          if (!requireNamespace("devtools", quietly = TRUE)) {
+            stop("devtools n'est pas installé")
           }
           devtools::install_github('ropensci/rAltmetric')
           devtools::install_github('nsgrantham/ggdark')
