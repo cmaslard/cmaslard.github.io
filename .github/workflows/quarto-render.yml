@@ -25,12 +25,6 @@ jobs:
         with:
           r-version: '4.2'  # Adapte selon ta version de R
           
-      - name: Install GitHub packages
-        run: |
-          Rscript -e "if (!require('devtools')) install.packages('devtools')"
-          Rscript -e "devtools::install_github('ropensci/rAltmetric')"
-          Rscript -e "devtools::install_github('nsgrantham/ggdark')"
-
       - name: Install R dependencies
         run: |
           install.packages("remotes")
@@ -57,9 +51,12 @@ jobs:
             "glue",
             "stringr",
             "readr", 
-            "devoid"
+            "devoid",
+            "devtools"
             ))
           }
+          devtools::install_github('ropensci/rAltmetric')
+          devtools::install_github('nsgrantham/ggdark')
         shell: Rscript {0}
 
       - name: Render Quarto site
