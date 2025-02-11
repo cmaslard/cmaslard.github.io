@@ -39,7 +39,7 @@ The [rStrava](https://www.google.com/url?q=https%3A%2F%2Fgithub.com%2Ffawda123%2
 library(readxl)
 library(tidyr)
 library(ggplot2)
-library(rStrava)    # devtools::install_github('fawda123/rStrava') 
+#library(rStrava)    # devtools::install_github('fawda123/rStrava') 
 library(leaflet)
 library(htmlwidgets)
 library(googleway)   # to convert google polyline format to lat and long
@@ -56,15 +56,15 @@ app_name       <- 'website' # chosen by user
 app_client_id  <- '133545' # an integer, assigned by Strava
 app_secret     <- 'e606d239de2a102bf125357c62641af7b2c39e04' # an alphanumeric secret, assigned by Strava
 
-stoken <- httr::config(token = strava_oauth(app_name, app_client_id, app_secret, app_scope="activity:read_all"))
+stoken <- httr::config(token = rStrava::strava_oauth(app_name, app_client_id, app_secret, app_scope="activity:read_all"))
 ```
 
 Next, I load in my activity list and compile my activities into a data frame using the rStrava library.
 
 ```{r, eval=F}
 ## Load my activities and compile activities with rStrava library
-my_data  <- get_activity_list(stoken)
-act_data <- compile_activities(my_data)
+my_data  <- rStrava::get_activity_list(stoken)
+act_data <- rStrava::compile_activities(my_data)
 save(my_data, act_data,stoken, file = "perso_projects/media/strava_report/data_strava.RData")
 ```
 
