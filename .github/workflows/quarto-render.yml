@@ -51,7 +51,7 @@ jobs:
                                "glue",
                                "stringr",
                                "readr",
-                               devoid))
+                               "devoid"))
           }
           # Vérification que devtools est bien installé
           remotes::install_github('ropensci/rAltmetric')
