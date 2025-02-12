@@ -68,7 +68,7 @@ jobs:
       - name: Publish to GitHub Pages
         uses: quarto-dev/quarto-actions/publish@v2
         with:
-          target: main
-          path: docs
+          to: main      # Branche de destination
+          path: docs    # Dossier contenant le site rendu
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
