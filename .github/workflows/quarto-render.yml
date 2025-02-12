@@ -40,8 +40,8 @@ jobs:
       # Restaurer les dépendances avec renv
       - name: Restore R dependencies with renv
         run: |
-          Rscript -e "install.packages('renv', repos = 'https://cloud.r-project.org')"
-          Rscript -e "renv::restore(confirm = FALSE)"
+          install.packages('renv', repos = 'https://cloud.r-project.org')
+          renv::restore(confirm = FALSE)
         shell: Rscript {0}
 
       # (Optionnel) Lister les packages installés pour vérification
