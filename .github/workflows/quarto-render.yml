@@ -32,6 +32,10 @@ jobs:
       # Installer les dépendances pour igraph (exemple déjà présent)
       - name: Install additional system dependencies for igraph
         run: sudo apt-get update && sudo apt-get install -y libglpk40
+      
+      # Installer la dépendance système pour units (libudunits2)
+      - name: Install additional system dependencies for units
+        run: sudo apt-get update && sudo apt-get install -y libudunits2-dev
 
       # Installer les dépendances pour sf (PROJ, GDAL, GEOS) via le PPA ubuntugis
       - name: Install additional system dependencies for sf
