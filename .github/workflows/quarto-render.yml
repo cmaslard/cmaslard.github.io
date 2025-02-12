@@ -40,7 +40,7 @@ jobs:
 
       - name: Install R dependencies
         env:
-          GITHUB_PAT: ${{ secrets.GITHUB_PAT }}  # Si vous en avez besoin pour installer depuis GitHub
+          GITHUB_PAT: ${{ secrets.FOR_IMPORT_GITHUBPACKAGE_PAT }}  # Si vous en avez besoin pour installer depuis GitHub
         run: |
           install.packages("remotes", repos="https://cloud.r-project.org")
           install.packages(c("tidyverse", 
