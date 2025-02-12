@@ -69,6 +69,6 @@ jobs:
         uses: quarto-dev/quarto-actions/publish@v2
         with:
           target: main
-          source: _site
+          source: docs
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
