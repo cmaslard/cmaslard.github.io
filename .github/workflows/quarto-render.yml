@@ -29,12 +29,16 @@ jobs:
       - name: Install system dependencies
         run: sudo apt-get update && sudo apt-get install -y libcurl4-openssl-dev libssl-dev libxml2-dev
 
+      # Installer la dépendance système manquante pour igraph (libglpk)
+      - name: Install additional system dependencies for igraph
+        run: sudo apt-get update && sudo apt-get install -y libglpk40
+        # Si libglpk40 ne fonctionne pas, essayer libglpk-dev
+
       # (Optionnel) Cacher le répertoire des packages installés par renv pour accélérer les builds futurs  
-      # Vous pouvez ajuster le chemin de cache en fonction de votre configuration renv
       # - name: Cache renv library
       #   uses: actions/cache@v3
       #   with:
-      #     path: renv/library/R-4.2/x86_64-pc-linux-gnu
+      #     path: renv/library/R-4.4/x86_64-pc-linux-gnu
       #     key: ${{ runner.os }}-renv-${{ hashFiles('renv.lock') }}
 
       # Restaurer les dépendances avec renv
