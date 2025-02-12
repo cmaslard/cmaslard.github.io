@@ -42,7 +42,7 @@ jobs:
         run: |
           sudo add-apt-repository -y ppa:ubuntugis/ubuntugis-unstable
           sudo apt-get update
-          sudo apt-get install -y libproj-dev proj-data proj-bin libgdal-dev libgeos-dev
+          sudo apt-get install -y libproj-dev proj-data proj-bin libgdal-dev libgeos-dev libgdal34
 
       # (Optionnel) Cacher le répertoire des packages installés par renv pour accélérer les builds futurs  
       # - name: Cache renv library
