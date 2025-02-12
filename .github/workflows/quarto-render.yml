@@ -58,7 +58,8 @@ jobs:
                              "kableExtra", 
                              "glue",
                              "stringr",
-                             "readr"), repos="https://cloud.r-project.org")
+                             "readr",
+                             "ggraph"), repos="https://cloud.r-project.org")
           # Installation de scholar depuis GitHub uniquement
           remotes::install_github('YuLab-SMU/scholar')
         shell: Rscript {0}
