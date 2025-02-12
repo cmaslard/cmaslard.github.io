@@ -63,7 +63,7 @@ Last update on: **`r Sys.Date()`**
 -   The Altmetric Attention Score is a quantitative measure of the attention that a research article has received online. Clicking on the donut icon will load a page at altmetric.com with additional details about the score and the social media presence for the given article. Find more information on the [Altmetric Attention Score and how the score is calculated](https://help.altmetric.com/support/solutions/articles/6000233311-how-is-the-altmetric-attention-score-calculated).
 :::
 
-::::: columns
+::: columns
 ::: {.column width="25%"}
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 profile <- get_profile("TsztyiMAAAAJ&hl")
@@ -89,7 +89,7 @@ kable(metrics, col.names = c("", ""), align = "c", format = "html") %>%
 
 ::: {.column width="75%"}
 ```{r, echo=F, warning=FALSE, message=FALSE}
-df <-get_citation_history("TsztyiMAAAAJ&hl") %>%  # my_ID (find in URL)
+df <-scholar::get_citation_history("TsztyiMAAAAJ&hl") %>%  # my_ID (find in URL)
   mutate(Face=ifelse(year==format(Sys.Date(), "%Y"),"bold","plain"))
 
 ggplot(df,aes(x=year,y=cites))+
@@ -114,7 +114,7 @@ ggplot(df,aes(x=year,y=cites))+
   coord_flip() 
 ```
 :::
-:::::
+:::
 
 ```{r, eval=F, echo=F}
 
