@@ -25,47 +25,52 @@ jobs:
         with:
           r-version: '4.2'
 
+      # Installer les dépendances système utiles pour certains packages
+      - name: Install system dependencies
+        run: sudo apt-get update && sudo apt-get install -y libcurl4-openssl-dev libssl-dev libxml2-dev
+
+      # Option : si vous n'avez pas de fichier DESCRIPTION, utilisez une clé statique pour le cache
       - name: Cache R packages
         uses: actions/cache@v3
         with:
           path: ~/.R/library
-          key: ${{ runner.os }}-r-${{ hashFiles('**/DESCRIPTION') }}
+          key: ${{ runner.os }}-r-packages
           restore-keys: |
-            ${{ runner.os }}-r-
+            ${{ runner.os }}-r-packages
 
       - name: Install R dependencies
         env:
-          GITHUB_PAT: ${{ secrets.FOR_IMPORT_GITHUBPACKAGE_PAT }}  # Passage du PAT ici
+          GITHUB_PAT: ${{ secrets.GITHUB_PAT }}  # Si vous en avez besoin pour installer depuis GitHub
         run: |
           install.packages("remotes", repos="https://cloud.r-project.org")
-          if (file.exists("DESCRIPTION")) {
-            remotes::install_deps(dependencies = TRUE)
-          } else if (file.exists("renv.lock")) {
-            install.packages("renv", repos="https://cloud.r-project.org")
-            renv::restore()
-          } else {
-            install.packages(c("tidyverse", 
-                               "ggplot2",
-                               "rcrossref",
-                               "readxl",
-                               "patchwork",
-                               "treemap",
-                               "leaflet",
-                               "htmlwidgets", 
-                               "htmltools",
-                               "googleway",
-                               "plotly",
-                               "scholar",
-                               "knitr",
-                               "kableExtra", 
-                               "glue",
-                               "stringr",
-                               "readr"), repos="https://cloud.r-project.org")
-          }
-          # Utilisation de remotes pour installer depuis GitHub
+          install.packages(c("tidyverse", 
+                             "ggplot2",
+                             "rcrossref",  # Installation de rcrossref dans la liste
+                             "readxl",
+                             "patchwork",
+                             "treemap",
+                             "leaflet",
+                             "htmlwidgets", 
+                             "htmltools",
+                             "googleway",
+                             "plotly",
+                             "scholar",
+                             "knitr",
+                             "kableExtra", 
+                             "glue",
+                             "stringr",
+                             "readr"), repos="https://cloud.r-project.org")
+          # Installation des packages depuis GitHub avec remotes
           remotes::install_github('ropensci/rAltmetric')
           remotes::install_github('nsgrantham/ggdark')
         shell: Rscript {0}
+        
+        - name: List installed packages
+          run: Rscript -e "print(installed.packages()[, c('Package','Version')])"
+          
+      # Vérifier que rcrossref est installé (optionnel, pour le debug)
+      - name: Check installed packages
+        run: Rscript -e "if(!('rcrossref' %in% rownames(installed.packages()))) { stop('rcrossref is not installed') } else { print('rcrossref is installed') }"
 
       - name: Render Quarto site
         run: quarto render
