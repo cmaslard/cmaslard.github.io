@@ -23,15 +23,25 @@ jobs:
       - name: Install R
         uses: r-lib/actions/setup-r@v2
         with:
-          r-version: '4.2'  # Adapte selon ta version de R
-          
+          r-version: '4.2'
+
+      - name: Cache R packages
+        uses: actions/cache@v3
+        with:
+          path: ~/.R/library
+          key: ${{ runner.os }}-r-${{ hashFiles('**/DESCRIPTION') }}
+          restore-keys: |
+            ${{ runner.os }}-r-
+
       - name: Install R dependencies
+        env:
+          GITHUB_PAT: ${{ secrets.FOR_IMPORT_GITHUBPACKAGE_PAT }}  # Passage du PAT ici
         run: |
-          install.packages("remotes")
+          install.packages("remotes", repos="https://cloud.r-project.org")
           if (file.exists("DESCRIPTION")) {
             remotes::install_deps(dependencies = TRUE)
           } else if (file.exists("renv.lock")) {
-            install.packages("renv")
+            install.packages("renv", repos="https://cloud.r-project.org")
             renv::restore()
           } else {
             install.packages(c("tidyverse", 
@@ -50,21 +60,18 @@ jobs:
                                "kableExtra", 
                                "glue",
                                "stringr",
-                               "readr",
-                               "devoid"))
+                               "readr"), repos="https://cloud.r-project.org")
           }
-          # Vérification que devtools est bien installé
+          # Utilisation de remotes pour installer depuis GitHub
           remotes::install_github('ropensci/rAltmetric')
           remotes::install_github('nsgrantham/ggdark')
         shell: Rscript {0}
 
       - name: Render Quarto site
-        run: |
-          quarto render
+        run: quarto render
 
       - name: Pull latest changes to avoid conflicts
-        run: |
-          git pull --rebase
+        run: git pull --rebase
 
       - name: Commit and push changes
         run: |
