@@ -50,16 +50,12 @@ jobs:
                                "kableExtra", 
                                "glue",
                                "stringr",
-                               "readr"))
-            # Supprimez ou corrigez "devoid" si ce package n'existe pas
-            install.packages("devtools")
+                               "readr",
+                               devoid))
           }
           # Vérification que devtools est bien installé
-          if (!requireNamespace("devtools", quietly = TRUE)) {
-            stop("devtools n'est pas installé")
-          }
-          devtools::install_github('ropensci/rAltmetric')
-          devtools::install_github('nsgrantham/ggdark')
+          remotes::install_github('ropensci/rAltmetric')
+          remotes::install_github('nsgrantham/ggdark')
         shell: Rscript {0}
 
       - name: Render Quarto site
