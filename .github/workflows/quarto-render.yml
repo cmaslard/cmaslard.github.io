@@ -65,10 +65,10 @@ jobs:
           remotes::install_github('nsgrantham/ggdark')
         shell: Rscript {0}
         
-        - name: List installed packages
-          run: Rscript -e "print(installed.packages()[, c('Package','Version')])"
-          
       # Vérifier que rcrossref est installé (optionnel, pour le debug)
+      - name: List installed packages
+        run: Rscript -e "print(installed.packages()[, c('Package','Version')])"
+          
       - name: Check installed packages
         run: Rscript -e "if(!('rcrossref' %in% rownames(installed.packages()))) { stop('rcrossref is not installed') } else { print('rcrossref is installed') }"
 
