@@ -63,6 +63,7 @@ jobs:
           # Installation des packages depuis GitHub avec remotes
           remotes::install_github('ropensci/rAltmetric')
           remotes::install_github('nsgrantham/ggdark')
+          remotes::install_github('YuLab-SMU/scholar')
         shell: Rscript {0}
         
       # Vérifier que rcrossref est installé (optionnel, pour le debug)
