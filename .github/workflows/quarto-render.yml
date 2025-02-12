@@ -65,8 +65,11 @@ jobs:
       - name: Render Quarto site
         run: quarto render
 
-      - name: Pull latest changes to avoid conflicts
-        run: git pull --rebase
+      - name: Stage changes and pull latest changes
+        run: |
+          git add .
+          git commit -m "Automated commit before pull" || echo "No changes to commit"
+          git pull --rebase
 
       - name: Commit and push changes
         run: |
