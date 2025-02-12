@@ -5,6 +5,8 @@ title-block-banner: media/tree-banner.jpg
 title-block-banner-color: "#FFFFFF"
 about:
   template: solana
+resources:
+  - .nojekyll
 ---
 
 Hi, I am Corentin and this is my research website!
