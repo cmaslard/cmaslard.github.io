@@ -65,30 +65,9 @@ jobs:
       - name: Render Quarto site
         run: quarto render
 
-      - name: Stage changes and pull latest changes
-        run: |
-          # Configure Git identity
-          git config --global user.email "github-actions@github.com"
-          git config --global user.name "github-actions"
-          
-          # Stage all changes
-          git add -A
-          
-          # Commit changes if there are any; if not, echo a message to avoid error
-          git commit -m "Automated commit before pull" || echo "No changes to commit"
-          
-          # Reset the working directory to ensure no unstaged changes remain
-          git reset --hard HEAD
-          
-          # Now pull with rebase
-          git pull --rebase
-
-      - name: Commit and push changes
-        run: |
-          git config --global user.name "github-actions"
-          git config --global user.email "github-actions@github.com"
-          git add .
-          git commit -m "Automated Quarto render and push" || echo "No changes to commit"
-          git push
+      - name: Publish to GitHub Pages
+        uses: quarto-dev/quarto-actions/publish@v2
+        with:
+          target: docs
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
