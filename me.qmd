@@ -3,6 +3,10 @@ title: About
 subtitle: Where to find me online
 image: media/headshot.jpg
 toc: false
+
+format: 
+  html:
+    page-layout: full
 about: 
   template: trestles
   image-shape: round
@@ -54,6 +58,7 @@ When I’m not immersed in research, I love spending quality time with my family
 ### CV 
 
 ```{=html}
-<iframe width="800px" height="1000px" style="border:2px solid #dee2e6;" src="https://docs.google.com/document/d/1oCgrdjnAJuVjgocx3F2kmlbJxlqa6uWrSgqm5fWRhpA/edit"  allowfullscreen></iframe>
+<iframe width="900px" height="1000px" style="border:2px solid #dee2e6;" src="https://docs.google.com/document/d/1oCgrdjnAJuVjgocx3F2kmlbJxlqa6uWrSgqm5fWRhpA/edit"  allowfullscreen></iframe>
 ```
+
 :::
