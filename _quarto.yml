@@ -2,7 +2,7 @@ project:
   type: website
   resources:
     - CNAME
-    - "media/"
+    - media/
   output-dir: docs
 lang: en
 
