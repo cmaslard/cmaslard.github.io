@@ -85,4 +85,3 @@ format:
       light: [cosmo, theme-light.scss]
       dark: [cosmo, theme-dark.scss]
     toc: false
-    

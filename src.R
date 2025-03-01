@@ -48,7 +48,7 @@ generate_altmetric_html <- function(doi_x) {
         html_output <-
         HTML(glue(
           '<a href="{"cmaslard.xyz/publications/"}" target="_blank">
-             <img src="{"media/altmetric-symbol_no_information_1.png"}" width="64" height="64">
+             <img src="{"/media/altmetric-symbol_no_information_1.png"}" width="64" height="64">
            </a>'
         ))
       })
