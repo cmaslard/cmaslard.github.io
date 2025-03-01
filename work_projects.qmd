@@ -12,7 +12,7 @@ listing:
     - "work_projects/*qmd"
 ---
 
-```{r, echo=FALSE, results='asis'}
+```{r, echo=FALSE, results='asis', eval = F}
 show_project_icons <- function(path = "work_projects") {
   name_projects <- list.files(here::here(path), pattern = "\\.qmd$", full.names = TRUE)
   name_projects <- tools::file_path_sans_ext(basename(name_projects))
