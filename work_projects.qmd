@@ -1,5 +1,5 @@
 ---
-title: "Work projects"
+title: "Scientific Projects"
 listing:
   image-align: left
   image-height: "3cm"
@@ -11,3 +11,42 @@ listing:
   contents: 
     - "work_projects/*qmd"
 ---
+
+```{r, echo=FALSE, results='asis'}
+show_project_icons <- function(path = "work_projects") {
+  name_projects <- list.files(path, pattern = "\\.qmd$", full.names = TRUE)
+  name_projects <- tools::file_path_sans_ext(basename(name_projects))
+  path_icons   <- paste0(path, "/media/", name_projects)
+  
+  icon_paths <- sapply(path_icons, function(d) {
+    files <- list.files(d, pattern = "\\.ico$", full.names = TRUE)
+    if (length(files) < 1) {
+      return(NA)
+    } else {
+      return(files[1])
+    }
+  })
+  return(unname(icon_paths))
+}
+
+icon_paths <- show_project_icons()
+
+# Pour chaque icône, on crée un lien vers https://cmaslard.xyz/<nom_du_projet>/
+# en récupérant le nom du dossier (par ex. "ECODIV_2021") grâce à `basename(dirname(ip))`.
+for (ip in icon_paths) {
+  
+  # Le dossier où se trouve l'icône, ex. "work_projects/media/ECODIV_2021"
+  project_dir <- dirname(ip)
+  # Le nom du projet, ex. "ECODIV_2021"
+  project_name <- basename(project_dir)
+  
+  # Construit le lien, ex. "https://cmaslard.xyz/ECODIV_2021/"
+  link <- paste0("https://cmaslard.xyz/", project_name, "/")
+  
+  # Affichage HTML : <a href="..."><img src="..." /></a>
+  cat(sprintf(
+    '<a href="%s"><img src="%s" alt="icon" style="width:32px; margin: 5px;" /></a>\n',
+    link, ip
+  ))
+}
+```

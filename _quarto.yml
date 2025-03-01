@@ -24,11 +24,7 @@ website:
         text: " "
       - href: me.qmd
       - text: Projects
-        menu: 
-          - text: Work
-            href: work_projects.qmd
-          - text: Personal
-            href: perso_projects.qmd
+        href: work_projects.qmd
       - href: publications.qmd
       - href: presentations.qmd
       - text: Others
@@ -41,6 +37,8 @@ website:
             href: grants.qmd
           - text: Tools
             href: tools.qmd
+          - text: Personal projects
+            href: perso_projects.qmd
 
   page-footer: 
       border: true
