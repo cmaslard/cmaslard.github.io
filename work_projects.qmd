@@ -14,7 +14,7 @@ listing:
 
 ```{r, echo=FALSE, results='asis'}
 show_project_icons <- function(path = "work_projects") {
-  name_projects <- list.files(path, pattern = "\\.qmd$", full.names = TRUE)
+  name_projects <- list.files(here::here(path), pattern = "\\.qmd$", full.names = TRUE)
   name_projects <- tools::file_path_sans_ext(basename(name_projects))
   path_icons   <- paste0(path, "/media/", name_projects)
   
