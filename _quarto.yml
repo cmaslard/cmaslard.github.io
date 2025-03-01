@@ -2,7 +2,7 @@ project:
   type: website
   resources:
     - CNAME
-    - media/altmetric-symbol_no_information_1.png
+    - "media/"
   output-dir: docs
 lang: en
 
