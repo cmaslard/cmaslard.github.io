@@ -1,6 +1,5 @@
 ---
 title: "Scientific Projects"
-include: TRUE
 listing:
   image-align: left
   image-height: "3cm"
@@ -12,6 +11,7 @@ listing:
   contents: 
     - "work_projects/*qmd"
 ---
+![](work_projects/media/phd_soybean_2021_2024/root.ico) 
 
 ```{r, echo=FALSE, results='asis'}
 show_project_icons <- function(path = "work_projects") {
