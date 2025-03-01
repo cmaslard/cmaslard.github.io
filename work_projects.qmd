@@ -1,6 +1,6 @@
 ---
 title: "Scientific Projects"
-image: work_projects/media/ECODIV_2021/icon_creation_inskape.ico
+include: TRUE
 listing:
   image-align: left
   image-height: "3cm"
