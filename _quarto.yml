@@ -16,7 +16,7 @@ website:
   favicon: media/growing-plant.png
   back-to-top-navigation: true
   site-url: "https://cmaslard.xyz"
-  repo-url: "https://github.com/cmaslard/cmaslard.github.io"
+  repo-url: "http://cmaslard.xyz"
   google-analytics: "G-10GPM4RSNJ"
   navbar:
     left:
