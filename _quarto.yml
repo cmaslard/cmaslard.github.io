@@ -10,7 +10,7 @@ website:
   announcement: 
     icon: info-circle
     dismissable: true
-    content: "**Alert** I am available for a postdoctoral position starting July 2025. Feel free to contact me for opportunities or collaborations 😉"
+    content: "**Alert** I am available for a postdoctoral position starting in July 2025. Please do not hesitate to contact me for opportunities or collaborations 😉"
     type: danger
     position: below-navbar
   title: "Corentin Maslard"
