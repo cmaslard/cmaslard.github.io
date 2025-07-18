@@ -81,9 +81,16 @@ Now that the data is prepared I want to create a blank map of the area I want to
 
 ```{r, warning=FALSE, message=F}
 ## Create blank map bounded by given lon and lat
+
+################################################
 # Dijon
 lons.range <- c(5, 5.1) #(x)
-lats.range <- c(47.2, 47.4) #(y)
+lats.range <- c(47.2, 47.4) #(y
+################################################
+# Canton de Neuchâtel – emprise administrative
+lons.range <- c(6.43, 7.09)   # axe X
+lats.range <- c(46.85, 47.17) # axe Y
+
 ## tile options CartoDB.Positron , CartoDB.DarkMatter , Stamen.Toner  
 map <- leaflet(options = leafletOptions(zoomControl = TRUE)) %>%
   addProviderTiles('CartoDB.Positron',
