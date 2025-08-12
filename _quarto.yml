@@ -10,7 +10,8 @@ website:
   announcement: 
     icon: info-circle
     dismissable: true
-    content: "**Alert** I am available for a postdoctoral position starting in July 2025. Please do not hesitate to contact me for opportunities or collaborations 😉"
+    content: "Postdoctoral Researcher in Plant Biology | University of Neuchâtel | Always open to new collaborations — feel free to contact me 😉"
+    #content: "**Alert** I am available for a postdoctoral position starting in July 2025. Please do not hesitate to contact me for opportunities or collaborations 😉"
     type: danger
     position: below-navbar
   title: "Corentin Maslard"

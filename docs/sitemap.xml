@@ -1,10 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://cmaslard.xyz/perso_projects/strava_report.html</loc>
-    <lastmod>2025-08-12T08:26:54.024Z</lastmod>
-  </url>
-  <url>
     <loc>https://cmaslard.xyz/work_projects.html</loc>
     <lastmod>2025-03-01T15:56:28.000Z</lastmod>
   </url>
@@ -25,36 +21,44 @@
     <lastmod>2025-04-16T18:31:28.000Z</lastmod>
   </url>
   <url>
-    <loc>https://cmaslard.xyz/advisees.html</loc>
-    <lastmod>2025-02-11T19:33:58.000Z</lastmod>
-  </url>
-  <url>
-    <loc>https://cmaslard.xyz/grants.html</loc>
-    <lastmod>2025-06-09T14:34:44.000Z</lastmod>
-  </url>
-  <url>
-    <loc>https://cmaslard.xyz/tools/macro_angle.html</loc>
-    <lastmod>2024-08-30T16:28:58.000Z</lastmod>
-  </url>
-  <url>
-    <loc>https://cmaslard.xyz/perso_projects/analyse_garden.html</loc>
-    <lastmod>2025-08-12T08:46:16.980Z</lastmod>
-  </url>
-  <url>
-    <loc>https://cmaslard.xyz/tools/deep_learning_segmentation.html</loc>
-    <lastmod>2024-08-30T16:34:38.000Z</lastmod>
-  </url>
-  <url>
-    <loc>https://cmaslard.xyz/tools.html</loc>
-    <lastmod>2024-08-17T22:52:26.000Z</lastmod>
+    <loc>https://cmaslard.xyz/awards.html</loc>
+    <lastmod>2025-02-11T18:03:05.000Z</lastmod>
   </url>
   <url>
     <loc>https://cmaslard.xyz/me.html</loc>
     <lastmod>2025-02-14T11:00:27.000Z</lastmod>
   </url>
   <url>
-    <loc>https://cmaslard.xyz/awards.html</loc>
-    <lastmod>2025-02-11T18:03:05.000Z</lastmod>
+    <loc>https://cmaslard.xyz/tools.html</loc>
+    <lastmod>2024-08-17T22:52:26.000Z</lastmod>
+  </url>
+  <url>
+    <loc>https://cmaslard.xyz/tools/deep_learning_segmentation.html</loc>
+    <lastmod>2024-08-30T16:34:38.000Z</lastmod>
+  </url>
+  <url>
+    <loc>https://cmaslard.xyz/perso_projects/strava_report.html</loc>
+    <lastmod>2025-07-18T17:58:57.357Z</lastmod>
+  </url>
+  <url>
+    <loc>https://cmaslard.xyz/perso_projects/analyse_garden.html</loc>
+    <lastmod>2024-09-03T13:09:48.000Z</lastmod>
+  </url>
+  <url>
+    <loc>https://cmaslard.xyz/tools/macro_angle.html</loc>
+    <lastmod>2024-08-30T16:28:58.000Z</lastmod>
+  </url>
+  <url>
+    <loc>https://cmaslard.xyz/grants.html</loc>
+    <lastmod>2025-06-09T14:34:44.570Z</lastmod>
+  </url>
+  <url>
+    <loc>https://cmaslard.xyz/advisees.html</loc>
+    <lastmod>2025-02-11T19:33:58.000Z</lastmod>
+  </url>
+  <url>
+    <loc>https://cmaslard.xyz/index.html</loc>
+    <lastmod>2025-02-12T17:19:24.000Z</lastmod>
   </url>
   <url>
     <loc>https://cmaslard.xyz/work_projects/PeaSulf_2025.html</loc>

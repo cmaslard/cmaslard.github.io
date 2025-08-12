@@ -5,4 +5,4 @@
 
 /.quarto/
 /docs/renv/
-/index_files/
+/index_files/.DS_Store
