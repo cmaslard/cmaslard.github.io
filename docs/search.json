@@ -158,7 +158,7 @@
     "href": "perso_projects/analyse_garden_v2.html",
     "title": "Garden analysis V2",
     "section": "",
-    "text": "The aim of this project was simply to record the weights of each fruit and vegetable harvested over the years, in order to predict the possible gains from creating your own garden and linking that with a new sql dataset and website.\n\nInputAnalyse\n\n\n\n\n\n\n\n\n\nData importation\n\n\nCode\ndf_harvest_price &lt;- read_excel(here::here(\"perso_projects/media/data_analyse_garden/recolte_total.xlsx\")) %&gt;% \n  rename(\"date\"=Date_récolte) %&gt;% \n  rename(\"qty\"=`Quantité récolté`) %&gt;% \n  rename(\"unite\"=Expr1002) %&gt;% \n  rename(\"price\"=`Prix en magasin BIO`) %&gt;% \n  rename(\"name\"=`Nom (s) commun (s)`) %&gt;% \n  rename(\"type\"=`Type (Rotation)`) %&gt;% \n  rename(\"total\"=Expr1) %&gt;% \n  dplyr::select(-Unités)\n\n\n\n\n\n\n\n\n\n Back to top"
+    "text": "The aim of this project was simply to record the weights of each fruit and vegetable harvested over the years, in order to predict the possible gains from creating your own garden and linking that with a new sql dataset and website.\n\nAnalyseInput\n\n\n\nData importation\n\n\nCode\ndf_harvest_price &lt;- read_excel(here::here(\"perso_projects/media/data_analyse_garden/recolte_total.xlsx\")) %&gt;% \n  rename(\"date\"=Date_récolte) %&gt;% \n  rename(\"qty\"=`Quantité récolté`) %&gt;% \n  rename(\"unite\"=Expr1002) %&gt;% \n  rename(\"price\"=`Prix en magasin BIO`) %&gt;% \n  rename(\"name\"=`Nom (s) commun (s)`) %&gt;% \n  rename(\"type\"=`Type (Rotation)`) %&gt;% \n  rename(\"total\"=Expr1) %&gt;% \n  dplyr::select(-Unités)\n\n\n\n\n\n\n\n\n\n\n\n\n\n Back to top"
   },
   {
     "objectID": "perso_projects/analyse_garden.html",
