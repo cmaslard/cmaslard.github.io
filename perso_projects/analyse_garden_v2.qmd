@@ -1,0 +1,48 @@
+---
+title: "Garden analysis V2"
+subtitle: "The aim here is to analyze my garden (yields and predicted benefits), and secondly to learn how to use SQL databases"
+format:
+  html:
+    code-fold: true
+editor: visual
+author: Corentin Maslard
+date: 2025-08-30
+#image: "media/deep_learning_segmentation/overlay_modif.png"
+categories: [Garden, Analyse, Perso, sql]
+editor_options: 
+  chunk_output_type: console
+---
+
+The aim of this project was simply to record the weights of each fruit and vegetable harvested over the years, in order to predict the possible gains from creating your own garden and linking that with a new sql dataset and website.
+
+::: panel-tabset
+
+## Analyse
+
+```{r, echo=F, warning=F, message=FALSE}
+library(readxl)
+library(dplyr)
+library(ggplot2)
+library(patchwork)
+library(treemap)
+```
+
+### Data importation
+
+```{r, dfImport}
+df_harvest_price <- read_excel(here::here("perso_projects/media/data_analyse_garden/recolte_total.xlsx")) %>% 
+  rename("date"=Date_récolte) %>% 
+  rename("qty"=`Quantité récolté`) %>% 
+  rename("unite"=Expr1002) %>% 
+  rename("price"=`Prix en magasin BIO`) %>% 
+  rename("name"=`Nom (s) commun (s)`) %>% 
+  rename("type"=`Type (Rotation)`) %>% 
+  rename("total"=Expr1) %>% 
+  dplyr::select(-Unités)
+```
+
+## Input
+
+<iframe src="https://cmaslard.xyz/garden-harvest/" width="100%" height="1200" style="border:0; border-radius:12px;"></iframe>
+
+:::
