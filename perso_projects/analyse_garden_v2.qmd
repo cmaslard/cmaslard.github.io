@@ -31,24 +31,61 @@ library(treemap)
 library(DBI)
 library(RPostgres)
 library(dplyr)
-
 ```
 
 ### Data importation
 
 ```{r, dfImport}
-df_harvest_price <- read_excel(here::here("perso_projects/media/data_analyse_garden/recolte_total.xlsx")) %>% 
-  rename("date"=Date_récolte) %>% 
-  rename("qty"=`Quantité récolté`) %>% 
-  rename("unite"=Expr1002) %>% 
-  rename("price"=`Prix en magasin BIO`) %>% 
-  rename("name"=`Nom (s) commun (s)`) %>% 
-  rename("type"=`Type (Rotation)`) %>% 
-  rename("total"=Expr1) %>% 
-  dplyr::select(-Unités)
+# df_harvest_price <- read_excel(here::here("perso_projects/media/data_analyse_garden/recolte_total.xlsx")) %>% 
+#   rename("date"=Date_récolte) %>% 
+#   rename("qty"=`Quantité récolté`) %>% 
+#   rename("unite"=Expr1002) %>% 
+#   rename("price"=`Prix en magasin BIO`) %>% 
+#   rename("name"=`Nom (s) commun (s)`) %>% 
+#   rename("type"=`Type (Rotation)`) %>% 
+#   rename("total"=Expr1) %>% 
+#   dplyr::select(-Unités)
 
-# test
+library(httr2)
+library(jsonlite)
+library(dplyr)
 
+# 1) mets ta clé anon en variable d’environnement (une fois par session R)
+Sys.setenv(SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inh5Z2N6cHdnb3dtbWFyZmt3ZGJjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTY0OTUwNDYsImV4cCI6MjA3MjA3MTA0Nn0.euY43Bd9gJW4y2qvxjwAZqrP6RPQXmGwcpD1H1Qx_pg")
+
+# 2) appel RPC dans le schéma 'garden'
+SUPABASE_URL <- "https://xygczpwgowmmarfkwdbc.supabase.co"
+ANON <- Sys.getenv("SUPABASE_ANON_KEY")
+stopifnot(nchar(ANON) > 0)
+
+req <- request(paste0(SUPABASE_URL, "/rest/v1/rpc/harvests_public_all")) |>
+  req_method("POST") |>
+  req_headers(
+    apikey = ANON,
+    Authorization = paste("Bearer", ANON),
+    `Content-Type` = "application/json",
+    Accept = "application/json",
+    # 👇 indispensable quand la fonction est dans un autre schéma que 'public'
+    `Content-Profile` = "garden",
+    `Accept-Profile`  = "garden"
+  ) |>
+  req_body_json(list())  # pas de paramètres
+
+# (optionnel) voir la requête construite
+# req_dry_run(req)
+
+resp <- req_perform(req)
+stopifnot(resp_status(resp) < 300)
+df <- resp_body_json(resp, simplifyVector = TRUE) |> tibble::as_tibble()
+glimpse(df)
+
+plot <- df %>% group_by(product_name) %>% summarise(total = sum(quantity, na.rm=TRUE)) %>%
+  ggplot(aes(x=reorder(product_name, total), y=total)) + geom_col() + coord_flip() +
+  labs(x=NULL, y='Total', title=sprintf('Quantités par produit (jours)'))
+
+#ggsave('chart.png', plot, width=8, height=5, dpi=150)
+#dbDisconnect(con)
+plot
 ```
 
 ## Input
