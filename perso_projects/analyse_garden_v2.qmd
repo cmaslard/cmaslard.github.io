@@ -3,6 +3,7 @@ title: "Garden analysis V2"
 subtitle: "The aim here is to analyze my garden (yields and predicted benefits), and secondly to learn how to use SQL databases"
 format:
   html:
+    page-layout: full
     code-fold: true
 editor: visual
 author: Corentin Maslard
@@ -25,6 +26,11 @@ library(dplyr)
 library(ggplot2)
 library(patchwork)
 library(treemap)
+library(DBI)
+library(RPostgres)
+library(dplyr)
+library(ggplot2)
+
 ```
 
 ### Data importation
@@ -39,6 +45,8 @@ df_harvest_price <- read_excel(here::here("perso_projects/media/data_analyse_gar
   rename("type"=`Type (Rotation)`) %>% 
   rename("total"=Expr1) %>% 
   dplyr::select(-Unités)
+
+
 ```
 
 ## Input
