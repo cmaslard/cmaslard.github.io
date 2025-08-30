@@ -29,7 +29,6 @@ library(treemap)
 library(DBI)
 library(RPostgres)
 library(dplyr)
-library(ggplot2)
 
 ```
 
@@ -46,6 +45,7 @@ df_harvest_price <- read_excel(here::here("perso_projects/media/data_analyse_gar
   rename("total"=Expr1) %>% 
   dplyr::select(-Unités)
 
+# test
 
 ```
 
