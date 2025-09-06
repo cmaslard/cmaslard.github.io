@@ -19,7 +19,6 @@ The aim of this project was simply to record the weights of each fruit and veget
 The website for the database [is available here.](https://cmaslard.xyz/garden-harvest/)
 
 ::: panel-tabset
-
 ## Analyse
 
 ```{r, echo=F, warning=F, message=FALSE}
@@ -79,8 +78,13 @@ stopifnot(resp_status(resp) < 300)
 df <- resp_body_json(resp, simplifyVector = TRUE) |> tibble::as_tibble()
 glimpse(df)
 
-plot <- df %>% group_by(product_name) %>% summarise(total = sum(quantity, na.rm=TRUE)) %>%
-  ggplot(aes(x=reorder(product_name, total), y=total)) + geom_col() + coord_flip() +
+plot <- df %>% 
+  dplyr::group_by(product_name, location_name,created_by_name) %>% 
+  summarise(total = sum(quantity, na.rm=TRUE)) %>%
+  ggplot(aes(x=reorder(product_name, total), y=total, fill = location_name)) + 
+  geom_col() + 
+  coord_flip() +
+  #facet_grid(.~created_by_name)+
   labs(x=NULL, y='Total', title=sprintf('Quantités par produit (jours)'))
 
 #ggsave('chart.png', plot, width=8, height=5, dpi=150)
@@ -90,6 +94,7 @@ plot
 
 ## Input
 
-<iframe src="https://cmaslard.xyz/garden-harvest/" width="100%" height="1200" style="border:0; border-radius:12px;"></iframe>
+<iframe src="https://cmaslard.xyz/garden-harvest/" width="100%" height="1200" style="border:0; border-radius:12px;">
 
+</iframe>
 :::
