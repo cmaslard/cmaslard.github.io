@@ -27,7 +27,13 @@ source("src.R")
 ```
 
 ::: column-margin
-{{< iconify line-md link width="1.2em" height="1.2em" >}}: More about the student\
+{{< iconify line-md:link width="1.2em" height="1.2em" >}} : More about the student\
+{{< iconify fa6-brands:github width="1.2em" height="1.2em" >}} : GitHub page\
+{{< iconify fa6-brands:orcid width="1.2em" height="1.2em" >}} : ORCID\
+{{< iconify academicons:researchgate width="1.2em" height="1.2em" >}} : ResearchGate\
+{{< iconify academicons:google-scholar width="1.2em" height="1.2em" >}} : Google Scholar page\
+{{< iconify fa6-brands:linkedin width="1.2em" height="1.2em" >}} : LinkedIn\
+{{< iconify fa6-brands:bluesky width="1.2em" height="1.2em" >}} : Bluesky page\
 Last update on: **`r Sys.Date()`**
 :::
 
