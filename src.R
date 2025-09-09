@@ -460,6 +460,54 @@ make_repo <- function(url_repo) {
   ))
 }
 
+icon_link <- function(url, icon_slug, aria = NULL) {
+  if (is.null(url) || is.na(url) || trimws(url) == "") return("")
+  aria_attr <- if (!is.null(aria) && nzchar(aria)) glue::glue(' aria-label="{aria}"') else ""
+  htmltools::HTML(glue::glue(
+    '<a href="{url}" target="_blank" rel="noopener"{aria_attr}
+        style="text-decoration:none; display:inline-flex; align-items:center; margin-right:6px;">
+       <iconify-icon icon="{icon_slug}" width="1.2em" height="1.2em"></iconify-icon>
+     </a>'
+  ))
+}
+
+# petit helper pour être robuste aux noms de colonnes (google_scholar vs google.scholar vs google-scholar…)
+pluck_col <- function(row, ...) {
+  for (nm in c(...)) {
+    val <- tryCatch(row[[nm]], error = function(e) NULL)
+    if (!is.null(val)) return(val)
+  }
+  return(NA)
+}
+
+make_linkedin  <- function(u) icon_link(u, "fa6-brands:linkedin",      "LinkedIn")
+make_website   <- function(u) icon_link(u, "line-md:link",             "Website")
+make_github    <- function(u) icon_link(u, "fa6-brands:github",        "GitHub")
+make_rg_icon   <- function(u) icon_link(u, "simple-icons:researchgate","ResearchGate")
+make_orcid     <- function(u) icon_link(u, "simple-icons:orcid",       "ORCID")
+make_bluesky   <- function(u) icon_link(u, "simple-icons:bluesky",     "Bluesky")
+make_gscholar  <- function(u) icon_link(u, "academicons:google-scholar","Google Scholar")
+
+make_advisee_icon <- function(advise) {
+  web  <- pluck_col(advise, "website", "site", "url")
+  gh   <- pluck_col(advise, "github")
+  orc  <- pluck_col(advise, "orcid")
+  rg   <- pluck_col(advise, "researchgate", "research_gate", "rg")
+  gsch <- pluck_col(advise, "google_scholar", "google.scholar", "google-scholar", "scholar", "googleScholar")
+  li   <- pluck_col(advise, "linkedin")
+  bs   <- pluck_col(advise, "bluesky", "bsky")
+  
+  htmltools::HTML(paste0(
+    make_website(web),
+    make_github(gh),
+    make_orcid(orc),
+    make_rg_icon(rg),
+    make_gscholar(gsch),
+    make_linkedin(li),
+    make_bluesky(bs)
+  ))
+}
+
 make_researchgate <- function(url_rg) {
   return(glue::glue(
     '<a href="{url_rg}" target="_blank" style="text-decoration: none; display: inline-flex; align-items: center;">
@@ -567,6 +615,23 @@ make_advise_list <- function(advise, complete) {
   return(htmltools::HTML(paste(unlist(advise_list), collapse = "")))
 }
 
+# --- UPDATE: enrichit avec une colonne $icon pour les advisees ----------------
+make_advisees <- function(advisees) {
+  advisees$citation <- unlist(lapply(split(advisees, 1:nrow(advisees)), make_advise))
+  advisees$icon     <- unlist(lapply(split(advisees, 1:nrow(advisees)), make_advisee_icon))
+  
+  test <- advisees %>% dplyr::filter(advisees$complete == 0)
+  if (nrow(test) == 0) {
+    advisees <- advisees %>%
+      dplyr::bind_rows(dplyr::mutate(advisees[1, ], dplyr::across(dplyr::everything(), ~NA))) %>%
+      dplyr::mutate(
+        complete = replace(complete, dplyr::n(), 0),
+        citation = replace(citation, dplyr::n(), ""),
+        icon     = replace(icon, dplyr::n(), "")
+      )
+  }
+  advisees
+}
 
 #make_award_list(awards = awards, "research")
 
@@ -686,6 +751,71 @@ make_grant1 <- function(grant, index = NULL) {
   )))
 }
 
+make_linkedin <- function(url_li) {
+  if (is.null(url_li) || is.na(url_li) || url_li == "") return("")
+  htmltools::HTML(glue::glue(
+    '<a href="{url_li}" target="_blank" style="text-decoration:none; display:inline-flex; align-items:center; margin-right:6px;">
+       <iconify-icon icon="fa6-brands:linkedin" width="1.2em" height="1.2em"></iconify-icon>
+     </a>'
+  ))
+}
+
+make_website <- function(url_site) {
+  if (is.null(url_site) || is.na(url_site) || url_site == "") return("")
+  htmltools::HTML(glue::glue(
+    '<a href="{url_site}" target="_blank" style="text-decoration:none; display:inline-flex; align-items:center; margin-right:6px;">
+       <iconify-icon icon="line-md:link" width="1.2em" height="1.2em"></iconify-icon>
+     </a>'
+  ))
+}
+
+make_advisee_icon <- function(advise) {
+  val <- function(nm) {
+    v <- tryCatch(advise[[nm]], error = function(e) NA)
+    if (is.null(v) || is.na(v) || trimws(v) == "") "" else as.character(v)
+  }
+  web <- val("website")
+  gh  <- val("github")
+  orc <- val("orcid")
+  rg  <- val("researchgate")
+  gs  <- val("google_scholar")
+  li  <- val("linkedin")
+  bs  <- val("bluesky")
+  
+  parts <- c(
+    if (nzchar(web)) glue::glue(
+      '<a href="{web}" target="_blank" rel="noopener" style="text-decoration:none;display:inline-flex;align-items:center;margin-right:6px;">
+         <iconify-icon icon="line-md:link" width="1.2em" height="1.2em"></iconify-icon>
+       </a>') else "",
+    if (nzchar(gh))  glue::glue(
+      '<a href="{gh}" target="_blank" rel="noopener" style="text-decoration:none;display:inline-flex;align-items:center;margin-right:6px;">
+         <iconify-icon icon="fa6-brands:github" width="1.2em" height="1.2em"></iconify-icon>
+       </a>') else "",
+    if (nzchar(orc)) glue::glue(
+      '<a href="{orc}" target="_blank" rel="noopener" style="text-decoration:none;display:inline-flex;align-items:center;margin-right:6px;">
+         <iconify-icon icon="fa6-brands:orcid" width="1.2em" height="1.2em"></iconify-icon>
+       </a>') else "",
+    if (nzchar(rg))  glue::glue(
+      '<a href="{rg}" target="_blank" rel="noopener" style="text-decoration:none;display:inline-flex;align-items:center;margin-right:6px;">
+         <iconify-icon icon="fa6-brands:researchgate" width="1.2em" height="1.2em"></iconify-icon>
+       </a>') else "",
+    if (nzchar(gs))  glue::glue(
+      '<a href="{gs}" target="_blank" rel="noopener" style="text-decoration:none;display:inline-flex;align-items:center;margin-right:6px;">
+         <iconify-icon icon="academicons:google-scholar" width="1.2em" height="1.2em"></iconify-icon>
+       </a>') else "",
+    if (nzchar(li))  glue::glue(
+      '<a href="{li}" target="_blank" rel="noopener" style="text-decoration:none;display:inline-flex;align-items:center;margin-right:6px;">
+         <iconify-icon icon="fa6-brands:linkedin" width="1.2em" height="1.2em"></iconify-icon>
+       </a>') else "",
+    if (nzchar(bs))  glue::glue(
+      '<a href="{bs}" target="_blank" rel="noopener" style="text-decoration:none;display:inline-flex;align-items:center;margin-right:6px;">
+         <iconify-icon icon="fa6-brands:bluesky" width="1.2em" height="1.2em"></iconify-icon>
+       </a>') else ""
+  )
+  
+  htmltools::HTML(paste0(parts, collapse = ""))
+}
+
 make_advise1 <- function(advise, index = NULL) {
   header <- FALSE
   if (is.null(index)) {
@@ -694,24 +824,30 @@ make_advise1 <- function(advise, index = NULL) {
     cite <- glue::glue('{advise$citation}')
     if (index == 1) { header <- TRUE }
   }
+  icon <- if (!is.null(advise$icon)) advise$icon else ""
   
-  # Format title in bold with large font size, add index number before, reduce space after title
   formatted_title <- glue::glue(
     '<div style="font-size: 18px; line-height: 1.1;">
-     <span style="font-weight: normal;">{ifelse(is.na(advise$name),"",index)}|</span> 
-     <span style="font-weight: bold; margin-top: 0px; margin-bottom: 4px;">{title_to_html(ifelse(is.na(advise$name),"No students advised for the moment",advise$name))}</span>
-     <span style="font-weight: normal; margin-top: 0px; margin-bottom: 4px;">{title_to_html(ifelse(is.na(advise$name),"",paste0(" (",advise$category, " student)")))}</span>
-   </div>
-   <div style="font-size: 15px; margin-top: 5px; margin-bottom: -10px; line-height: 1.1;">{markdown_to_html(cite)}</div>
-   <hr style="border: 1px solid #ccc;" />'
+       <span style="font-weight: normal;">{ifelse(is.na(advise$name),"",index)}|</span> 
+       <span style="font-weight: bold; margin-top: 0px; margin-bottom: 4px;">
+         {title_to_html(ifelse(is.na(advise$name),"No students advised for the moment", advise$name))}
+       </span>
+       <span style="font-weight: normal; margin-top: 0px; margin-bottom: 4px;">
+         {title_to_html(ifelse(is.na(advise$name),"", paste0(" (", advise$category, " student)")))}
+       </span>
+     </div>
+     <div style="font-size: 15px; margin-top: 5px; margin-bottom: -6px; line-height: 1.1;">{markdown_to_html(cite)}</div>
+     <div style="font-size: 16px; margin-top: 2px; margin-bottom: -10px;">{icon}</div>
+     <hr style="border: 1px solid #ccc;" />'
   )
   
-  return(htmltools::HTML(glue::glue(
+  htmltools::HTML(glue::glue(
     '<div class="presentation">
-    <div class="grid">
-    <div class="g-col-9"> {formatted_title} </div>
-    </div>'
-  )))
+       <div class="grid">
+         <div class="g-col-9">{formatted_title}</div>
+       </div>
+     </div>'
+  ))
 }
 
 make_altmetric <- function(pub) {

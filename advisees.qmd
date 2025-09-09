@@ -27,11 +27,12 @@ source("src.R")
 ```
 
 ::: column-margin
-{{< iconify line-md link width="1.2em" height="1.2em" >}}: More about the student \
+{{< iconify line-md link width="1.2em" height="1.2em" >}}: More about the student\
 Last update on: **`r Sys.Date()`**
 :::
 
-`r make_advise_list(advisees, 0)`  
-  
-### Alumni  
-`r make_advise_list(advisees, 1)`  
+`r make_advise_list(advisees, 0)`
+
+### Alumni
+
+`r make_advise_list(advisees, 1)`
