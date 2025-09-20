@@ -130,7 +130,9 @@ find_url("10.1021/acs.jnatprod.0c01355")
 altmetric_data(altmetrics(doi = "10.1021/acs.jnatprod.0c01355",apikey = ""))$details_url
 
 # only for ISSN
+# install.packages("remotes")
 # install_github("https://github.com/masonrhayes/sciteR")
+# remotes::install_github("masonrhayes/sciteR")
 library(sciteR)
 
 my_issns <- c("1029-8479", "0092-8674", "0028-0836", "0036-8075")

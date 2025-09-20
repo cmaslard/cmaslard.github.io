@@ -112,6 +112,17 @@ darksvg = function(file, width, height) {
   void_dev()
 }
 
+# Packages: thematic, svglite, ggplot2
+darksvg <- function(file, width, height, ...) {
+  if (!requireNamespace("thematic", quietly = TRUE))
+    stop("Install 'thematic': install.packages('thematic')")
+  
+  thematic::thematic_on(bg = "#111111", fg = "white", accent = "#2780e3")
+  on.exit(thematic::thematic_off(), add = TRUE)
+  svglite::svglite(file = file, width = width, height = height, ...)
+}
+
+
 ############## function that make list of publication ####################
 get_pubs <- function() {
   pubs <- gsheet::gsheet2tbl(
