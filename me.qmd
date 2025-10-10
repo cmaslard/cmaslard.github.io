@@ -13,7 +13,7 @@ about:
   image-width: 13em
   links:
     - text: "{{< iconify fa6-solid:envelope >}} Email"
-      href: "mailto:maslard.corentin@gmail.com"
+      href: "mailto:corentin.maslard@unine.ch"
       aria-label: "envelope logo for email"
     - icon: github
       text: Github

@@ -15,6 +15,6 @@ image: "media/bioinformatic_tools_mcom_analyse/preview_website_2025-09-16.png"
 
 [You can access the teaching through this link](http://cmaslard.xyz/bioinformatic_tools_mcom_analyse/)
 
-This course was created by me under the supervision of [Thomas Badet](https://www.unine.ch/sciences/biographie/thomas-badet) for the . It provides an understanding of the basics of microbial community analysis, in particular the analysis of bacteria and fungi via amplicon sequencing using the 16S and ITS portions.
+This course was created by [me](https://cmaslard.xyz/me.html) under the supervision of [Thomas Badet](https://www.unine.ch/sciences/biographie/thomas-badet) for the unit "Bioinformatics tools (3BL2194)" see  pdf. It provides an understanding of the basics of microbial community analysis, in particular the analysis of bacteria and fungi via amplicon sequencing using the 16S and ITS portions.
 
 Resume of the course...

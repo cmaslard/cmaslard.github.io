@@ -54,7 +54,7 @@ website:
         
       center:
         - text: "{{< iconify fa6-solid:envelope >}}"
-          href: "mailto:maslard.corentin@gmail.com"
+          href: "mailto:corentin.maslard@unine.ch"
           aria-label: "envelope logo for email"
         - text: "{{< iconify fa6-brands:github >}}"
           href: https://github.com/cmaslard
