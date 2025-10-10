@@ -31,6 +31,8 @@ website:
       - href: presentations.qmd
       - text: Others
         menu: 
+          - text: Teaching
+            href: teaching.qmd
           - text: Supervised Students
             href: advisees.qmd
           - text: Awards

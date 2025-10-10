@@ -18,6 +18,12 @@
     ]
   },
   {
+    "listing": "/teaching.html",
+    "items": [
+      "/teaching/Bioinformatic_tools_mcom_analyse.html"
+    ]
+  },
+  {
     "listing": "/perso_projects.html",
     "items": [
       "/perso_projects/analyse_garden_v2.html",
