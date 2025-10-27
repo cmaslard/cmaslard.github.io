@@ -13,4 +13,4 @@ My research aims to understand how **plants** can better adapt to changes in **w
 
 I believe in **Open Science** and the importance of science communication.
 
-I am currently working as a postdoctoral researcher in Switzerland at the [University of Neuchâte](https://www.unine.ch/), in the Laboratory of [Plant Molecular and Cell Biology led by Prof. Joop Vermeer](https://www.unine.ch/lbmc). My research focuses on **root system architecture** and its adaptive mechanisms under stress, particularly **lateral root formation** in *Brachypodium distachyon*, combining molecular approaches, multiphoton microscopy, snRNA-seq, and genetic variability analyses
+I am currently working as a postdoctoral researcher in Switzerland at the [University of Neuchâtel](https://www.unine.ch/), in the Laboratory of [Plant Molecular and Cell Biology led by Prof. Joop Vermeer](https://www.unine.ch/lbmc). My research focuses on **root system architecture** and its adaptive mechanisms under stress, particularly **lateral root formation** in *Brachypodium distachyon*, combining molecular approaches, multiphoton microscopy, snRNA-seq, and genetic variability analyses
