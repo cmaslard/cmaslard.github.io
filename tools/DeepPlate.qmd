@@ -1,0 +1,59 @@
+---
+title: "DeepPlate"
+subtitle: "Automated deep-learning pipeline for plate-based root and shoot phenotyping"
+abstract: "DeepPlate is an automated image-analysis pipeline for high-throughput phenotyping of plate-grown Brachypodium and Arabidopsis plants. Starting from high-resolution ScanStation images, it prepares a project workspace, crops user-defined regions  (root, shoot, seed), and applies Ilastik-based deep-learning segmentation. Segmented images are then recomposed and used to extract quantitative traits such as projected area, width, depth, convex hull area and perimeter, enabling reproducible, scalable analysis of root and shoot architecture."
+format: html
+editor: visual
+author: Corentin Maslard
+date: 2025-10-14
+image: "media/DeepPlate/Capture d’écran 2025-11-06 à 13.49.40.png"
+categories: [Image, Deep learning, Python, Root architecture, Brachypodium, Arabidopsis, UniNe]
+---
+
+## Background
+
+## Graphical overview
+
+![](media/DeepPlate/flow_chart.png)
+
+### Flow chart representing the different steps of root trait analysis.
+
+## Results
+
+```{=html}
+<div style="display: flex; gap: 10px;">
+
+  <figure style="width: 50%; margin: 0; text-align: center;">
+    <figcaption style="margin-bottom: 5px; font-size: 1rem;">A. thaliana</figcaption>
+    <video
+      src="media/DeepPlate/At_20251014_032_recomposed_V3.mp4"
+      autoplay
+      loop
+      muted
+      playsinline
+      style="width: 100%; object-fit: cover;"
+    >
+      Votre navigateur ne supporte pas la balise <code>video</code>.
+    </video>
+  </figure>
+
+  <figure style="width: 50%; margin: 0; text-align: center;">
+    <figcaption style="margin-bottom: 5px; font-size: 1rem;">Brachypodium distchion</figcaption>
+    <video
+      src="media/DeepPlate/Bd_20251014_032_recomposed_V2.mp4"
+      autoplay
+      loop
+      muted
+      playsinline
+      style="width: 100%; object-fit: cover;"
+    >
+      Votre navigateur ne supporte pas la balise <code>video</code>.
+    </video>
+  </figure>
+
+</div>
+```
+
+## Article Information
+
+### How to cite

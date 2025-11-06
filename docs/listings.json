@@ -13,6 +13,7 @@
   {
     "listing": "/tools.html",
     "items": [
+      "/tools/DeepPlate.html",
       "/tools/macro_angle.html",
       "/tools/deep_learning_segmentation.html"
     ]
