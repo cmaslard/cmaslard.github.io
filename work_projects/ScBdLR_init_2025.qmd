@@ -7,7 +7,7 @@ format:
 editor: visual
 author: Corentin Maslard
 date: 2025-09-16
-categories: [work, UniNE, SnRNAseq, Brachypodium distachyon]
+categories: [work, UniNe, SnRNAseq, Brachypodium distachyon]
 editor_options: 
   chunk_output_type: console
 image: "media/ScBdLR_init_2025/preview_website_2025-09-16.png"
@@ -17,6 +17,7 @@ image: "media/ScBdLR_init_2025/preview_website_2025-09-16.png"
 
 Lateral root (LR) formation is a critical process in shaping plant root architecture, requiring the emerging organ to breach surrounding tissues through tightly regulated cell wall (CW) remodeling. In dicots, this spatial accommodation involves coordinated modification of pectins and hemicelluloses. However, the molecular and structural dynamics underlying this process in monocots, especially grasses with compositionally distinct Type II cell walls, remain largely unexplored. Here, we combine high-resolution immunolocalization and single-cell RNA sequencing to construct a spatiotemporal atlas of CW remodeling during LR development in *Brachypodium distachyon*, a model grass. Using a comprehensive panel of glycan-directed antibodies, we reveal dynamic and tissue-specific reorganization of hemicellulose and pectin epitopes. Xyloglucan remodeling at the LRP-parent root interface and arabinoxylan modifications in overlying cortical layers suggest coordinated enzymatic activity facilitating primordium emergence. Although overall pectin levels are low, localized deposition and remodeling of rhamnogalacturonan-I and xylogalacturonan in specific LRP and cortical domains point to precise functional roles for distinct pectic substructures. Integration with single-cell transcriptomic data identifies candidate enzymes, including glycosyltransferases, hydrolases, driving these structural transitions. Together, our findings uncover a modular and layered CW remodeling program in a grass species.
 
+```{=html}
 <style>
 #logos {
   display: flex;
@@ -32,12 +33,8 @@ Lateral root (LR) formation is a critical process in shaping plant root architec
   object-fit: contain;
 }
 </style>
+```
 
 ::: {#logos}
-[![](media/ScBdLR_init_2025/cnrs.png)](https://www.cnrs.fr/)
-[![](media/ScBdLR_init_2025/jbn.png)](https://www.jbneuchatel.ch/)
-[![](media/ScBdLR_init_2025/snf.png)](https://snf.ch/)
-[![](media/ScBdLR_init_2025/eu.png)](https://marie-sklodowska-curie-actions.ec.europa.eu/)
-[![](media/ScBdLR_init_2025/ipsim.png)](https://www1.montpellier.inra.fr/wp-inra/ipsim/)
-[![](media/ScBdLR_init_2025/unine.png)](https://www.unine.ch/)
+[![](media/ScBdLR_init_2025/cnrs.png)](https://www.cnrs.fr/) [![](media/ScBdLR_init_2025/jbn.png)](https://www.jbneuchatel.ch/) [![](media/ScBdLR_init_2025/snf.png)](https://snf.ch/) [![](media/ScBdLR_init_2025/eu.png)](https://marie-sklodowska-curie-actions.ec.europa.eu/) [![](media/ScBdLR_init_2025/ipsim.png)](https://www1.montpellier.inra.fr/wp-inra/ipsim/) [![](media/ScBdLR_init_2025/unine.png)](https://www.unine.ch/)
 :::
