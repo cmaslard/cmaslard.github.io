@@ -2,6 +2,7 @@
   {
     "listing": "/work_projects.html",
     "items": [
+      "/work_projects/DeepPlate_analyse.html",
       "/work_projects/ScBdLR_init_2025.html",
       "/work_projects/ECODIV_2021.html",
       "/work_projects/EUCLEG_2021.html",
@@ -11,17 +12,17 @@
     ]
   },
   {
+    "listing": "/teaching.html",
+    "items": [
+      "/teaching/Bioinformatic_tools_mcom_analyse.html"
+    ]
+  },
+  {
     "listing": "/tools.html",
     "items": [
       "/tools/DeepPlate.html",
       "/tools/macro_angle.html",
       "/tools/deep_learning_segmentation.html"
-    ]
-  },
-  {
-    "listing": "/teaching.html",
-    "items": [
-      "/teaching/Bioinformatic_tools_mcom_analyse.html"
     ]
   },
   {
