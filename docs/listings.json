@@ -12,18 +12,18 @@
     ]
   },
   {
-    "listing": "/teaching.html",
-    "items": [
-      "/teaching/2025_plant_root_AI_basics.html",
-      "/teaching/Bioinformatic_tools_mcom_analyse.html"
-    ]
-  },
-  {
     "listing": "/tools.html",
     "items": [
       "/tools/DeepPlate.html",
       "/tools/macro_angle.html",
       "/tools/deep_learning_segmentation.html"
+    ]
+  },
+  {
+    "listing": "/teaching.html",
+    "items": [
+      "/teaching/2025_plant_root_AI_basics.html",
+      "/teaching/Bioinformatic_tools_mcom_analyse.html"
     ]
   },
   {
