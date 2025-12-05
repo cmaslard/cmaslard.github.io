@@ -60,7 +60,7 @@
     "href": "teaching/Bioinformatic_tools_mcom_analyse.html",
     "title": "Microbial Community Analysis",
     "section": "",
-    "text": "You can access the teaching through this link\nThis course was created by me under the supervision of Thomas Badet for the third session of the bioinformatics tools course(3BL2194). It provides an understanding of the basics of microbial community analysis, in particular the analysis of bacteria and fungi via amplicon sequencing using the 16S and ITS portions.\n\n\n\n Back to top"
+    "text": "You can access the teaching through this link\nThis course was created by me under the supervision of Thomas Badet for the third session of the bioinformatics tools course (3BL2194). It provides an understanding of the basics of microbial community analysis, in particular the analysis of bacteria and fungi via amplicon sequencing using the 16S and ITS portions.\n\n\n\n Back to top"
   },
   {
     "objectID": "index.html",
@@ -151,7 +151,7 @@
     "href": "teaching.html",
     "title": "Teaching",
     "section": "",
-    "text": "Order By\n      Default\n      \n        Title\n      \n      \n        Date - Oldest\n      \n      \n        Date - Newest\n      \n      \n        Author\n      \n    \n  \n\n\n\n\n\n\n\n\n\n\nMicrobial Community Analysis\n\n\nBioinformatic tools (Course 3)\n\n\n\nUniNE\n\nMicrobial Community\n\n16S\n\nITS\n\nR\n\n\n\n\n\n\n\n\n\nOct 13, 2025\n\n\nCorentin Maslard\n\n\n\n\n\nNo matching items\n Back to top"
+    "text": "Order By\n      Default\n      \n        Title\n      \n      \n        Date - Oldest\n      \n      \n        Date - Newest\n      \n      \n        Author\n      \n    \n  \n\n\n\n\n\n\n\n\n\n\nDeep learning for plant root image analysis\n\n\n \n\n\n\nUniNE\n\nMachine Learning\n\nDeep Learning\n\nRoot\n\nImage analyse\n\n\n\n\n\n\n\n\n\nDec 5, 2025\n\n\nCorentin Maslard\n\n\n\n\n\n\n\n\n\n\n\n\nMicrobial Community Analysis\n\n\nBioinformatic tools (Course 3)\n\n\n\nUniNE\n\nMicrobial Community\n\n16S\n\nITS\n\nR\n\n\n\n\n\n\n\n\n\nOct 13, 2025\n\n\nCorentin Maslard\n\n\n\n\n\nNo matching items\n Back to top"
   },
   {
     "objectID": "perso_projects/analyse_garden_v2.html",
@@ -292,5 +292,12 @@
     "title": "Personal projects",
     "section": "",
     "text": "Order By\n      Default\n      \n        Title\n      \n      \n        Date - Oldest\n      \n      \n        Date - Newest\n      \n      \n        Author\n      \n    \n  \n\n\n\n\n\n\n\n\n\n\nGarden analysis V2\n\n\nThe aim here is to analyze my garden (yields and predicted benefits), and secondly to learn how to use SQL databases\n\n\n\nGarden\n\nAnalyse\n\nPerso\n\nsql\n\n\n\n\n\n\n\n\n\nAug 30, 2025\n\n\nCorentin Maslard\n\n\n\n\n\n\n\n\n\n\n\n\nStrava Dashboard\n\n\nA personal project to explore my Strava data\n\n\n\nStrava\n\nPerso\n\n\n\n\n\n\n\n\n\nAug 31, 2024\n\n\nCorentin Maslard\n\n\n\n\n\n\n\n\n\n\n\n\nGarden analysis\n\n\nThis page just shows the distribution of gains from my personal garden over the years. \n\n\n\nGarden\n\nAnalyse\n\nPerso\n\n\n\n\n\n\n\n\n\nAug 22, 2022\n\n\nCorentin Maslard\n\n\n\n\n\nNo matching items\n Back to top"
+  },
+  {
+    "objectID": "teaching/2025_plant_root_AI_basics.html",
+    "href": "teaching/2025_plant_root_AI_basics.html",
+    "title": "Deep learning for plant root image analysis",
+    "section": "",
+    "text": "You can access the teaching through this link\nThis course was created by me under the supervision of Joop Vermeer. This course is designed to give participants a practical introduction to how artificial intelligence, especially machine learning and deep learning can be used to analyse plant root images and extract quantitative root traits.\n\n\n\n Back to top"
   }
 ]

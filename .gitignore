@@ -6,3 +6,5 @@
 /.quarto/
 /docs/renv/
 /index_files/.DS_Store
+
+**/*.quarto_ipynb

@@ -1,0 +1,18 @@
+---
+title: "Deep learning for plant root image analysis"
+subtitle: "    "
+format:
+  html:
+    code-fold: true
+editor: visual
+author: Corentin Maslard
+date: 2025-12-05
+categories: [UniNE, Machine Learning, Deep Learning, Root, Image analyse]
+editor_options: 
+  chunk_output_type: console
+image: "media/bioinformatic_tools_mcom_analyse/preview_website_2025-10-14.png"
+---
+
+[You can access the teaching through this link](media/2025_plant_root_AI_basics/teaching_deep learning for plant root image analysis_2025.pdf)
+
+This course was created by [me](https://cmaslard.xyz/me.html) under the supervision of [Joop Vermeer](https://www.unine.ch/lbmc/2024/09/25/research-topic-2/). This course is designed to give participants a practical introduction to how artificial intelligence, especially machine learning and deep learning can be used to analyse plant root images and extract quantitative root traits.
