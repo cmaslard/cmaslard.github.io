@@ -10,7 +10,7 @@ date: 2025-10-13
 categories: [UniNE, Microbial Community, 16S, ITS, R]
 editor_options: 
   chunk_output_type: console
-image: "media/bioinformatic_tools_mcom_analyse/preview_website_2025-10-14.png"
+image: "media/bioinformatic_tools_mcom_analyse/preview_website_2025-12-04.png"
 ---
 
 [You can access the teaching through this link](http://cmaslard.xyz/bioinformatic_tools_mcom_analyse/)
