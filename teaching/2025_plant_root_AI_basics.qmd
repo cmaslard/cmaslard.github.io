@@ -10,7 +10,7 @@ date: 2025-12-05
 categories: [UniNE, Machine Learning, Deep Learning, Root, Image analyse]
 editor_options: 
   chunk_output_type: console
-image: "media/bioinformatic_tools_mcom_analyse/preview_website_2025-10-14.png"
+image: "media/2025_plant_root_AI_basics/preview_website_2025-12-04.png"
 ---
 
 [You can access the teaching through this link](media/2025_plant_root_AI_basics/teaching_deep learning for plant root image analysis_2025.pdf)
