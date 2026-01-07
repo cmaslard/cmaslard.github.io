@@ -40,73 +40,176 @@ Last update on: **`r Sys.Date()`**
 library(plotly)
 today <- Sys.Date()
 
-df <- get_grants() %>% 
+# df <- get_grants() %>% 
+#   mutate(
+#     sponsor_id = paste(sponsor, seq_along(sponsor)),
+#     start_period_hatch = start_period,
+#     end_period_hatch   = end_period
+#   ) %>% 
+#   mutate(start_period = if_else(
+#       start_period < today & end_period < today, 
+#       as.Date(NA), 
+#       if_else(start_period < today & end_period > today, today, start_period)
+#     )
+#   ) %>% 
+#   filter(awarded==1)
+# 
+# p1 <- ggplot(df) +
+#   geom_segment(aes(x = start_period_hatch, xend = end_period_hatch, 
+#                    y = reorder(sponsor_id, as.numeric(start_period_hatch)), 
+#                    yend = reorder(sponsor_id, as.numeric(start_period_hatch)),
+#                    color = sponsor), 
+#                size = 6, alpha = 0.5) +
+#   geom_segment(aes(x = start_period, xend = end_period, 
+#                    y = reorder(sponsor_id, as.numeric(start_period_hatch)), 
+#                    yend = reorder(sponsor_id, as.numeric(start_period_hatch)),
+#                    color = sponsor), 
+#                size = 6) +
+#   geom_text(aes(x = start_period_hatch + (end_period_hatch - start_period_hatch) / 2,
+#                 y = reorder(sponsor_id, as.numeric(start_period_hatch)),
+#                 label = budget_total),
+#             size = 3, color = "black") +
+#   theme_minimal() +
+#   labs(title = "Financing Gantt chart",
+#        x = "Period",
+#        y = "") +
+#   theme(
+#         panel.background = element_blank(),
+#         plot.background = element_blank(),   # Remove plot background
+#         panel.grid = element_blank(),
+#         axis.text.y     = element_text(size = 10),
+#         axis.text.x     = element_text(size = 10),
+#         axis.ticks.y    = element_blank(),
+#         axis.title.x    = element_text(size = 10),
+#         axis.title.y    = element_blank(),
+#         legend.position = "none"
+#       )+ scale_color_brewer(palette = "Dark2")
+# 
+# # Calculer la hauteur du plot en fonction du nombre de financements
+# n_financements <- nrow(df)
+# # Par exemple, 50 pixels par financement + 100 pixels supplémentaires pour la marge
+# plot_height <- 70 + n_financements * 50
+# 
+# ggplotly(p1, height = plot_height) %>% 
+#     layout(
+#       shapes = list(
+#         list(
+#           type = "line",
+#           x0 = as.character(today),  # Convert today's date to character
+#           x1 = as.character(today),
+#           y0 = 0,      # yref = "paper" pour que la ligne s'étende sur toute la hauteur du plot
+#           y1 = 1,
+#           xref = "x",
+#           yref = "paper",
+#           line = list(color = "black", dash = "dot", width = 2)
+#         )
+#       )
+#     )
+# 
+
+
+#### test new 
+library(plotly)
+today <- Sys.Date()
+
+df <- get_grants() %>%
   mutate(
-    sponsor_id = paste(sponsor, seq_along(sponsor)),
+    sponsor_id = paste0(seq_along(sponsor), " | ", sponsor),
     start_period_hatch = start_period,
     end_period_hatch   = end_period
-  ) %>% 
-  mutate(start_period = if_else(
-      start_period < today & end_period < today, 
-      as.Date(NA), 
+  ) %>%
+  mutate(
+    start_period = if_else(
+      start_period < today & end_period < today,
+      as.Date(NA),
       if_else(start_period < today & end_period > today, today, start_period)
-    )
-  ) %>% 
-  filter(awarded==1)
+    ),
+    label_amount = dplyr::case_when(
+      tolower(status) == "funded" & !is.na(amount_awarded) ~
+        paste0(scales::comma(amount_awarded, accuracy = 0.01), " ", currency),
+      tolower(status) == "not funded" & !is.na(amount_requested_by_applicant) ~
+        paste0(scales::comma(amount_requested_by_applicant, accuracy = 0.01), " ", currency),
+      TRUE ~ ""
+    ),
+    status_plot = dplyr::case_when(
+      tolower(status) == "funded" ~ "Funded",
+      tolower(status) == "in preparation" ~ "In preparation",
+      tolower(status) == "under evaluation" ~ "Under evaluation",
+      tolower(status) == "submitted" ~ "Submitted",
+      tolower(status) == "not funded" ~ "Not funded",
+      TRUE ~ "Other"
+    ),
+    # pour figer l’ordre dans la légende
+    status_plot = factor(status_plot,
+                         levels = c("Funded", "In preparation", "Under evaluation", "Submitted", "Not funded", "Other"))
+  )
+
+# palette pastel
+pal <- c(
+  "Funded"           = "#B7E4C7",  # vert pastel
+  "In preparation"   = "#A9D6E5",  # bleu pastel
+  "Under evaluation" = "#FFD6A5",  # orange pastel
+  "Submitted"        = "#D0D0D0",  # gris clair
+  "Not funded"       = "#FFADAD",  # rouge/rose pastel
+  "Other"            = "#E6E6E6"
+)
 
 p1 <- ggplot(df) +
-  geom_segment(aes(x = start_period_hatch, xend = end_period_hatch, 
-                   y = reorder(sponsor_id, as.numeric(start_period_hatch)), 
-                   yend = reorder(sponsor_id, as.numeric(start_period_hatch)),
-                   color = sponsor), 
-               size = 6, alpha = 0.5) +
-  geom_segment(aes(x = start_period, xend = end_period, 
-                   y = reorder(sponsor_id, as.numeric(start_period_hatch)), 
-                   yend = reorder(sponsor_id, as.numeric(start_period_hatch)),
-                   color = sponsor), 
-               size = 6) +
-  geom_text(aes(x = start_period_hatch + (end_period_hatch - start_period_hatch) / 2,
-                y = reorder(sponsor_id, as.numeric(start_period_hatch)),
-                label = budget_total),
-            size = 3, color = "black") +
+  geom_segment(aes(
+    x = start_period_hatch, xend = end_period_hatch,
+    y = reorder(sponsor_id, as.numeric(start_period_hatch)),
+    yend = reorder(sponsor_id, as.numeric(start_period_hatch)),
+    color = status_plot
+  ), size = 6, alpha = 0.35) +
+  geom_segment(aes(
+    x = start_period, xend = end_period,
+    y = reorder(sponsor_id, as.numeric(start_period_hatch)),
+    yend = reorder(sponsor_id, as.numeric(start_period_hatch)),
+    color = status_plot
+  ), size = 6) +
+  geom_text(aes(
+    x = start_period_hatch + (end_period_hatch - start_period_hatch) / 2,
+    y = reorder(sponsor_id, as.numeric(start_period_hatch)),
+    label = label_amount
+  ), size = 3, color = "black") +
   theme_minimal() +
-  labs(title = "Financing Gantt chart",
-       x = "Period",
-       y = "") +
+  labs(title = "Financing Gantt chart", x = "Period", y = "", color = NULL)+
   theme(
-        panel.background = element_blank(),
-        plot.background = element_blank(),   # Remove plot background
-        panel.grid = element_blank(),
-        axis.text.y     = element_text(size = 10),
-        axis.text.x     = element_text(size = 10),
-        axis.ticks.y    = element_blank(),
-        axis.title.x    = element_text(size = 10),
-        axis.title.y    = element_blank(),
-        legend.position = "none"
-      )+ scale_color_brewer(palette = "Dark2")
+  axis.ticks.y = element_blank(),
+  legend.position = "bottom",
+  legend.title = element_blank(),
+  panel.grid = element_blank()
+  )+
+  scale_color_manual(values = pal, drop = FALSE) +
+  guides(color = guide_legend(nrow = 1, byrow = TRUE))
 
-# Calculer la hauteur du plot en fonction du nombre de financements
 n_financements <- nrow(df)
-# Par exemple, 50 pixels par financement + 100 pixels supplémentaires pour la marge
 plot_height <- 70 + n_financements * 50
 
-ggplotly(p1, height = plot_height) %>% 
-    layout(
-      shapes = list(
-        list(
-          type = "line",
-          x0 = as.character(today),  # Convert today's date to character
-          x1 = as.character(today),
-          y0 = 0,      # yref = "paper" pour que la ligne s'étende sur toute la hauteur du plot
-          y1 = 1,
-          xref = "x",
-          yref = "paper",
-          line = list(color = "black", dash = "dot", width = 2)
-        )
+ggplotly(p1, height = plot_height) %>%
+  layout(
+    legend = list(
+      orientation = "h",
+      x = 0, xanchor = "left",
+      y = -0.30, yanchor = "top",   # <- plus bas qu'avant
+      title = list(text = "")
+    ),
+    xaxis = list(
+      title = list(standoff = 2)    # <- titre "Period" plus proche de l’axe
+    ),
+    shapes = list(
+      list(
+        type = "line",
+        x0 = as.character(today),
+        x1 = as.character(today),
+        y0 = 0, y1 = 1,
+        xref = "x",
+        yref = "paper",
+        line = list(color = "black", dash = "dash", width = 2)
       )
-    )
-
-
+    ),
+    margin = list(l = 240, b = 90, t = 30)  # <- b plus grand pour éviter le chevauchement
+  )
 # df <-get_citation_history("TsztyiMAAAAJ&hl") %>%  # my_ID (find in URL)
 #   mutate(Face=ifelse(year==format(Sys.Date(), "%Y"),"bold","plain"))
 # 

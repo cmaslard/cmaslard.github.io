@@ -157,7 +157,8 @@ get_awards <- function() {
 
 get_grants <- function() {
   grants <- gsheet::gsheet2tbl(
-    url = "https://docs.google.com/spreadsheets/d/1Cu1twyhPRdxY3Q4HBF6qmOK7BI_8a4qRav_IWI2n4eA/edit?gid=267267554#gid=267267554")
+    url = "https://docs.google.com/spreadsheets/d/1Cu1twyhPRdxY3Q4HBF6qmOK7BI_8a4qRav_IWI2n4eA/edit?gid=267267554#gid=267267554"
+  )
   grants <- make_grants(grants)
   return(grants)
 }
@@ -170,9 +171,10 @@ get_advisees <- function() {
 }
 
 make_citations <- function(pubs) {
-  pubs$citation <- unlist(lapply(split(pubs, 1:nrow(pubs)), make_citation))
-  pubs$icon <- unlist(lapply(split(pubs, 1:nrow(pubs)), make_icon))
-  return(pubs)
+  pubs$citation <- vapply(seq_len(nrow(pubs)), function(i) make_citation(pubs[i, ]), character(1))
+  pubs$icon     <- vapply(seq_len(nrow(pubs)), function(i) make_icon(pubs[i, ]), character(1))
+  pubs$details  <- vapply(seq_len(nrow(pubs)), function(i) make_pub_details(pubs[i, ]), character(1))
+  pubs
 }
 
 make_talks <- function(presentations) {
@@ -190,6 +192,79 @@ make_grants <- function(grants) {
   grants$citation <- unlist(lapply(split(grants, 1:nrow(grants)), make_grant))
   grants$icon <- unlist(lapply(split(grants, 1:nrow(grants)), make_icon))
   return(grants)
+}
+
+make_grants <- function(grants) {
+  
+  # --- parse dates safely (gsheet revient souvent en character) ---
+  date_cols <- intersect(c("submitted", "decision_date", "start_period", "end_period"), names(grants))
+  for (cc in date_cols) {
+    grants[[cc]] <- as.Date(grants[[cc]])
+  }
+  
+  # --- parse numeric amounts safely ---
+  num_cols <- intersect(c("amount_requested_by_applicant", "amount_awarded", "budget_managed"), names(grants))
+  for (cc in num_cols) {
+    grants[[cc]] <- readr::parse_number(
+      as.character(grants[[cc]]),
+      locale = readr::locale(grouping_mark = " ", decimal_mark = ".")
+    )
+  }
+  
+  grants$citation <- vapply(seq_len(nrow(grants)), function(i) make_grant(grants[i, ]), character(1))
+  grants$icon     <- vapply(seq_len(nrow(grants)), function(i) make_icon(grants[i, ]), character(1))
+  grants$details <- vapply(seq_len(nrow(grants)), function(i) make_grant_details(grants[i, ]), character(1))
+  
+  return(grants)
+}
+
+status_badge <- function(status) {
+  if (is.na(status) || !nzchar(status)) return("")
+  
+  col <- switch(
+    tolower(status),
+    "funded"           = "#58a53b",
+    "not funded"       = "red",
+    "under evaluation" = "#d08c00",
+    "in preparation"   = "#666666",
+    "submitted"        = "#1f77b4",
+    "interview"        = "#6f42c1",
+    "withdrawn"        = "#999999",
+    "#555555"
+  )
+  
+  glue::glue(
+    "<span style='border:1px solid {col}; color:{col}; padding:1px 7px; border-radius:999px; font-size:12px;'>
+      {status}
+     </span>"
+  )
+}
+
+fmt_amount <- function(x, currency = "") {
+  if (is.na(x) || !is.finite(x)) return("")
+  cur <- if (!is.na(currency) && nzchar(currency)) currency else ""
+  paste0(scales::comma(x, accuracy = 0.01), if (nzchar(cur)) paste0(" ", cur) else "")
+}
+
+amount_html <- function(status, amount_awarded, amount_requested, currency) {
+  # Montant affiché: si funded -> awarded, sinon -> requested (si dispo)
+  show_awarded <- !is.na(amount_awarded) && is.finite(amount_awarded)
+  show_req     <- !is.na(amount_requested) && is.finite(amount_requested)
+  
+  if (!show_awarded && !show_req) return("")
+  
+  status_l <- tolower(ifelse(is.na(status), "", status))
+  col <- if (status_l == "funded") "#58a53b" else if (status_l == "not funded") "red" else "#555555"
+  
+  val <- if (status_l == "funded" && show_awarded) {
+    fmt_amount(amount_awarded, currency)
+  } else {
+    fmt_amount(amount_requested, currency)
+  }
+  
+  suffix <- if (status_l == "not funded") "" else ""
+  
+  glue::glue("<span style='color:{col}; font-weight:700;'>{val}{suffix}</span>")
 }
 
 make_advisees <- function(advisees) {
@@ -321,26 +396,179 @@ make_award <- function(award) {
   ))
 }
 
+# make_grant <- function(grant) {
+#   if(!is.na(grant$url_pub)){
+#     grant$url_pub <- make_url(grant$url_pub)
+#   }
+#   if (!is.na(grant$sponsor)) {
+#     grant$sponsor <- glue::glue('_{grant$sponsor}_.')
+#   }
+#   if (!is.na(grant$applicant)) {
+#     grant$applicant <- glue::glue("{grant$applicant},")
+#   }else{
+#     
+#   }
+#   grant$submitted <- glue::glue("{grant$submitted}|")
+#   grant$budget_total <- glue::glue(
+#     "<span style='color:{ifelse(grant$awarded, '#58a53b', 'red')}'>**{ifelse(grant$awarded, grant$budget_total, paste0(grant$budget_total, ' (rejected)'))}**</span>"
+#   )
+#   grant[,which(is.na(grant))] <- ''
+#   return(paste(
+#     grant$submitted, grant$applicant, grant$sponsor, grant$budget_total
+#   ))
+# }
+
 make_grant <- function(grant) {
-  if(!is.na(grant$url_pub)){
-    grant$url_pub <- make_url(grant$url_pub)
+  
+  # helpers
+  nz <- function(x) !is.na(x) && nzchar(trimws(x))
+  low <- function(x) tolower(trimws(x))
+  
+  submitted_txt <- if (!is.na(grant$submitted)) format(grant$submitted, "%Y-%m-%d") else ""
+  submitted_txt <- glue::glue("{submitted_txt}|")
+  
+  # Sponsor italique
+  sponsor_txt <- if (nz(grant$sponsor)) glue::glue("_{grant$sponsor}_.") else ""
+  
+  # Scheme
+  scheme_txt <- if (nz(grant$scheme)) glue::glue("**{grant$scheme}**") else ""
+  
+  # Call / round
+  call_txt <- if (nz(grant$call_or_round)) glue::glue("({grant$call_or_round})") else ""
+  
+  # Project acronym: seulement si “gros” scheme (MSCA/EMBO) et pas déjà présent
+  show_project <- nz(grant$project_acronym) &&
+    (grepl("msca", low(grant$scheme)) || grepl("embo", low(grant$scheme)) || grepl("horizon", low(grant$scheme)))
+  
+  project_txt <- ""
+  if (show_project) {
+    # éviter répétition si déjà dans title ou scheme
+    already_in_title  <- nz(grant$title)  && grepl(low(grant$project_acronym), low(grant$title), fixed = TRUE)
+    already_in_scheme <- nz(grant$scheme) && grepl(low(grant$project_acronym), low(grant$scheme), fixed = TRUE)
   }
-  if (!is.na(grant$sponsor)) {
-    grant$sponsor <- glue::glue('_{grant$sponsor}_.')
+  
+  # ✅ si le scheme est déjà dans le title (cas EMBO), on ne le répète pas dans la ligne
+  if (nz(grant$title) && nz(grant$scheme) && grepl(low(grant$scheme), low(grant$title), fixed = TRUE)) {
+    scheme_txt <- ""
   }
-  if (!is.na(grant$applicant)) {
-    grant$applicant <- glue::glue("{grant$applicant},")
-  }else{
-    
-  }
-  grant$submitted <- glue::glue("{grant$submitted}|")
-  grant$budget_total <- glue::glue(
-    "<span style='color:{ifelse(grant$awarded, '#58a53b', 'red')}'>**{ifelse(grant$awarded, grant$budget_total, paste0(grant$budget_total, ' (rejected)'))}**</span>"
+  
+  badge <- status_badge(grant$status)
+  badge_amt <- glue::glue(
+    "<span style='display:inline-flex; gap:8px; align-items:baseline; white-space:nowrap;'>{badge}</span>"
   )
-  grant[,which(is.na(grant))] <- ''
-  return(paste(
-    grant$submitted, grant$applicant, grant$sponsor, grant$budget_total
-  ))
+  
+  # Séparateur seulement si project_txt existe
+  sep <- "<span style='opacity:0.6;'> &ndash; </span>"
+  
+  out <- paste(
+    submitted_txt,
+    if (nz(project_txt)) paste0(project_txt, sep) else "",
+    scheme_txt,
+    call_txt,
+    sponsor_txt,
+    badge_amt
+  )
+  
+  out <- gsub("\\s+", " ", out)
+  return(out)
+}
+
+make_grant_details <- function(grant) {
+  nz <- function(x) !is.null(x) && !is.na(x) && nzchar(trimws(as.character(x)))
+  
+  pieces <- c()
+  
+  # --- Project en premier ---
+  if (nz(grant$project_acronym)) {
+    pieces <- c(pieces, glue::glue("<div><b>Project:</b> {htmltools::htmlEscape(grant$project_acronym)}</div>"))
+  }
+  
+  # --- dates ---
+  fmt_date <- function(x) if (is.na(x) || is.null(x)) "" else format(as.Date(x), "%Y-%m-%d")
+  
+  if (nz(grant$submitted)) {
+    pieces <- c(pieces, glue::glue("<div><b>Submitted:</b> {fmt_date(grant$submitted)}</div>"))
+  }
+  if (nz(grant$decision_date)) {
+    pieces <- c(pieces, glue::glue("<div><b>Decision date:</b> {fmt_date(grant$decision_date)}</div>"))
+  }
+  if (nz(grant$start_period) || nz(grant$end_period)) {
+    pieces <- c(pieces, glue::glue(
+      "<div><b>Period:</b> {fmt_date(grant$start_period)} &rarr; {fmt_date(grant$end_period)}</div>"
+    ))
+  }
+  
+  # --- montants ---
+  if (nz(grant$amount_awarded)) {
+    pieces <- c(pieces, glue::glue(
+      "<div><b>Awarded:</b> {htmltools::htmlEscape(fmt_amount(grant$amount_awarded, grant$currency))}</div>"
+    ))
+  }
+  if (nz(grant$amount_requested_by_applicant)) {
+    pieces <- c(pieces, glue::glue(
+      "<div><b>Requested:</b> {htmltools::htmlEscape(fmt_amount(grant$amount_requested_by_applicant, grant$currency))}</div>"
+    ))
+  }
+  if (nz(grant$budget_managed)) {
+    pieces <- c(pieces, glue::glue(
+      "<div><b>Managed:</b> {htmltools::htmlEscape(fmt_amount(grant$budget_managed, grant$currency))}</div>"
+    ))
+  }
+  
+  # --- texte ---
+  if (nz(grant$one_liner)) {
+    pieces <- c(pieces, glue::glue("<div><b>Summary:</b> {htmltools::htmlEscape(grant$one_liner)}</div>"))
+  }
+  if (nz(grant$keywords)) {
+    pieces <- c(pieces, glue::glue("<div><b>Keywords:</b> {htmltools::htmlEscape(grant$keywords)}</div>"))
+  }
+  
+  if (length(pieces) == 0) return("")
+  
+  glue::glue(
+    "<details style='margin-top:6px;'>
+       <summary style='cursor:pointer; font-size:14px; opacity:0.85;'>
+         Show details
+       </summary>
+       <div style='margin-top:6px; padding-left:10px; border-left:2px solid #e5e5e5; font-size:14px;'>
+         {paste(pieces, collapse = \"\")}
+       </div>
+     </details>"
+  )
+}
+
+make_pub_details <- function(pub) {
+  # uniquement pour les peer-reviewed
+  if (is.null(pub$category) || is.na(pub$category) || pub$category != "peer_reviewed") return("")
+  
+  nz <- function(x) !is.null(x) && !is.na(x) && nzchar(trimws(as.character(x)))
+  
+  pieces <- c()
+  
+  if (nz(pub$abstract)) {
+    pieces <- c(pieces, glue::glue(
+      "<div><b>Abstract:</b> {htmltools::htmlEscape(pub$abstract)}</div>"
+    ))
+  }
+  
+  if (nz(pub$keywords)) {
+    pieces <- c(pieces, glue::glue(
+      "<div><b>Keywords:</b> {htmltools::htmlEscape(pub$keywords)}</div>"
+    ))
+  }
+  
+  if (length(pieces) == 0) return("")
+  
+  glue::glue(
+    "<details style='margin-top:6px;'>
+       <summary style='cursor:pointer; font-size:14px; opacity:0.85;'>
+         Show abstract
+       </summary>
+       <div style='margin-top:6px; padding-left:10px; border-left:2px solid #e5e5e5; font-size:14px;'>
+         {paste(pieces, collapse = \"\")}
+       </div>
+     </details>"
+  )
 }
 
 make_advise <- function(advise) {
@@ -662,10 +890,11 @@ make_pub <- function(pub, index = NULL) {
     '<div style="font-size: 18px; line-height: 1.1;">
      <span style="font-weight: normal;">{index}|</span> 
      <span style="font-weight: bold; margin-top: 0px; margin-bottom: 4px;">{title_to_html(pub$title)}</span>
-   </div>
-   <div style="font-size: 15px; margin-top: 5px; margin-bottom: -10px; line-height: 1.1;">{markdown_to_html(cite)}</div>
-   <div style="font-size: 16px; margin-top: 0px; margin-bottom: -10px;">{icon}</div>
-   <hr style="border: 1px solid #ccc;" />'
+    </div>
+    <div style="font-size: 15px; margin-top: 5px; margin-bottom: -10px; line-height: 1.1;">{markdown_to_html(cite)}</div>
+    <div style="margin-top: 8px; margin-bottom: -6px;">{pub$details}</div>
+    <div style="font-size: 16px; margin-top: 0px; margin-bottom: -10px;">{icon}</div>
+    <hr style="border: 1px solid #ccc;" />'
     )
   
   return(htmltools::HTML(glue::glue(
@@ -750,7 +979,8 @@ make_grant1 <- function(grant, index = NULL) {
      <span style="font-weight: bold; margin-top: 0px; margin-bottom: 4px;">{title_to_html(grant$title)}</span>
    </div>
    <div style="font-size: 15px; margin-top: 5px; margin-bottom: -10px; line-height: 1.1;">{markdown_to_html(cite)}</div>
-   <div style="font-size: 16px; margin-top: 0px; margin-bottom: -10px;">{icon}</div>
+  <div style="margin-top: 8px; margin-bottom: -6px;">{grant$details}</div>
+  <div style="font-size: 16px; margin-top: 0px; margin-bottom: -10px;">{icon}</div>
    <hr style="border: 1px solid #ccc;" />'
   )
   
