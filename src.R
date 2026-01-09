@@ -197,7 +197,7 @@ make_grants <- function(grants) {
 make_grants <- function(grants) {
   
   # --- parse dates safely (gsheet revient souvent en character) ---
-  date_cols <- intersect(c("submitted", "decision_date", "start_period", "end_period"), names(grants))
+  date_cols <- intersect(c("submitted", "decision_date_expected", "decision_date", "start_period", "end_period"), names(grants))
   for (cc in date_cols) {
     grants[[cc]] <- as.Date(grants[[cc]])
   }
@@ -488,6 +488,9 @@ make_grant_details <- function(grant) {
   
   if (nz(grant$submitted)) {
     pieces <- c(pieces, glue::glue("<div><b>Submitted:</b> {fmt_date(grant$submitted)}</div>"))
+  }
+  if (nz(grant$decision_date_expected)) {
+    pieces <- c(pieces, glue::glue("<div><b>Decision expected:</b> {fmt_date(grant$decision_date_expected)}</div>"))
   }
   if (nz(grant$decision_date)) {
     pieces <- c(pieces, glue::glue("<div><b>Decision date:</b> {fmt_date(grant$decision_date)}</div>"))
