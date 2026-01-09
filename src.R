@@ -122,6 +122,18 @@ darksvg <- function(file, width, height, ...) {
   svglite::svglite(file = file, width = width, height = height, ...)
 }
 
+parse_bool <- function(x, default = TRUE) {
+  x <- as.character(x)
+  x[is.na(x) | !nzchar(trimws(x))] <- as.character(default)
+  x <- tolower(trimws(x))
+  x %in% c("true","t","1","yes","y","oui","o")
+}
+
+ensure_show_col <- function(df, col = "show_in_site", default = TRUE) {
+  if (!col %in% names(df)) df[[col]] <- default
+  df[[col]] <- parse_bool(df[[col]], default = default)
+  df
+}
 
 ############## function that make list of publication ####################
 get_pubs <- function() {
@@ -812,13 +824,15 @@ make_stubs <- function(pubs) {
 # pubs = pubs
 # category = "peer_reviewed"
 make_pub_list <- function(pubs, category) {
-  x <- pubs[which(pubs$category == category),]
+  pubs <- ensure_show_col(pubs, "show_in_site", default = TRUE)
+  
+  x <- pubs[which(pubs$category == category & pubs$show_in_site), ]
+  
   pub_list <- list()
   for (i in 1:nrow(x)) {
-    #cat(x$title[i], "\n")
     pub_list[[i]] <- make_pub(x[i,], index = i)
   }
-  return(htmltools::HTML(paste(unlist(pub_list), collapse = "")))
+  htmltools::HTML(paste(unlist(pub_list), collapse = ""))
 }
 
 make_talk_list <- function(talks, category) {
@@ -840,12 +854,15 @@ make_award_list <- function(awards, category) {
 }
 
 make_grant_list <- function(grants) {
-  x <- grants
+  grants <- ensure_show_col(grants, "show_in_site", default = TRUE)
+  
+  x <- grants[which(grants$show_in_site), ]
+  
   grant_list <- list()
   for (i in 1:nrow(x)) {
     grant_list[[i]] <- make_grant1(x[i,], index = i)
   }
-  return(htmltools::HTML(paste(unlist(grant_list), collapse = "")))
+  htmltools::HTML(paste(unlist(grant_list), collapse = ""))
 }
 
 make_advise_list <- function(advise, complete) {
