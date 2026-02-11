@@ -15,6 +15,8 @@ image: "media/DeepPlate_analyse/preview_website_2025-11-07.png"
 
 You can access the project (code, figure, explanation ...) [through this link](https://cmaslard.xyz/DeepPlate_analyse/), the code for the algorithm [at this link](https://github.com/cmaslard/DeepPlate) and you can find more informations at [this link.](https://cmaslard.xyz/tools/DeepPlate.html)
 
+[You can access the private project (code, figures, explanations…) via this link](https://deepplate-analyses.private.cmaslard.xyz/). Access is restricted (Cloudflare Access). Use your authorized email to receive a one-time login code. If you don’t receive a code within \~60 seconds, your email is likely not allow-listed; please contact me.
+
 DeepPlate is a deep learning pipeline designed to analyse plate images of Arabidopsis thaliana and Brachypodium distachyon, including roots, seeds and aerial tissues. Starting from raw time-series images, it performs preprocessing, segmentation and trait extraction to generate quantitative descriptors of plant growth and architecture. On this page, I summarise the main performance metrics and example outputs of DeepPlate. I show how well the models segment different organs, how robust the pipeline is across experiments, and how the extracted traits relate to manual measurements. The goal is to document what works, where the current limitations are, and how these results can guide future improvements of the tool.
 
 ```{=html}

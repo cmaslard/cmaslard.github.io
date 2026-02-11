@@ -99,7 +99,7 @@ generate_altmetric_html <- function(doi_x) {
 
 # cosmetic
 ## Dark_mode also for graph (i add image-dark-light.js from https://github.com/quarto-dev/quarto-cli/discussions/5439)
-library(ggdark)
+library(ggdark) #renv::install("nsgrantham/ggdark")
 library(devoid)
 darksvg = function(file, width, height) {
   on.exit({

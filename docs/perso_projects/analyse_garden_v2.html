@@ -492,8 +492,13 @@ $ note            &lt;chr&gt; "test", NA, NA, NA, NA, NA, "test MAJ", NA, "Test"
 <span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="cn">NULL</span>, <span class="at">y=</span><span class="st">'Total'</span>, <span class="at">title=</span><span class="fu">sprintf</span>(<span class="st">'Quantités par produit (jours)'</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stderr">
-<pre><code>`summarise()` has grouped output by 'product_name', 'location_name'. You can
-override using the `.groups` argument.</code></pre>
+<pre><code>`summarise()` has regrouped the output.
+ℹ Summaries were computed grouped by product_name, location_name, and
+  created_by_name.
+ℹ Output is grouped by product_name and location_name.
+ℹ Use `summarise(.groups = "drop_last")` to silence this message.
+ℹ Use `summarise(.by = c(product_name, location_name, created_by_name))` for
+  per-operation grouping (`?dplyr::dplyr_by`) instead.</code></pre>
 </div>
 <details class="code-fold">
 <summary>Code</summary>
