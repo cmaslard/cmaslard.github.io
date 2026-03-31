@@ -29,6 +29,12 @@ website:
         href: work_projects.qmd
       - href: publications.qmd
       - href: presentations.qmd
+      - text: "VermeerLab data explorer"
+        menu:
+          - text: "Public data explorer"
+            href: https://vermeerlab.cmaslard.xyz/
+          - text: "Private data explorer"
+            href: https://private-vermeerlab.cmaslard.xyz/
       - text: Others
         menu: 
           - text: Teaching

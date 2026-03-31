@@ -1,0 +1,40 @@
+---
+title: "Bd abiotic stress APP 2026"
+subtitle: "This project investigates how the model grass Brachypodium distachyon responds to abiotic stresses, including salinity, ABA treatment, and nutrient deficiencies, by analyzing early changes in root growth and architecture"
+format:
+  html:
+    code-fold: true
+editor: visual
+author: Corentin Maslard
+date: 2025-09-16
+categories: [work, root, Deep learning, Python, Root architecture, Brachypodium distachyon, NaCl, ABA, deficiencies, UniNe, qPCR]
+editor_options: 
+  chunk_output_type: console
+image: "media/Bd_abiotic_stress_APP_2026/preview_website_2026-03-31.png"
+---
+
+[You can access the private project (code, figures, explanations…) via this link](https://bd-abiotic-stress-2026.private.cmaslard.xyz/). Access is restricted (Cloudflare Access). Use your authorized email to receive a one-time login code. If you don’t receive a code within \~60 seconds, your email is likely not allow-listed; please contact me.
+
+Understanding how plants respond to abiotic stresses is essential for improving crop resilience. In this project, we investigate the early responses of the model grass *Brachypodium distachyon* to several environmental constraints, including salinity, abscisic acid (ABA) treatment, and nutrient deficiencies. Two commonly used genotypes, Bd21 and Bd21-3, are compared in order to identify potential genotype-specific differences in stress sensitivity. Seedlings are first germinated under control conditions and then transferred to agar media containing defined stress treatments. Root system development is monitored daily for ten days using image-based phenotyping. Quantitative measurements of root architecture, including primary root length, lateral root number, and root system organization, are used to assess plant responses to the different treatments. To complement the morphological analysis, expression levels of selected stress-responsive genes will be analyzed using quantitative PCR. These molecular measurements aim to link visible developmental responses with underlying stress signaling pathways. Together, this experimental approach provides an integrated view of how *Brachypodium distachyon* adjusts its root growth and development in response to multiple abiotic stresses. The project also introduces students to experimental design, plant phenotyping, and molecular analysis techniques used to study plant stress biology.
+
+```{=html}
+<style>
+#logos {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  margin-top: 1em;
+}
+#logos img {
+  height: 80px;
+  width: auto;
+  object-fit: contain;
+}
+</style>
+```
+
+::: {#logos}
+[![](media/Bd_abiotic_stress_APP_2026/snf.png)](https://snf.ch/) [![](media/Bd_abiotic_stress_APP_2026/unine.png)](https://www.unine.ch/)
+:::

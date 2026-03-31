@@ -24,7 +24,7 @@ library(treemap)
 library(wesanderson)
 ```
 
-#  Data importation
+# Data importation
 
 ```{r, dfImport}
 df_harvest_price <- read_excel(here::here("perso_projects/media/data_analyse_garden/recolte_total.xlsx")) %>% 
