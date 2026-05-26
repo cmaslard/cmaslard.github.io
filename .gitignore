@@ -7,3 +7,4 @@
 /index_files/.DS_Store
 **/*.quarto_ipynb
 .httr-oauth
+.positai

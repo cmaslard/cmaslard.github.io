@@ -25,12 +25,12 @@ There are many more visualizations and features I'd love to add, but finding the
 ::: callout-note
 ## Code written by me, Corentin Maslard and inspired by various websites:
 
--   https://www.dancullen.me/articles/creating-a-heatmap-in-r-with-google-polylines
--   https://padpadpadpad.github.io/post/animate-your-strava-activities-using-rstrava-and-gganimate/
--   https://medium.com/@annthurium/getting-started-with-the-strava-api-a-tutorial-f3909496cd2d
--   https://www.r-bloggers.com/where-do-you-run-to-map-your-strava-activities-on-static-and-leaflet-maps/
--   http://www.databrew.cc/posts/strava.html
--   https://github.com/fawda123/rStrava
+- https://www.dancullen.me/articles/creating-a-heatmap-in-r-with-google-polylines
+- https://padpadpadpad.github.io/post/animate-your-strava-activities-using-rstrava-and-gganimate/
+- https://medium.com/@annthurium/getting-started-with-the-strava-api-a-tutorial-f3909496cd2d
+- https://www.r-bloggers.com/where-do-you-run-to-map-your-strava-activities-on-static-and-leaflet-maps/
+- http://www.databrew.cc/posts/strava.html
+- https://github.com/fawda123/rStrava
 :::
 
 The [rStrava](https://www.google.com/url?q=https%3A%2F%2Fgithub.com%2Ffawda123%2FrStrava%23APIfunctions&sa=D&sntz=1&usg=AOvVaw3NiLeffsoqfDa971PS_bTh) package allows easy access to your Strava data using the Strava API. Combined with leaflet I can easily create a heatmap of all of my Strava activities. One interesting challenge does arise when doing this. Strava stores the coordinates of the activity as a [Google Polyline](https://developers.google.com/maps/documentation/utilities/polylineutility), so I will use the [googleway](https://www.google.com/url?q=https%3A%2F%2Fcran.r-project.org%2Fweb%2Fpackages%2Fgoogleway%2Fvignettes%2Fgoogleway-vignette.html&sa=D&sntz=1&usg=AOvVaw1EXllXJaE3UX0OKBgZY6eH) package to decode the data in to latitude and longitude coordinates.
