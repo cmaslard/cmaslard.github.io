@@ -1,0 +1,202 @@
+---
+title: "Climate Change Dashboard"
+subtitle: "Key global warming indicators tracked with historical and up-to-date scientific data"
+format:
+  html:
+    page-layout: full
+    code-fold: true
+author: Corentin Maslard
+date: 2026-06-28
+categories: [Climate, Environment, Data, Perso]
+editor_options:
+  chunk_output_type: console
+---
+
+As a biologist working on plant stress responses to heat and drought, understanding the broader trajectory of climate change is directly relevant to my research. This dashboard pulls three canonical climate indicators from major scientific agencies (NOAA, NASA), each updated regularly at their source. Data is fetched at render time, so this page reflects the most recent available records.
+
+::: callout-note
+## Data sources
+
+-   **CO2**: [NOAA Global Monitoring Laboratory](https://gml.noaa.gov/ccgg/trends/) -- Mauna Loa Observatory, monthly mean atmospheric CO2 since 1958
+-   **Temperature**: [NASA GISTEMP v4](https://data.giss.nasa.gov/gistemp/) -- Global Land-Ocean Temperature Index, annual anomaly vs. 1951--1980 baseline
+-   **Warming stripes**: methodology from [Ed Hawkins](https://showyourstripes.info/s) (University of Reading), norm period 1961--1990
+:::
+
+```{r setup, echo=FALSE, warning=FALSE, message=FALSE}
+library(readr)
+library(dplyr)
+library(plotly)
+```
+
+```{r data_load, echo=FALSE, warning=FALSE, message=FALSE}
+# ----- CO2: NOAA Mauna Loa monthly means -----
+co2_url <- "https://gml.noaa.gov/webdata/ccgg/trends/co2/co2_mm_mlo.csv"
+co2 <- tryCatch({
+  raw <- read_csv(co2_url, comment = "#", show_col_types = FALSE)
+  names(raw) <- c("year", "month", "decimal_date", "average", "deseason", "ndays", "sdev", "unc")
+  raw |>
+    filter(average > 0) |>
+    mutate(date = as.Date(paste(year, month, "15", sep = "-")))
+}, error = function(e) NULL)
+
+# ----- Temperature: NASA GISTEMP annual anomaly -----
+temp_url <- "https://data.giss.nasa.gov/gistemp/tabledata_v4/GLB.Ts+dSST.csv"
+temp <- tryCatch({
+  df <- read_csv(temp_url, skip = 1, na = "***", show_col_types = FALSE) |>
+    select(Year, `J-D`) |>
+    filter(!is.na(`J-D`)) |>
+    rename(year = Year, anomaly = `J-D`) |>
+    mutate(year = as.integer(year),
+           sign  = ifelse(anomaly >= 0, "Warmer", "Cooler"),
+           smooth = as.numeric(stats::filter(anomaly, rep(1/10, 10), sides = 2)))
+
+  # Re-centre to 1961-1990 norm for warming stripes
+  ref_mean <- df |> filter(year >= 1961, year <= 1990) |> pull(anomaly) |> mean(na.rm = TRUE)
+  df |> mutate(anomaly_stripes = anomaly - ref_mean)
+}, error = function(e) NULL)
+```
+
+::: panel-tabset
+## CO2 Concentration
+
+The Keeling Curve, named after Charles Keeling who began measurements in 1958, is one of the most iconic datasets in climate science. It tracks the rise in atmospheric CO2 at Mauna Loa, Hawaii, far from local pollution sources, providing a clean global signal. The seasonal oscillations reflect plant breathing cycles; the upward trend reflects fossil fuel emissions.
+
+```{r co2_plot, echo=FALSE, warning=FALSE, message=FALSE}
+if (!is.null(co2)) {
+  last_val <- tail(co2, 1)
+
+  plot_ly(co2) |>
+    add_lines(x = ~date, y = ~average,
+              name = "Monthly mean",
+              line = list(color = "#E76F51", width = 1, opacity = 0.7),
+              hovertemplate = "<b>%{x|%b %Y}</b><br>CO2: %{y:.1f} ppm<extra></extra>") |>
+    add_lines(x = ~date, y = ~deseason,
+              name = "Deseasonalized trend",
+              line = list(color = "#264653", width = 2.5),
+              hovertemplate = "<b>%{x|%b %Y}</b><br>Trend: %{y:.1f} ppm<extra></extra>") |>
+    add_annotations(
+      x = last_val$date, y = last_val$average,
+      text = paste0("<b>", round(last_val$average, 1), " ppm</b>"),
+      xanchor = "right", showarrow = FALSE,
+      font = list(color = "#E76F51", size = 13)
+    ) |>
+    layout(
+      title = list(text = "Atmospheric CO2 -- Mauna Loa Observatory (NOAA)", x = 0),
+      xaxis = list(title = ""),
+      yaxis = list(title = "CO2 (ppm)"),
+      legend = list(x = 0.05, y = 0.95, bgcolor = "rgba(255,255,255,0.7)"),
+      hovermode = "x unified",
+      plot_bgcolor  = "rgba(0,0,0,0)",
+      paper_bgcolor = "rgba(0,0,0,0)"
+    )
+} else {
+  cat("Could not fetch CO2 data.")
+}
+```
+
+## Global Temperature
+
+Annual global surface temperature anomaly combining land and ocean measurements (NASA GISTEMP v4). The bar chart uses the original 1951--1980 baseline; the warming stripes below are re-centred to the 1961--1990 norm following Ed Hawkins' original design.
+
+::: callout-note
+## About Warming Stripes
+
+The climate stripes show the annual temperature anomaly from the norm period **1961--1990**. Red stripes represent warmer years and blue stripes represent cooler years -- the darker the color, the greater the departure from the norm. The original design was created by **Ed Hawkins** (University of Reading). Climate stripes for more than 200 countries, states and cities are freely available at [showyourstripes.info](https://showyourstripes.info/s).
+:::
+
+```{r temp_plot, echo=FALSE, warning=FALSE, message=FALSE}
+if (!is.null(temp)) {
+  plot_ly(temp) |>
+    add_bars(x = ~year, y = ~anomaly,
+             color = ~sign,
+             colors = c("Warmer" = "#E63946", "Cooler" = "#457B9D"),
+             hovertemplate = "<b>%{x}</b><br>Anomaly: %{y:+.3f} C<extra></extra>") |>
+    add_lines(x = ~year, y = ~smooth,
+              name = "10-yr running mean",
+              line = list(color = "#1D3557", width = 2.5),
+              hovertemplate = "<b>%{x}</b><br>10-yr mean: %{y:+.3f} C<extra></extra>") |>
+    layout(
+      title = list(text = "Global Surface Temperature Anomaly -- NASA GISTEMP v4 (baseline 1951-1980)", x = 0),
+      xaxis = list(title = ""),
+      yaxis = list(title = "Temperature anomaly (C)", zeroline = TRUE,
+                   zerolinecolor = "#aaaaaa", zerolinewidth = 1),
+      legend = list(x = 0.05, y = 0.95, bgcolor = "rgba(255,255,255,0.7)"),
+      hovermode = "x unified",
+      barmode = "overlay",
+      plot_bgcolor  = "rgba(0,0,0,0)",
+      paper_bgcolor = "rgba(0,0,0,0)"
+    )
+} else {
+  cat("Could not fetch temperature data.")
+}
+```
+
+```{r stripes_plot, echo=FALSE, warning=FALSE, message=FALSE}
+if (!is.null(temp)) {
+  plot_ly(
+    z      = matrix(temp$anomaly_stripes, nrow = 1),
+    x      = temp$year,
+    y      = c(""),
+    type   = "heatmap",
+    colorscale = list(
+      list(0,    "#1D3557"),
+      list(0.3,  "#457B9D"),
+      list(0.5,  "#f5f5f5"),
+      list(0.7,  "#E63946"),
+      list(1,    "#7a0000")
+    ),
+    zmin   = -1.5,
+    zmax   =  1.5,
+    showscale   = FALSE,
+    hovertemplate = "<b>%{x}</b><br>%{z:+.2f} C vs 1961-1990 norm<extra></extra>"
+  ) |>
+    layout(
+      height = 130,
+      title  = list(text = "Warming Stripes (1880-present, baseline 1961-1990)", x = 0),
+      xaxis  = list(title = "", tickfont = list(size = 10)),
+      yaxis  = list(showticklabels = FALSE, ticks = ""),
+      margin = list(l = 10, r = 10, t = 40, b = 10),
+      plot_bgcolor  = "rgba(0,0,0,0)",
+      paper_bgcolor = "rgba(0,0,0,0)"
+    )
+} else {
+  cat("Could not render warming stripes.")
+}
+```
+
+## CO2 vs Temperature
+
+The relationship between rising CO2 and warming is one of the most studied links in climate science. Each point represents one year (1958--present), colored from early (blue) to recent (red), showing how the two signals co-evolved once continuous CO2 measurements began at Mauna Loa.
+
+```{r scatter_plot, echo=FALSE, warning=FALSE, message=FALSE}
+if (!is.null(co2) && !is.null(temp)) {
+  co2_annual <- co2 |>
+    group_by(year) |>
+    summarise(co2_mean = mean(average, na.rm = TRUE), .groups = "drop")
+
+  combined <- inner_join(co2_annual, temp |> select(year, anomaly), by = "year")
+
+  plot_ly(combined,
+          x = ~co2_mean, y = ~anomaly,
+          color = ~year, colors = colorRamp(c("#A8DADC", "#457B9D", "#E63946")),
+          text = ~year,
+          type = "scatter", mode = "markers",
+          marker = list(size = 8, opacity = 0.85),
+          hovertemplate = "<b>%{text}</b><br>CO2: %{x:.1f} ppm<br>Anomaly: %{y:+.3f} C<extra></extra>") |>
+    layout(
+      title = list(text = "CO2 Concentration vs Global Temperature Anomaly", x = 0),
+      xaxis = list(title = "Annual mean CO2 (ppm)"),
+      yaxis = list(title = "Temperature anomaly (C)"),
+      coloraxis = list(colorbar = list(title = "Year")),
+      plot_bgcolor  = "rgba(0,0,0,0)",
+      paper_bgcolor = "rgba(0,0,0,0)"
+    )
+} else {
+  cat("Could not compute scatter (missing CO2 or temperature data).")
+}
+```
+:::
+
+---
+
+*Data fetched at render time. Last rendered: `r format(Sys.Date(), "%B %d, %Y")`*
