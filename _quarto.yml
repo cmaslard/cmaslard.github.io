@@ -1,5 +1,6 @@
 project:
   type: website
+  pre-render: generate_stripe.R
   resources:
     - CNAME
     - media/
@@ -91,7 +92,8 @@ website:
 
 format:
   html:
-    theme: 
+    theme:
       light: [cosmo, theme-light.scss]
       dark: [cosmo, theme-dark.scss]
+    css: stripe.css
     toc: false
