@@ -1,14 +1,5 @@
 [
   {
-    "listing": "/perso_projects.html",
-    "items": [
-      "/perso_projects/climate_change.html",
-      "/perso_projects/analyse_garden_v2.html",
-      "/perso_projects/strava_report.html",
-      "/perso_projects/analyse_garden.html"
-    ]
-  },
-  {
     "listing": "/work_projects.html",
     "items": [
       "/work_projects/Bd_abiotic_stress_APP_2026.html",
@@ -34,6 +25,15 @@
       "/tools/DeepPlate.html",
       "/tools/macro_angle.html",
       "/tools/deep_learning_segmentation.html"
+    ]
+  },
+  {
+    "listing": "/perso_projects.html",
+    "items": [
+      "/perso_projects/climate_change.html",
+      "/perso_projects/analyse_garden_v2.html",
+      "/perso_projects/strava_report.html",
+      "/perso_projects/analyse_garden.html"
     ]
   }
 ]
