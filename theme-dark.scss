@@ -13,3 +13,29 @@ $navbar-default-color: white;
 
 // Code blocks
 $code-block-bg-alpha: -.8;
+
+/*-- scss:rules --*/
+// The Altmetric donut badge is a transparent PNG rendered by Altmetric's
+// servers with the attention score drawn in plain black — readable on the
+// light pages it was designed for, invisible on our dark background. Rather
+// than recolor the whole badge (which would also wash out the ring's own
+// colors), invert just a small circle at its center, over the score only:
+// the ring passes through untouched, the number reads white.
+.altmetric-embed {
+  display: inline-block;
+  line-height: 0; // drop the inline-block baseline gap so the box is a true 64x64 square, not an ellipse
+  position: relative;
+}
+.altmetric-embed::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 22px;
+  height: 22px;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  backdrop-filter: invert(1);
+  -webkit-backdrop-filter: invert(1);
+  pointer-events: none;
+}

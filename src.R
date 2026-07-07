@@ -1,6 +1,5 @@
-# pkg 
+# pkg
 library(rcrossref)
-library(rAltmetric) # install.packages("devtools") #devtools::install_github("ropensci/rAltmetric")
 library(scholar)
 library(dplyr)
 library(ggplot2)
@@ -12,90 +11,18 @@ library(stringr)
 library(readr)
 
 # function
-# Function to generate the Altmetric HTML snippet
-# generate_altmetric_html <- function(doi_x) {
-#   html_output = ""
-#   if (!is.na(doi_x)){
-#     # URL and image generation using the provided DOI
-#     url <- altmetric_data(altmetrics(doi = doi_x,apikey = ""))$details_url # some time the doi not working (i don't know why)
-#     img <- altmetric_data(altmetrics(doi = doi_x,apikey = ""))$images.medium # some time the doi not working (i don't know why)
-# 
-#     # Create the HTML code
-#     html_output <- HTML(glue(
-#       '<a href="{url}" target="_blank"><img src="{img}" width="64" height="64"></a>'
-#     ))
-#   }
-#   return(html_output)
-# }
-
-#### MAJ try error
+# Since Nov 2025 the Altmetric Details Page API requires a paid API key
+# (https://api.altmetric.com/v1/... now returns HTTP 403 without one), so
+# fetching the badge image server-side no longer works. Use Altmetric's free
+# client-side embed widget instead: it renders the donut badge in the
+# visitor's browser from the DOI alone, no API key needed.
+# https://docs.altmetric.com/details-page-api/badges/getting-started/
 generate_altmetric_html <- function(doi_x) {
-  html_output = ""
-  if (!is.na(doi_x)){
-      html_output <- tryCatch({
-        # URL and image generation using the provided DOI
-        url <- altmetric_data(altmetrics(doi = doi_x,apikey = ""))$details_url # some time the doi not working (i don't know why)
-        img <- altmetric_data(altmetrics(doi = doi_x,apikey = ""))$images.medium # some time the doi not working (i don't know why)
-        
-        # Create the HTML code
-        html_output <- HTML(glue(
-          '<a href="{url}" target="_blank"><img src="{img}" width="64" height="64"></a>'
-        ))
-        
-      }, error = function(e) {
-        # Ne rien afficher ni interrompre le script en cas d'erreur,
-        # simplement renvoyer le placeholder
-        html_output <-
-        HTML(glue(
-          '<a href="{"cmaslard.xyz/publications/"}" target="_blank">
-             <img src="{"media/altmetric-symbol_no_information_1.png"}" width="64" height="64">
-           </a>'
-        ))
-      })
-    
-  }
-  return(html_output)
+  if (is.na(doi_x) || !nzchar(doi_x)) return("")
+  HTML(glue(
+    '<div class="altmetric-embed" data-badge-type="donut" data-doi="{doi_x}"></div>'
+  ))
 }
-
-# generate_altmetric_html <- function(doi_x) {
-#   # Définir éventuellement un lien et une image "placeholder"
-#   placeholder_url <- "#"  # ou un lien par défaut
-#   placeholder_img <- "media/growing-plant.png"  # image de secours
-#   
-#   # Si le DOI est manquant ou vide, renvoyer directement le placeholder
-#   if (is.na(doi_x) || doi_x == "") {
-#     return(
-#       HTML(glue(
-#         '<a href="{placeholder_url}" target="_blank">
-#            <img src="{placeholder_img}" width="64" height="64">
-#          </a>'
-#       ))
-#     )
-#   }
-#   
-#   # Sinon, on tente de récupérer les données Altmetrics
-#   out <- tryCatch({
-#     data <- altmetric_data(altmetrics(doi = doi_x, apikey = ""))
-#     url  <- data$details_url
-#     img  <- data$images$medium
-#     
-#     HTML(glue(
-#       '<a href="{url}" target="_blank">
-#          <img src="{img}" width="64" height="64">
-#        </a>'
-#     ))
-#   }, error = function(e) {
-#     # Ne rien afficher ni interrompre le script en cas d'erreur,
-#     # simplement renvoyer le placeholder
-#     HTML(glue(
-#       '<a href="{placeholder_url}" target="_blank">
-#          <img src="{placeholder_img}" width="64" height="64">
-#        </a>'
-#     ))
-#   })
-#   
-#   return(out)
-# }
 
 # cosmetic
 ## Dark_mode also for graph (i add image-dark-light.js from https://github.com/quarto-dev/quarto-cli/discussions/5439)

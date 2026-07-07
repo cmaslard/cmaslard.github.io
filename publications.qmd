@@ -17,6 +17,7 @@ knitr:
 include-after-body:
   text: |
     <script type="application/javascript" src="image-dark-light.js"></script>
+    <script type="text/javascript" src="https://embed.altmetric.com/assets/embed.js"></script>
 editor: visual
 editor_options: 
   chunk_output_type: console
