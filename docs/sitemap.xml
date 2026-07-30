@@ -2,15 +2,19 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://cmaslard.xyz/work_projects.html</loc>
-    <lastmod>2026-07-30T11:53:38.542Z</lastmod>
+    <lastmod>2026-07-30T13:10:00.487Z</lastmod>
   </url>
   <url>
     <loc>https://cmaslard.xyz/presentations.html</loc>
     <lastmod>2026-07-30T12:08:46.177Z</lastmod>
   </url>
   <url>
-    <loc>https://cmaslard.xyz/work_projects/phd_soybean_2021_2024.html</loc>
-    <lastmod>2026-07-30T10:47:35.324Z</lastmod>
+    <loc>https://cmaslard.xyz/work_projects/Bd_CASP1.html</loc>
+    <lastmod>2026-07-30T13:18:54.682Z</lastmod>
+  </url>
+  <url>
+    <loc>https://cmaslard.xyz/work_projects/VermeerLab.html</loc>
+    <lastmod>2026-07-30T13:19:20.353Z</lastmod>
   </url>
   <url>
     <loc>https://cmaslard.xyz/work_projects/FABER_2025.html</loc>
@@ -21,76 +25,80 @@
     <lastmod>2025-01-23T12:41:23.000Z</lastmod>
   </url>
   <url>
-    <loc>https://cmaslard.xyz/work_projects/ScBdLR_init_2025.html</loc>
-    <lastmod>2026-07-30T10:47:42.855Z</lastmod>
+    <loc>https://cmaslard.xyz/work_projects/AtPhosphoSHY2.html</loc>
+    <lastmod>2026-07-30T13:05:29.526Z</lastmod>
   </url>
   <url>
-    <loc>https://cmaslard.xyz/teaching/Bioinformatic_tools_mcom_analyse.html</loc>
-    <lastmod>2025-12-05T08:00:25.795Z</lastmod>
-  </url>
-  <url>
-    <loc>https://cmaslard.xyz/index.html</loc>
-    <lastmod>2025-10-27T21:51:23.344Z</lastmod>
-  </url>
-  <url>
-    <loc>https://cmaslard.xyz/advisees.html</loc>
-    <lastmod>2026-07-30T12:08:29.133Z</lastmod>
-  </url>
-  <url>
-    <loc>https://cmaslard.xyz/grants.html</loc>
-    <lastmod>2026-07-30T12:08:42.515Z</lastmod>
-  </url>
-  <url>
-    <loc>https://cmaslard.xyz/tools/macro_angle.html</loc>
-    <lastmod>2024-08-30T16:28:58.000Z</lastmod>
-  </url>
-  <url>
-    <loc>https://cmaslard.xyz/tools/DeepPlate.html</loc>
-    <lastmod>2025-11-07T15:31:43.936Z</lastmod>
-  </url>
-  <url>
-    <loc>https://cmaslard.xyz/perso_projects/strava_report.html</loc>
-    <lastmod>2026-05-26T20:41:12.182Z</lastmod>
-  </url>
-  <url>
-    <loc>https://cmaslard.xyz/perso_projects/analyse_garden_v2.html</loc>
-    <lastmod>2026-07-30T09:23:05.585Z</lastmod>
-  </url>
-  <url>
-    <loc>https://cmaslard.xyz/teaching.html</loc>
-    <lastmod>2025-10-10T11:42:50.936Z</lastmod>
-  </url>
-  <url>
-    <loc>https://cmaslard.xyz/perso_projects/climate_change.html</loc>
-    <lastmod>2026-06-28T13:56:30.794Z</lastmod>
-  </url>
-  <url>
-    <loc>https://cmaslard.xyz/perso_projects/analyse_garden.html</loc>
-    <lastmod>2026-03-31T15:09:40.921Z</lastmod>
-  </url>
-  <url>
-    <loc>https://cmaslard.xyz/tools/deep_learning_segmentation.html</loc>
-    <lastmod>2024-08-30T16:34:38.000Z</lastmod>
-  </url>
-  <url>
-    <loc>https://cmaslard.xyz/tools.html</loc>
-    <lastmod>2024-08-17T22:52:26.000Z</lastmod>
-  </url>
-  <url>
-    <loc>https://cmaslard.xyz/me.html</loc>
-    <lastmod>2025-10-10T13:28:20.553Z</lastmod>
-  </url>
-  <url>
-    <loc>https://cmaslard.xyz/awards.html</loc>
-    <lastmod>2026-07-30T12:08:35.006Z</lastmod>
+    <loc>https://cmaslard.xyz/teaching/2025_plant_root_AI_basics.html</loc>
+    <lastmod>2025-12-05T08:00:33.054Z</lastmod>
   </url>
   <url>
     <loc>https://cmaslard.xyz/publications.html</loc>
     <lastmod>2026-07-30T12:09:12.035Z</lastmod>
   </url>
   <url>
-    <loc>https://cmaslard.xyz/teaching/2025_plant_root_AI_basics.html</loc>
-    <lastmod>2025-12-05T08:00:33.054Z</lastmod>
+    <loc>https://cmaslard.xyz/awards.html</loc>
+    <lastmod>2026-07-30T12:08:35.006Z</lastmod>
+  </url>
+  <url>
+    <loc>https://cmaslard.xyz/me.html</loc>
+    <lastmod>2025-10-10T13:28:20.553Z</lastmod>
+  </url>
+  <url>
+    <loc>https://cmaslard.xyz/tools.html</loc>
+    <lastmod>2024-08-17T22:52:26.000Z</lastmod>
+  </url>
+  <url>
+    <loc>https://cmaslard.xyz/tools/deep_learning_segmentation.html</loc>
+    <lastmod>2024-08-30T16:34:38.000Z</lastmod>
+  </url>
+  <url>
+    <loc>https://cmaslard.xyz/perso_projects/analyse_garden.html</loc>
+    <lastmod>2026-03-31T15:09:40.921Z</lastmod>
+  </url>
+  <url>
+    <loc>https://cmaslard.xyz/perso_projects/climate_change.html</loc>
+    <lastmod>2026-06-28T13:56:30.794Z</lastmod>
+  </url>
+  <url>
+    <loc>https://cmaslard.xyz/teaching.html</loc>
+    <lastmod>2025-10-10T11:42:50.936Z</lastmod>
+  </url>
+  <url>
+    <loc>https://cmaslard.xyz/perso_projects/analyse_garden_v2.html</loc>
+    <lastmod>2026-07-30T09:23:05.585Z</lastmod>
+  </url>
+  <url>
+    <loc>https://cmaslard.xyz/perso_projects/strava_report.html</loc>
+    <lastmod>2026-05-26T20:41:12.182Z</lastmod>
+  </url>
+  <url>
+    <loc>https://cmaslard.xyz/tools/DeepPlate.html</loc>
+    <lastmod>2025-11-07T15:31:43.936Z</lastmod>
+  </url>
+  <url>
+    <loc>https://cmaslard.xyz/tools/macro_angle.html</loc>
+    <lastmod>2024-08-30T16:28:58.000Z</lastmod>
+  </url>
+  <url>
+    <loc>https://cmaslard.xyz/grants.html</loc>
+    <lastmod>2026-07-30T12:08:42.515Z</lastmod>
+  </url>
+  <url>
+    <loc>https://cmaslard.xyz/advisees.html</loc>
+    <lastmod>2026-07-30T12:08:29.133Z</lastmod>
+  </url>
+  <url>
+    <loc>https://cmaslard.xyz/index.html</loc>
+    <lastmod>2025-10-27T21:51:23.344Z</lastmod>
+  </url>
+  <url>
+    <loc>https://cmaslard.xyz/teaching/Bioinformatic_tools_mcom_analyse.html</loc>
+    <lastmod>2025-12-05T08:00:25.795Z</lastmod>
+  </url>
+  <url>
+    <loc>https://cmaslard.xyz/work_projects/ScBdLR_init_2025.html</loc>
+    <lastmod>2026-07-30T10:47:42.855Z</lastmod>
   </url>
   <url>
     <loc>https://cmaslard.xyz/work_projects/PeaSulf_2025.html</loc>
@@ -102,11 +110,15 @@
   </url>
   <url>
     <loc>https://cmaslard.xyz/work_projects/DeepPlate_analyse.html</loc>
-    <lastmod>2026-02-11T13:31:43.300Z</lastmod>
+    <lastmod>2026-07-30T12:27:42.187Z</lastmod>
+  </url>
+  <url>
+    <loc>https://cmaslard.xyz/work_projects/phd_soybean_2021_2024.html</loc>
+    <lastmod>2026-07-30T10:47:35.324Z</lastmod>
   </url>
   <url>
     <loc>https://cmaslard.xyz/work_projects/Bd_abiotic_stress_APP_2026.html</loc>
-    <lastmod>2026-03-31T15:52:10.586Z</lastmod>
+    <lastmod>2026-07-30T13:05:29.433Z</lastmod>
   </url>
   <url>
     <loc>https://cmaslard.xyz/perso_projects.html</loc>

@@ -1,0 +1,20 @@
+---
+title: "VermeerLab"
+subtitle: "Internal Shiny app portal of the VermeerLab, giving lab members quick access to shared tools and resources"
+format:
+  html:
+    code-fold: true
+editor: visual
+author: Corentin Maslard
+date: 2026-07-30
+dock-url: "https://private-vermeerlab.cmaslard.xyz/"
+dock-order: 0
+categories: [work, VermeerLab, Shiny, UniNe]
+editor_options:
+  chunk_output_type: console
+image: "media/VermeerLab/logo.png"
+---
+
+[You can access the lab's private Shiny app via this link](https://private-vermeerlab.cmaslard.xyz/). Access is restricted (Cloudflare Access). Use your authorized email to receive a one-time login code. If you don't receive a code within \~60 seconds, your email is likely not allow-listed; please contact me.
+
+This portal centralizes shared Shiny tools and resources used by the VermeerLab.

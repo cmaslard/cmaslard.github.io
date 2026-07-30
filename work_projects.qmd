@@ -32,22 +32,30 @@ show_project_icons <- function(path = "work_projects") {
 
 icon_paths <- show_project_icons()
 
-# Pour chaque icône, on crée un lien vers https://cmaslard.xyz/<nom_du_projet>/
-# en récupérant le nom du dossier (par ex. "ECODIV_2021") grâce à `basename(dirname(ip))`.
+# Chaque icône utilise `dock-url` lorsqu'il est défini dans la page du projet.
+# Sinon, on conserve le lien historique https://cmaslard.xyz/<nom_du_projet>/.
 for (ip in icon_paths) {
   
   # Le dossier où se trouve l'icône, ex. "work_projects/media/ECODIV_2021"
   project_dir <- dirname(ip)
   # Le nom du projet, ex. "ECODIV_2021"
   project_name <- basename(project_dir)
+  project_qmd <- here::here("work_projects", paste0(project_name, ".qmd"))
+  metadata <- tryCatch(
+    rmarkdown::yaml_front_matter(project_qmd),
+    error = function(e) list()
+  )
   
-  # Construit le lien, ex. "https://cmaslard.xyz/ECODIV_2021/"
-  link <- paste0("https://cmaslard.xyz/", project_name, "/")
+  link <- if (!is.null(metadata[["dock-url"]])) {
+    metadata[["dock-url"]]
+  } else {
+    paste0("https://cmaslard.xyz/", project_name, "/")
+  }
   
   # Affichage HTML : <a href="..."><img src="..." /></a>
   cat(sprintf(
-    '<a href="%s"><img src="%s" alt="icon" style="width:32px; margin: 5px;" /></a>\n',
-    link, ip
+    '<a href="%s"><img src="%s" alt="%s shortcut" style="width:32px; margin: 5px;" /></a>\n',
+    link, ip, project_name
   ))
 }
 ```

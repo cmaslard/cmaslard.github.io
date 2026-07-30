@@ -1,0 +1,41 @@
+---
+title: "AtPhosphoSHY2"
+subtitle: "Private workspace for an integrated proteomic and phosphoproteomic analysis in Arabidopsis thaliana"
+format:
+  html:
+    code-fold: true
+editor: visual
+author: Corentin Maslard
+date: 2026-07-30
+dock-url: "https://atphosphoshy2.private.cmaslard.xyz/"
+categories: [work, Proteomics, Phosphoproteomics, Arabidopsis thaliana, R, Quarto, UniNe]
+editor_options:
+  chunk_output_type: console
+image: "media/AtPhosphoSHY2/project.png"
+---
+
+[You can access the private project (code, figures, explanations…) via this link](https://atphosphoshy2.private.cmaslard.xyz/). Access is restricted (Cloudflare Access). Use your authorized email to receive a one-time login code. If you don’t receive a code within \~60 seconds, your email is likely not allow-listed; please contact me.
+
+AtPhosphoSHY2 is a private workspace for the integrated analysis and visualization of proteomic and phosphoproteomic data in *Arabidopsis thaliana*. Experimental details, intermediate results, and biological interpretations are intentionally omitted from this public page while the work remains unpublished.
+
+```{=html}
+<style>
+#logos {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  margin-top: 1em;
+}
+#logos img {
+  height: 80px;
+  width: auto;
+  object-fit: contain;
+}
+</style>
+```
+
+::: {#logos}
+[![](media/AtPhosphoSHY2/snf.png)](https://snf.ch/) [![](media/AtPhosphoSHY2/unine.png)](https://www.unine.ch/)
+:::

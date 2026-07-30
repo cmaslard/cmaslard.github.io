@@ -21,11 +21,14 @@ build_entry <- function(qmd_path) {
 
   href  <- if (!is.null(fm[["dock-url"]])) fm[["dock-url"]] else paste0("https://cmaslard.xyz/", name, "/")
   label <- if (!is.null(fm$title)) fm$title else name
+  order <- if (!is.null(fm[["dock-order"]])) as.numeric(fm[["dock-order"]]) else Inf
 
-  list(label = label, href = href, icon = paste0(path, "/media/", name, "/", icon_files[1]))
+  list(label = label, href = href, icon = paste0(path, "/media/", name, "/", icon_files[1]), order = order)
 }
 
 entries <- Filter(Negate(is.null), lapply(qmd_files, build_entry))
+entries <- entries[order(vapply(entries, `[[`, numeric(1), "order"))]
+entries <- lapply(entries, function(e) { e$order <- NULL; e })
 
 json <- jsonlite::toJSON(entries, auto_unbox = TRUE, pretty = FALSE)
 writeLines(
