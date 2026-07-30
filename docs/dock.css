@@ -1,0 +1,140 @@
+.quarto-navbar-tools {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.cm-dock {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.cm-dock-trigger {
+  background: transparent;
+  border: none;
+  color: #fff;
+  font-size: 1rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.cm-dock-panel {
+  position: absolute;
+  top: 50%;
+  right: calc(100% + 10px);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: rgba(12, 19, 31, 0.95);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-50%) translateX(8px);
+  transition: opacity 0.15s ease, transform 0.15s ease, visibility 0.15s;
+  z-index: 1050;
+}
+
+.cm-dock.open .cm-dock-panel {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(-50%) translateX(0);
+}
+
+.cm-dock-group {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.cm-dock-sep {
+  width: 1px;
+  height: 22px;
+  background: rgba(255, 255, 255, 0.2);
+  margin: 0 2px;
+}
+
+.cm-dock-item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff !important;
+  text-decoration: none !important;
+  transition: transform 0.15s ease, background 0.15s ease;
+}
+
+.cm-dock-item svg,
+.cm-dock-item img {
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+}
+
+.cm-dock-item img {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+}
+
+.cm-dock-item i {
+  font-size: 1rem;
+}
+
+.cm-dock-item:hover,
+.cm-dock-item:focus-visible {
+  transform: translateY(-3px) scale(1.15);
+  background: rgba(255, 255, 255, 0.18);
+}
+
+.cm-dock-item::after {
+  content: attr(data-label);
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%) translateY(-4px);
+  background: rgba(0, 0, 0, 0.85);
+  color: #fff;
+  font-size: 0.7rem;
+  padding: 3px 7px;
+  border-radius: 5px;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.15s ease, transform 0.15s ease;
+}
+
+.cm-dock-item:hover::after,
+.cm-dock-item:focus-visible::after {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+@media (max-width: 575.98px) {
+  .cm-dock-panel {
+    padding: 5px 8px;
+    gap: 3px;
+  }
+
+  .cm-dock-item {
+    width: 28px;
+    height: 28px;
+  }
+
+  .cm-dock-item svg,
+  .cm-dock-item img {
+    width: 15px;
+    height: 15px;
+  }
+
+  .cm-dock-item img {
+    width: 20px;
+    height: 20px;
+  }
+}

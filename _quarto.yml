@@ -95,8 +95,9 @@ format:
     theme:
       light: [cosmo, theme-light.scss]
       dark: [cosmo, theme-dark.scss]
-    css: stripe.css
+    css: [stripe.css, dock.css]
     include-after-body:
       text: |
         <script type="application/javascript" src="/stripe-link.js"></script>
+        <script type="application/javascript" src="/dock.js"></script>
     toc: false
