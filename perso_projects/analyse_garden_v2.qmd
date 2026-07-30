@@ -34,7 +34,7 @@ library(dplyr)
 
 ### Data importation
 
-```{r, dfImport}
+```{r, dfImport, eval=FALSE}
 # df_harvest_price <- read_excel(here::here("perso_projects/media/data_analyse_garden/recolte_total.xlsx")) %>% 
 #   rename("date"=Date_récolte) %>% 
 #   rename("qty"=`Quantité récolté`) %>% 

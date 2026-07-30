@@ -11,7 +11,7 @@ website:
   announcement: 
     icon: info-circle
     dismissable: true
-    content: "Postdoctoral Researcher in Plant Biology | University of Neuchâtel | Always open to new collaborations — feel free to contact me 😉"
+    content: "Postdoctoral Researcher in Plant Biology | University of Neuchâtel | Always open to new collaborations. Feel free to contact me 😉"
     #content: "**Alert** I am available for a postdoctoral position starting in July 2025. Please do not hesitate to contact me for opportunities or collaborations 😉"
     type: danger
     position: below-navbar
@@ -96,4 +96,7 @@ format:
       light: [cosmo, theme-light.scss]
       dark: [cosmo, theme-dark.scss]
     css: stripe.css
+    include-after-body:
+      text: |
+        <script type="application/javascript" src="/stripe-link.js"></script>
     toc: false

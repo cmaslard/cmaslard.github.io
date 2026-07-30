@@ -57,6 +57,7 @@ css <- sprintf(
 '/* Warming stripes -- auto-generated from NASA GISTEMP v4 at last render (%s)
    Baseline 1961-1990 | %d years (%d--%d) */
 footer.footer {
+  position: relative;
   border-top: none !important;
   background-image: %s;
   background-size: 100%% 6px;
@@ -67,6 +68,24 @@ footer.footer {
 
 body.quarto-dark footer.footer {
   background-image: %s;
+}
+
+.climate-stripe-link {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 16px;
+  cursor: pointer;
+}
+
+.climate-stripe-link:hover {
+  outline: 2px solid rgba(0, 0, 0, 0.15);
+  outline-offset: -2px;
+}
+
+body.quarto-dark .climate-stripe-link:hover {
+  outline-color: rgba(255, 255, 255, 0.25);
 }
 ',
   format(Sys.Date(), "%Y-%m-%d"),
