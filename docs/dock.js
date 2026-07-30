@@ -10,6 +10,12 @@
   };
 
   // Edit shortcuts here — each group renders as a cluster separated by a divider.
+  // The "pro" group is generated at render time (see generate_dock_projects.R)
+  // from every work_projects/*.qmd that has a .ico in its media/ folder.
+  var workProjects = (window.CM_DOCK_WORK_PROJECTS || []).map(function (p) {
+    return { label: p.label, href: p.href, img: BASE + p.icon };
+  });
+
   var groups = [
     [
       { label: "Photos", href: "https://photos.cmaslard.xyz/", svg: ICONS.immich },
@@ -17,11 +23,8 @@
       { label: "Jellyseerr", href: "https://naslard.taile58962.ts.net:8443/login", img: BASE + "media/dock/jellyseerr.svg" },
       { label: "Garden Harvest", href: "https://cmaslard.xyz/garden-harvest/", img: BASE + "media/dock/garden-harvest.png" }
     ],
-    [
-      { label: "PhD Soybean", href: "https://phd-soybean-2021-2024.private.cmaslard.xyz/", img: BASE + "work_projects/media/phd_soybean_2021_2024/root.ico" },
-      { label: "SCBDLR", href: "https://scbdlr.private.cmaslard.xyz/", img: BASE + "work_projects/media/ScBdLR_init_2025/image_bg_rm.ico" }
-    ]
-  ];
+    workProjects
+  ].filter(function (items) { return items.length > 0; });
 
   function itemMarkup(item) {
     if (item.svg) return item.svg;
@@ -79,18 +82,29 @@
     trigger.setAttribute("aria-expanded", "false");
     trigger.innerHTML = '<i class="bi bi-grid-3x3-gap-fill"></i>';
 
+    var panel = buildPanel();
     dock.appendChild(trigger);
-    dock.appendChild(buildPanel());
+    dock.appendChild(panel);
     tools.insertBefore(dock, toggle);
 
     var hoverOpen = false;
     var clickOpen = false;
     var closeTimer = null;
 
+    function keepOnScreen() {
+      panel.style.right = "";
+      var rect = panel.getBoundingClientRect();
+      var overflow = 8 - rect.left;
+      if (overflow > 0) {
+        panel.style.right = "calc(100% + 10px - " + overflow + "px)";
+      }
+    }
+
     function sync() {
       var shouldOpen = hoverOpen || clickOpen;
       dock.classList.toggle("open", shouldOpen);
       trigger.setAttribute("aria-expanded", String(shouldOpen));
+      if (shouldOpen) keepOnScreen();
     }
 
     function reset() {
