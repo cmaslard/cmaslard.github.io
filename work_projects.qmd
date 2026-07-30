@@ -20,6 +20,7 @@ show_project_icons <- function(path = "work_projects") {
   
   icon_paths <- sapply(path_icons, function(d) {
     files <- list.files(d, pattern = "\\.ico$", full.names = TRUE)
+    if (length(files) < 1) files <- list.files(d, pattern = "\\.png$", full.names = TRUE)
     if (length(files) < 1) {
       return(NA)
     } else {

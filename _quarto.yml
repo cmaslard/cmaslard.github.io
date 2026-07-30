@@ -98,6 +98,7 @@ format:
     css: [stripe.css, dock.css]
     include-after-body:
       text: |
+        <script type="application/javascript" src="/image-dark-light.js"></script>
         <script type="application/javascript" src="/stripe-link.js"></script>
         <script type="application/javascript" src="/media/dock/work-projects-data.js"></script>
         <script type="application/javascript" src="/dock.js"></script>

@@ -14,9 +14,6 @@ knitr:
   opts_chunk: 
     dev: [svg, darksvg]
     fig.ext: [.-light.svg, .-dark.svg]
-include-after-body:
-  text: |
-    <script type="application/javascript" src="image-dark-light.js"></script>
 editor: visual
 editor_options: 
   chunk_output_type: console

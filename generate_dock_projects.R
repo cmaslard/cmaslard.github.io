@@ -12,7 +12,11 @@ build_entry <- function(qmd_path) {
   fm <- tryCatch(rmarkdown::yaml_front_matter(qmd_path), error = function(e) list())
 
   icon_dir <- here::here(path, "media", name)
-  icon_files <- if (dir.exists(icon_dir)) list.files(icon_dir, pattern = "\\.ico$") else character(0)
+  icon_files <- character(0)
+  if (dir.exists(icon_dir)) {
+    icon_files <- list.files(icon_dir, pattern = "\\.ico$")
+    if (length(icon_files) < 1) icon_files <- list.files(icon_dir, pattern = "\\.png$")
+  }
   if (length(icon_files) < 1) return(NULL)
 
   href  <- if (!is.null(fm[["dock-url"]])) fm[["dock-url"]] else paste0("https://cmaslard.xyz/", name, "/")

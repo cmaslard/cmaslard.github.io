@@ -16,7 +16,10 @@ knitr:
     fig.ext: [.-light.svg, .-dark.svg]
 include-after-body:
   text: |
-    <script type="application/javascript" src="image-dark-light.js"></script>
+    <script type="application/javascript" src="/image-dark-light.js"></script>
+    <script type="application/javascript" src="/stripe-link.js"></script>
+    <script type="application/javascript" src="/media/dock/work-projects-data.js"></script>
+    <script type="application/javascript" src="/dock.js"></script>
     <script type="text/javascript" src="https://embed.altmetric.com/assets/embed.js"></script>
 editor: visual
 editor_options: 
