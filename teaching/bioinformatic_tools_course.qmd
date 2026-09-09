@@ -1,0 +1,20 @@
+---
+title: "Bioinformatics Tools"
+subtitle: "A hands-on course for MSc biology students"
+format:
+  html:
+    code-fold: true
+editor: visual
+author: Corentin Maslard
+date: 2026-09-09
+categories: [UniNE, Bioinformatics, Shell, R, Machine Learning]
+editor_options:
+  chunk_output_type: console
+image: "media/bioinformatic_tools_course/icon.png"
+---
+
+[You can access the teaching through this link](https://bioinformatics-tools-course.cmaslard.xyz/)
+
+This course was created and is taught by [me](https://cmaslard.xyz/me.html) in [Joop Vermeer](https://www.unine.ch/biographie/joop-vermeer)'s lab team. It is the course support for **Bioinformatics Tools**, a practical course for MSc biology students at the [University of Neuchâtel](https://www.unine.ch/), organised into nine sessions that introduce the essential command-line, R, and machine-learning tools used to inspect, analyse, and interpret biological data.
+
+The course follows a deliberately simple and progressive path, with prepared teaching datasets and no long installations, and it draws examples from genomics, microbial ecology, and plant biology. Machine learning is introduced as a tool for answering biological questions rather than as a programming topic in isolation. Sessions cover essential shell commands and biological formats, quality control, sequence similarity and phylogeny, biological tables and visualisation with R, PCA and unsupervised learning, supervised machine learning and evaluation, an introduction to deep learning, and a guided project from question to interpretation.

@@ -23,6 +23,9 @@
       { label: "Jellyseerr", href: "https://naslard.taile58962.ts.net:8443/login", img: BASE + "media/dock/jellyseerr.svg" },
       { label: "Garden Harvest", href: "https://cmaslard.xyz/garden-harvest/", img: BASE + "media/dock/garden-harvest.png" }
     ],
+    [
+      { label: "Bioinformatics Tools course", href: "https://bioinformatics-tools-course.cmaslard.xyz/", img: BASE + "media/dock/bioinformatics-tools-course.png" }
+    ],
     workProjects
   ].filter(function (items) { return items.length > 0; });
 
