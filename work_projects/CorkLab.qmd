@@ -1,0 +1,22 @@
+---
+title: "CorkLab"
+subtitle: "Data explorer portal for the CorkLab, with a public app and a restricted internal workspace"
+format:
+  html:
+    code-fold: true
+editor: visual
+author: Corentin Maslard
+date: 2026-09-10
+dock-url: "https://private-corklab.cmaslard.xyz/"
+categories: [work, CorkLab, Shiny, data explorer]
+editor_options:
+  chunk_output_type: console
+image: "media/CorkLab/logo.png"
+---
+
+Two portals give access to the CorkLab data explorer:
+
+- [Public data explorer](https://corklab.cmaslard.xyz/) — open access.
+- [Private data explorer](https://private-corklab.cmaslard.xyz/) — access restricted (Cloudflare Access). Use your authorized email to receive a one-time login code. If you don't receive a code within \~60 seconds, your email is likely not allow-listed; please contact me.
+
+This is a side project, similar in spirit to the VermeerLab portal: it centralizes shared Shiny tools and resources for exploring the lab's data.
