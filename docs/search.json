@@ -333,7 +333,7 @@
     "href": "work_projects/CorkLab.html",
     "title": "CorkLab",
     "section": "",
-    "text": "Two portals give access to the CorkLab data explorer:\n\nPublic data explorer — open access.\nPrivate data explorer — access restricted (Cloudflare Access). Use your authorized email to receive a one-time login code. If you don’t receive a code within ~60 seconds, your email is likely not allow-listed; please contact me.\n\nThis is a side project, similar in spirit to the VermeerLab portal: it centralizes shared Shiny tools and resources for exploring the lab’s data.\n\n\n\n Back to top"
+    "text": "Two portals give access to the CorkLab data explorer:\n\nPublic data explorer: open access.\nPrivate data explorer: access restricted (Cloudflare Access). Use your authorized email to receive a one-time login code. If you don’t receive a code within ~60 seconds, your email is likely not allow-listed; please contact me.\n\nThis is a side project, similar in spirit to the VermeerLab portal: it centralizes shared Shiny tools and resources for exploring the lab’s data.\n\n\n\n Back to top"
   },
   {
     "objectID": "work_projects/Bd_abiotic_stress_APP_2026.html",
