@@ -19,8 +19,8 @@
   var groups = [
     [
       { label: "Photos", href: "https://photos.cmaslard.xyz/", svg: ICONS.immich },
-      { label: "Jellyfin", href: "https://naslard.taile58962.ts.net/", svg: ICONS.jellyfin },
-      { label: "Jellyseerr", href: "https://naslard.taile58962.ts.net:8443/login", img: BASE + "media/dock/jellyseerr.svg" },
+      { label: "Jellyfin", href: "https://jellyfin.cmaslard.xyz/", svg: ICONS.jellyfin },
+      { label: "Jellyseerr", href: "https://jellyseerr.cmaslard.xyz/", img: BASE + "media/dock/jellyseerr.svg" },
       { label: "Garden Harvest", href: "https://cmaslard.xyz/garden-harvest/", img: BASE + "media/dock/garden-harvest.png" }
     ],
     [
