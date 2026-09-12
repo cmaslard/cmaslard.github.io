@@ -129,6 +129,10 @@
     right: auto;
     width: calc(100vw - 24px);
     max-width: 340px;
+    max-height: calc(100vh - 28px);
+    max-height: calc(100dvh - 28px);
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
     flex-wrap: wrap;
     justify-content: center;
     padding: 10px 12px;
