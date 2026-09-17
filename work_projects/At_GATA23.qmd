@@ -1,0 +1,41 @@
+---
+title: "At GATA23"
+subtitle: "Private analysis workspace for a single-nucleus transcriptomics project in Arabidopsis thaliana"
+format:
+  html:
+    code-fold: true
+editor: visual
+author: Corentin Maslard
+date: 2026-09-17
+dock-url: "https://at-gata23-private.cmaslard.xyz/"
+categories: [work, SnRNAseq, Arabidopsis thaliana, R, Quarto, UniNe]
+editor_options:
+  chunk_output_type: console
+image: "media/At_GATA23/image.png"
+---
+
+[You can access the private project (code, figures, explanations…) via this link](https://at-gata23-private.cmaslard.xyz/). Access is restricted (Cloudflare Access). Use your authorized email to receive a one-time login code. If you don’t receive a code within \~60 seconds, your email is likely not allow-listed; please contact me.
+
+The root endodermis is a highly specialized cell layer that controls the movement of water and solutes between the soil and the vascular tissues. Despite its essential role in root function, the transcriptional identity and heterogeneity of endodermal cells remain poorly characterized in grasses. Here, we investigated endodermal cell identity in *Arabidopsis thaliana* at single-cell resolution. Using a CRISPR-engineered AtGATA23 fluorescent reporter line, endodermis-enriched cells were isolated by fluorescence-activated cell sorting and profiled by single-nuclei RNA sequencing. This approach resolved distinct transcriptional states within the AtGATA23-labelled cell population and enabled the identification of cell-type-specific markers and gene expression programs associated with endodermal identity and differentiation. Experimental details, intermediate results, and biological interpretations are intentionally omitted from this public page while the work remains unpublished.
+
+```{=html}
+<style>
+#logos {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  margin-top: 1em;
+}
+#logos img {
+  height: 80px;
+  width: auto;
+  object-fit: contain;
+}
+</style>
+```
+
+::: {#logos}
+[![](media/At_GATA23/snf.png)](https://snf.ch/) [![](media/At_GATA23/unine.png)](https://www.unine.ch/)
+:::
