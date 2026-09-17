@@ -1,0 +1,41 @@
+---
+title: "At CASP1"
+subtitle: "Private analysis workspace for a single-nucleus transcriptomics project in Arabidopsis thaliana"
+format:
+  html:
+    code-fold: true
+editor: visual
+author: Corentin Maslard
+date: 2026-09-17
+dock-url: "https://at-casp1-private.cmaslard.xyz/"
+categories: [work, SnRNAseq, Arabidopsis thaliana, R, Quarto, UniNe]
+editor_options:
+  chunk_output_type: console
+image: "media/At_CASP1/image.png"
+---
+
+[You can access the private project (code, figures, explanations…) via this link](https://at-casp1-private.cmaslard.xyz/). Access is restricted (Cloudflare Access). Use your authorized email to receive a one-time login code. If you don’t receive a code within \~60 seconds, your email is likely not allow-listed; please contact me.
+
+At CASP1 is a private analysis workspace for a single-nucleus transcriptomics project in *Arabidopsis thaliana*. Experimental details, intermediate results, and biological interpretations are intentionally omitted from this public page while the work remains unpublished.
+
+```{=html}
+<style>
+#logos {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  margin-top: 1em;
+}
+#logos img {
+  height: 80px;
+  width: auto;
+  object-fit: contain;
+}
+</style>
+```
+
+::: {#logos}
+[![](media/At_CASP1/snf.png)](https://snf.ch/) [![](media/At_CASP1/unine.png)](https://www.unine.ch/)
+:::
