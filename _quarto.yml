@@ -95,6 +95,7 @@ format:
     theme:
       light: [cosmo, theme-light.scss]
       dark: [cosmo, theme-dark.scss]
+    respect-user-color-scheme: true
     css: [stripe.css, dock.css]
     include-after-body:
       text: |

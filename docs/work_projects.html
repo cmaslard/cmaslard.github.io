@@ -292,7 +292,8 @@ window.Quarto = {
       }
     };
     const authorPrefersDark = false;
-    const darkModeDefault = authorPrefersDark;
+    const queryPrefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+    const darkModeDefault = queryPrefersDark.matches;
       document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
       document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
     let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
@@ -305,6 +306,14 @@ window.Quarto = {
       toggleGiscusIfUsed(toAlternate, darkModeDefault);
       window.dispatchEvent(new Event('resize'));
     };
+    queryPrefersDark.addEventListener("change", e => {
+      if(window.localStorage.getItem("quarto-color-scheme") !== null)
+        return;
+      const alternate = e.matches
+      toggleColorMode(alternate);
+      localAlternateSentinel = e.matches ? 'alternate' : 'default'; // this is used alongside local storage!
+      toggleGiscusIfUsed(alternate, darkModeDefault);
+    });
     // Switch to dark mode if need be
     if (hasAlternateSentinel()) {
       toggleColorMode(true);
@@ -464,7 +473,7 @@ window.Quarto = {
   </div>
 </div>
 <div class="list quarto-listing-default">
-<div class="quarto-post image-left" data-index="0" data-categories="d29yayUyQ0ltYWdlJTJDRGVlcCUyMGxlYXJuaW5nJTJDQ2l0aXplbiUyMHNjaWVuY2UlMkNFZHVjYXRpb24lMkNPcGVuJTIwc2NpZW5jZSUyQ1B5dGhvbiUyQ1VuaU5l" data-listing-date-sort="1789682400000" data-listing-file-modified-sort="1789751820004" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="250">
+<div class="quarto-post image-left" data-index="0" data-categories="d29yayUyQ0ltYWdlJTJDRGVlcCUyMGxlYXJuaW5nJTJDQ2l0aXplbiUyMHNjaWVuY2UlMkNFZHVjYXRpb24lMkNPcGVuJTIwc2NpZW5jZSUyQ1B5dGhvbiUyQ1VuaU5l" data-listing-date-sort="1789682400000" data-listing-file-modified-sort="1789752329199" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="246">
 <div class="thumbnail"><a href="./work_projects/AnnoTrain.html" class="no-external">
 
 <img loading="lazy" src="./work_projects/media/AnnoTrain/preview.png" class="thumbnail-image" style="height: 3cm;">

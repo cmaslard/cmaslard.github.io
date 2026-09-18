@@ -292,7 +292,8 @@ window.Quarto = {
       }
     };
     const authorPrefersDark = false;
-    const darkModeDefault = authorPrefersDark;
+    const queryPrefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+    const darkModeDefault = queryPrefersDark.matches;
       document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
       document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
     let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
@@ -305,6 +306,14 @@ window.Quarto = {
       toggleGiscusIfUsed(toAlternate, darkModeDefault);
       window.dispatchEvent(new Event('resize'));
     };
+    queryPrefersDark.addEventListener("change", e => {
+      if(window.localStorage.getItem("quarto-color-scheme") !== null)
+        return;
+      const alternate = e.matches
+      toggleColorMode(alternate);
+      localAlternateSentinel = e.matches ? 'alternate' : 'default'; // this is used alongside local storage!
+      toggleGiscusIfUsed(alternate, darkModeDefault);
+    });
     // Switch to dark mode if need be
     if (hasAlternateSentinel()) {
       toggleColorMode(true);
@@ -412,7 +421,7 @@ window.Quarto = {
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(4)</span></div><div class="category" data-category="QXJhYmlkb3BzaXM=">Arabidopsis <span class="quarto-category-count">(1)</span></div><div class="category" data-category="QnJhY2h5cG9kaXVt">Brachypodium <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Q2l0aXplbiUyMHNjaWVuY2U=">Citizen science <span class="quarto-category-count">(1)</span></div><div class="category" data-category="RGVlcCUyMGxlYXJuaW5n">Deep learning <span class="quarto-category-count">(3)</span></div><div class="category" data-category="RWR1Y2F0aW9u">Education <span class="quarto-category-count">(1)</span></div><div class="category" data-category="RmFzdEFQSQ==">FastAPI <span class="quarto-category-count">(1)</span></div><div class="category" data-category="RmlqaQ==">Fiji <span class="quarto-category-count">(1)</span></div><div class="category" data-category="SW1hZ2U=">Image <span class="quarto-category-count">(4)</span></div><div class="category" data-category="SmF2YQ==">Java <span class="quarto-category-count">(1)</span></div><div class="category" data-category="T3BlbiUyMHNjaWVuY2U=">Open science <span class="quarto-category-count">(1)</span></div><div class="category" data-category="UHl0aG9u">Python <span class="quarto-category-count">(3)</span></div><div class="category" data-category="Um9vdA==">Root <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Um9vdCUyMGFyY2hpdGVjdHVyZQ==">Root architecture <span class="quarto-category-count">(1)</span></div><div class="category" data-category="VW5pTmU=">UniNe <span class="quarto-category-count">(2)</span></div></div></div>
+    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(4)</span></div><div class="category" data-category="QXJhYmlkb3BzaXM=">Arabidopsis <span class="quarto-category-count">(1)</span></div><div class="category" data-category="QnJhY2h5cG9kaXVt">Brachypodium <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Q2l0aXplbiUyMHNjaWVuY2U=">Citizen science <span class="quarto-category-count">(1)</span></div><div class="category" data-category="RGVlcCUyMGxlYXJuaW5n">Deep learning <span class="quarto-category-count">(3)</span></div><div class="category" data-category="RWR1Y2F0aW9u">Education <span class="quarto-category-count">(1)</span></div><div class="category" data-category="RmlqaQ==">Fiji <span class="quarto-category-count">(1)</span></div><div class="category" data-category="SW1hZ2U=">Image <span class="quarto-category-count">(4)</span></div><div class="category" data-category="SmF2YQ==">Java <span class="quarto-category-count">(1)</span></div><div class="category" data-category="T3BlbiUyMHNjaWVuY2U=">Open science <span class="quarto-category-count">(1)</span></div><div class="category" data-category="UHl0aG9u">Python <span class="quarto-category-count">(3)</span></div><div class="category" data-category="Um9vdA==">Root <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Um9vdCUyMGFyY2hpdGVjdHVyZQ==">Root architecture <span class="quarto-category-count">(1)</span></div><div class="category" data-category="VW5pTmU=">UniNe <span class="quarto-category-count">(2)</span></div></div></div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
@@ -463,7 +472,7 @@ window.Quarto = {
   </div>
 </div>
 <div class="list quarto-listing-default">
-<div class="quarto-post image-left" data-index="0" data-categories="SW1hZ2UlMkNEZWVwJTIwbGVhcm5pbmclMkNDaXRpemVuJTIwc2NpZW5jZSUyQ0VkdWNhdGlvbiUyQ09wZW4lMjBzY2llbmNlJTJDUHl0aG9uJTJDRmFzdEFQSSUyQ1VuaU5l" data-listing-date-sort="1789682400000" data-listing-file-modified-sort="1789751642268" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="298">
+<div class="quarto-post image-left" data-index="0" data-categories="SW1hZ2UlMkNEZWVwJTIwbGVhcm5pbmclMkNDaXRpemVuJTIwc2NpZW5jZSUyQ0VkdWNhdGlvbiUyQ09wZW4lMjBzY2llbmNlJTJDUHl0aG9uJTJDVW5pTmU=" data-listing-date-sort="1789682400000" data-listing-file-modified-sort="1789752280042" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="296">
 <div class="thumbnail"><a href="./tools/AnnoTrain.html" class="no-external">
 
 <img loading="lazy" src="./tools/media/AnnoTrain/preview.png" class="thumbnail-image" style="height: 3cm;">
@@ -490,13 +499,11 @@ window.Quarto = {
 
 <div class="listing-category" onclick="window.quartoListingCategory('UHl0aG9u'); return false;">Python</div>
 
-<div class="listing-category" onclick="window.quartoListingCategory('RmFzdEFQSQ=='); return false;">FastAPI</div>
-
 <div class="listing-category" onclick="window.quartoListingCategory('VW5pTmU='); return false;">UniNe</div>
 
 </div>
 <div class="delink listing-description"><a href="./tools/AnnoTrain.html" class="no-external">
-<p>AnnoTrain is an open platform connecting human annotation, dataset creation, model training, evaluation, and sharing into a single understandable workflow. It is designed both as a research tool — letting scientists turn raw images into quality-controlled datasets and trained models — and as a pedagogical platform that makes the complete deep-learning pipeline tangible for students and citizen scientists.</p>
+<p>AnnoTrain is an open platform connecting human annotation, dataset creation, model training, evaluation, and sharing into a single understandable workflow. It is designed both as a research tool, letting scientists turn raw images into quality-controlled datasets and trained models, and as a pedagogical platform that makes the complete deep-learning pipeline tangible for students and citizen scientists.</p>
 </a></div>
 </div>
 <div class="metadata">

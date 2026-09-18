@@ -234,7 +234,8 @@ gtag('config', 'G-10GPM4RSNJ', { 'anonymize_ip': true});
       }
     };
     const authorPrefersDark = false;
-    const darkModeDefault = authorPrefersDark;
+    const queryPrefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+    const darkModeDefault = queryPrefersDark.matches;
       document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
       document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
     let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
@@ -247,6 +248,14 @@ gtag('config', 'G-10GPM4RSNJ', { 'anonymize_ip': true});
       toggleGiscusIfUsed(toAlternate, darkModeDefault);
       window.dispatchEvent(new Event('resize'));
     };
+    queryPrefersDark.addEventListener("change", e => {
+      if(window.localStorage.getItem("quarto-color-scheme") !== null)
+        return;
+      const alternate = e.matches
+      toggleColorMode(alternate);
+      localAlternateSentinel = e.matches ? 'alternate' : 'default'; // this is used alongside local storage!
+      toggleGiscusIfUsed(alternate, darkModeDefault);
+    });
     // Switch to dark mode if need be
     if (hasAlternateSentinel()) {
       toggleColorMode(true);
@@ -369,7 +378,6 @@ gtag('config', 'G-10GPM4RSNJ', { 'anonymize_ip': true});
     <div class="quarto-category">Education</div>
     <div class="quarto-category">Open science</div>
     <div class="quarto-category">Python</div>
-    <div class="quarto-category">FastAPI</div>
     <div class="quarto-category">UniNe</div>
   </div>
   </div>
@@ -398,7 +406,7 @@ gtag('config', 'G-10GPM4RSNJ', { 'anonymize_ip': true});
 <div>
   <div class="abstract">
     <div class="block-title">Abstract</div>
-    AnnoTrain is an open platform connecting human annotation, dataset creation, model training, evaluation, and sharing into a single understandable workflow. It is designed both as a research tool — letting scientists turn raw images into quality-controlled datasets and trained models — and as a pedagogical platform that makes the complete deep-learning pipeline tangible for students and citizen scientists.
+    AnnoTrain is an open platform connecting human annotation, dataset creation, model training, evaluation, and sharing into a single understandable workflow. It is designed both as a research tool, letting scientists turn raw images into quality-controlled datasets and trained models, and as a pedagogical platform that makes the complete deep-learning pipeline tangible for students and citizen scientists.
   </div>
 </div>
 
@@ -413,12 +421,12 @@ gtag('config', 'G-10GPM4RSNJ', { 'anonymize_ip': true});
 <blockquote class="blockquote">
 <p>Human annotation → Dataset → Training → Evaluation → Model → Sharing → Reuse → Improvement</p>
 </blockquote>
-<p>A researcher can create a project, share a simple annotation link, collect annotations from students, colleagues, or citizen scientists, build a quality-controlled dataset, and optionally train and evaluate a deep-learning model — inspecting its predictions, correcting its errors, and publishing the resulting dataset and model. A contributor’s experience stays as simple as: <strong>open link → annotate → next image</strong>, no account required.</p>
+<p>A researcher can create a project, share a simple annotation link, collect annotations from students, colleagues, or citizen scientists, build a quality-controlled dataset, and optionally train and evaluate a deep-learning model, inspecting its predictions, correcting its errors, and publishing the resulting dataset and model. A contributor’s experience stays as simple as: <strong>open link → annotate → next image</strong>, no account required.</p>
 </section>
 <section id="ambition" class="level2">
 <h2 class="anchored" data-anchor-id="ambition">Ambition</h2>
-<p>AnnoTrain is built around four pillars: <strong>participatory annotation, deep learning, education, and open science</strong>. It is not meant to replace specialized annotation tools such as CVAT or Label Studio, but to combine citizen science, scientific annotation, model training, and teaching in one accessible platform — generic enough to support classification, detection, segmentation, point/landmark annotation, and eventually tracking, across domains ranging from camera-trap ecology to plant root imaging and microscopy.</p>
-<p>A first pedagogical prototype is being built for the <em>Bioinformatics Tools</em> MSc course at the University of Neuchâtel (session <em>A First Neural Network</em>, planned for November 2026), where students annotate camera-trap images and directly build the dataset used to train their first neural network. On the research side, <a href="DeepPlate.html">DeepPlate</a> — an existing U-Net segmentation model for plate-based plant phenotyping — is a target early use case for validating human-in-the-loop model improvement inside AnnoTrain.</p>
+<p>AnnoTrain is built around four pillars: <strong>participatory annotation, deep learning, education, and open science</strong>. It is not meant to replace specialized annotation tools such as CVAT or Label Studio, but to combine citizen science, scientific annotation, model training, and teaching in one accessible platform, generic enough to support classification, detection, segmentation, point/landmark annotation, and eventually tracking, across domains ranging from camera-trap ecology to plant root imaging and microscopy.</p>
+<p>A first pedagogical prototype is being built for the <em>Bioinformatics Tools</em> MSc course at the University of Neuchâtel (session <em>A First Neural Network</em>, planned for November 2026), where students annotate camera-trap images and directly build the dataset used to train their first neural network. On the research side, <a href="DeepPlate.html">DeepPlate</a> - an existing U-Net segmentation model for plate-based plant phenotyping - is a target early use case for validating human-in-the-loop model improvement inside AnnoTrain.</p>
 </section>
 <section id="documentation-code" class="level2">
 <h2 class="anchored" data-anchor-id="documentation-code">Documentation &amp; code</h2>

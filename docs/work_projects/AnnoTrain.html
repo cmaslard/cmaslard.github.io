@@ -234,7 +234,8 @@ gtag('config', 'G-10GPM4RSNJ', { 'anonymize_ip': true});
       }
     };
     const authorPrefersDark = false;
-    const darkModeDefault = authorPrefersDark;
+    const queryPrefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+    const darkModeDefault = queryPrefersDark.matches;
       document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
       document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
     let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
@@ -247,6 +248,14 @@ gtag('config', 'G-10GPM4RSNJ', { 'anonymize_ip': true});
       toggleGiscusIfUsed(toAlternate, darkModeDefault);
       window.dispatchEvent(new Event('resize'));
     };
+    queryPrefersDark.addEventListener("change", e => {
+      if(window.localStorage.getItem("quarto-color-scheme") !== null)
+        return;
+      const alternate = e.matches
+      toggleColorMode(alternate);
+      localAlternateSentinel = e.matches ? 'alternate' : 'default'; // this is used alongside local storage!
+      toggleGiscusIfUsed(alternate, darkModeDefault);
+    });
     // Switch to dark mode if need be
     if (hasAlternateSentinel()) {
       toggleColorMode(true);
@@ -401,10 +410,10 @@ gtag('config', 'G-10GPM4RSNJ', { 'anonymize_ip': true});
 
 
 <p>You can find the full project documentation (vision, architecture, annotation types, roadmap) <a href="https://docs.annotrain.cmaslard.xyz/">through this link</a>, the source code <a href="https://github.com/cmaslard/AnnoTrain">at this link</a>, and a shorter overview <a href="https://cmaslard.xyz/tools/AnnoTrain.html">on the tools page</a>.</p>
-<p>AnnoTrain is an open platform for participatory scientific image annotation, deep learning, and education, built around four pillars: <strong>participatory annotation, deep learning, education, and open science</strong>. It connects the full scientific workflow — human annotation, dataset creation, model training, evaluation, sharing, reuse, and improvement — so that researchers can turn raw images into quality-controlled datasets and trained models, while students and other contributors can learn how human annotations become training data and how that data shapes model predictions and performance.</p>
-<p>The platform is designed to make deep learning less of a “black box”: contributors annotate images through a minimal-friction interface (open link → annotate → next image, no account required), and the resulting datasets can train baseline models whose predictions, uncertainty, and errors are then fed back to humans for correction — a human-in-the-loop loop that keeps improving both the dataset and the model over successive versions.</p>
+<p>AnnoTrain is an open platform for participatory scientific image annotation, deep learning, and education, built around four pillars: <strong>participatory annotation, deep learning, education, and open science</strong>. It connects the full scientific workflow, human annotation, dataset creation, model training, evaluation, sharing, reuse, and improvement, so that researchers can turn raw images into quality-controlled datasets and trained models, while students and other contributors can learn how human annotations become training data and how that data shapes model predictions and performance.</p>
+<p>The platform is designed to make deep learning less of a “black box”: contributors annotate images through a minimal-friction interface (open link → annotate → next image, no account required), and the resulting datasets can train baseline models whose predictions, uncertainty, and errors are then fed back to humans for correction, a human-in-the-loop loop that keeps improving both the dataset and the model over successive versions.</p>
 <p>A first pedagogical prototype targets the <em>Bioinformatics Tools</em> MSc course at the University of Neuchâtel (session <em>A First Neural Network</em>, planned for November 2026), where ~40 students annotate camera-trap images and directly build the dataset used to train their first neural network. On the research side, the <a href="https://cmaslard.xyz/tools/DeepPlate.html">DeepPlate</a> segmentation model is a target early use case for validating human-in-the-loop model improvement inside AnnoTrain.</p>
-<p>🚧 AnnoTrain is currently under active early-stage development — see the <a href="https://docs.annotrain.cmaslard.xyz/roadmap/">roadmap</a> for current progress.</p>
+<p>🚧 AnnoTrain is currently under active early-stage development, see the <a href="https://docs.annotrain.cmaslard.xyz/roadmap/">roadmap</a> for current progress.</p>
 
 
 
