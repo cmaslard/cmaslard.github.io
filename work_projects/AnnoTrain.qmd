@@ -1,0 +1,25 @@
+---
+title: "AnnoTrain"
+subtitle: "An open platform for participatory scientific image annotation, deep learning, and education, connecting human annotation, dataset creation, model training and sharing into one understandable workflow"
+format:
+  html:
+    code-fold: true
+editor: visual
+author: Corentin Maslard
+date: 2026-09-18
+dock-url: "https://docs.annotrain.cmaslard.xyz/"
+categories: [work, Image, Deep learning, Citizen science, Education, Open science, Python, UniNe]
+editor_options:
+  chunk_output_type: console
+image: "media/AnnoTrain/preview.png"
+---
+
+You can find the full project documentation (vision, architecture, annotation types, roadmap) [through this link](https://docs.annotrain.cmaslard.xyz/), the source code [at this link](https://github.com/cmaslard/AnnoTrain), and a shorter overview [on the tools page](https://cmaslard.xyz/tools/AnnoTrain.html).
+
+AnnoTrain is an open platform for participatory scientific image annotation, deep learning, and education, built around four pillars: **participatory annotation, deep learning, education, and open science**. It connects the full scientific workflow, human annotation, dataset creation, model training, evaluation, sharing, reuse, and improvement, so that researchers can turn raw images into quality-controlled datasets and trained models, while students and other contributors can learn how human annotations become training data and how that data shapes model predictions and performance.
+
+The platform is designed to make deep learning less of a "black box": contributors annotate images through a minimal-friction interface (open link → annotate → next image, no account required), and the resulting datasets can train baseline models whose predictions, uncertainty, and errors are then fed back to humans for correction, a human-in-the-loop loop that keeps improving both the dataset and the model over successive versions.
+
+A first pedagogical prototype targets the *Bioinformatics Tools* MSc course at the University of Neuchâtel (session *A First Neural Network*, planned for November 2026), where \~40 students annotate camera-trap images and directly build the dataset used to train their first neural network. On the research side, the [DeepPlate](https://cmaslard.xyz/tools/DeepPlate.html) segmentation model is a target early use case for validating human-in-the-loop model improvement inside AnnoTrain.
+
+🚧 AnnoTrain is currently under active early-stage development, see the [roadmap](https://docs.annotrain.cmaslard.xyz/roadmap/) for current progress.

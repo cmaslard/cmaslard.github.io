@@ -2,6 +2,7 @@
   {
     "listing": "/work_projects.html",
     "items": [
+      "/work_projects/AnnoTrain.html",
       "/work_projects/At_CASP1.html",
       "/work_projects/At_GATA23.html",
       "/work_projects/CorkLab.html",
@@ -21,6 +22,7 @@
   {
     "listing": "/tools.html",
     "items": [
+      "/tools/AnnoTrain.html",
       "/tools/DeepPlate.html",
       "/tools/macro_angle.html",
       "/tools/deep_learning_segmentation.html"
