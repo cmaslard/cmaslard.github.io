@@ -26,7 +26,9 @@ AnnoTrain is built around four pillars: **participatory annotation, deep learnin
 
 A first pedagogical prototype is being built for the *Bioinformatics Tools* MSc course at the University of Neuchâtel (session *A First Neural Network*, planned for November 2026), where students annotate camera-trap images and directly build the dataset used to train their first neural network. On the research side, [DeepPlate](DeepPlate.html) - an existing U-Net segmentation model for plate-based plant phenotyping - is a target early use case for validating human-in-the-loop model improvement inside AnnoTrain.
 
-## Documentation & code
+## Application, documentation & code
+
+🚀 Application: [annotrain.cmaslard.xyz](https://annotrain.cmaslard.xyz/)
 
 📖 Full documentation (vision, architecture, annotation types, roadmap): [docs.annotrain.cmaslard.xyz](https://docs.annotrain.cmaslard.xyz/)
 
