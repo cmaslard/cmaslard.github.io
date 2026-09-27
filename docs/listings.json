@@ -30,6 +30,7 @@
   {
     "listing": "/tools.html",
     "items": [
+      "/tools/qrcode.html",
       "/tools/AnnoTrain.html",
       "/tools/DeepPlate.html",
       "/tools/macro_angle.html",

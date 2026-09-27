@@ -1,0 +1,121 @@
+---
+title: "QR code generator"
+subtitle: "Turn a URL or any text into a QR code and download it as PNG or SVG, directly in your browser"
+format: html
+author: Corentin Maslard
+date: 2026-09-27
+image: "media/qrcode/preview.png"
+categories: [QR code, JavaScript, Web tool]
+resources:
+  - media/qrcode/qrcode.js
+  - media/qrcode/qrcode-app.js
+  - media/qrcode/jsQR.js
+---
+
+Paste a URL or some text: the QR code updates as you type, can carry a logo in its centre, and can be downloaded as a PNG image or as a scalable SVG. Everything happens in your browser, nothing is sent to a server.
+
+```{=html}
+<style>
+  .qr-app .form-label { font-weight: 500; margin-bottom: .25rem; }
+  .qr-app textarea { font-family: var(--bs-font-monospace); font-size: .9rem; }
+  .qr-app .form-range { margin-top: .4rem; }
+  .qr-preview {
+    display: flex; align-items: center; justify-content: center;
+    width: 100%; max-width: 320px; aspect-ratio: 1; margin: 0 auto .75rem;
+    border: 1px solid var(--bs-border-color); border-radius: .5rem; overflow: hidden;
+  }
+  .qr-preview svg { display: block; width: 100%; height: auto; }
+  .qr-preview.qr-checker {
+    background: repeating-conic-gradient(#d9d9d9 0% 25%, #ffffff 0% 50%) 50% / 16px 16px;
+  }
+  .qr-placeholder { margin: 0; padding: 1.5rem; text-align: center; opacity: .7; }
+  .qr-info { text-align: center; font-size: .85rem; opacity: .75; min-height: 1.3em; }
+  .qr-scan-status { text-align: center; font-size: .85rem; margin: -.5rem 0 .75rem; }
+  .qr-app [hidden] { display: none !important; }
+  /* the dark theme gives the file button a light background with white text */
+  .qr-app input[type=file]::file-selector-button { color: inherit; background-color: rgba(127, 127, 127, .15); }
+  .qr-app input[type=file]:hover:not(:disabled)::file-selector-button { background-color: rgba(127, 127, 127, .3); }
+</style>
+
+<div class="qr-app grid mt-3 mb-4">
+  <div class="g-col-12 g-col-md-7">
+    <label for="qr-text" class="form-label">URL or text</label>
+    <textarea id="qr-text" class="form-control" rows="4" spellcheck="false" autocomplete="off">https://cmaslard.xyz</textarea>
+
+    <div class="grid mt-3" style="--bs-gap: 1rem;">
+      <div class="g-col-12 g-col-sm-6">
+        <label for="qr-ecc" class="form-label">Error correction</label>
+        <select id="qr-ecc" class="form-select">
+          <option value="L">Low · ~7%</option>
+          <option value="M" selected>Medium · ~15%</option>
+          <option value="Q">Quartile · ~25%</option>
+          <option value="H">High · ~30%</option>
+        </select>
+      </div>
+      <div class="g-col-12 g-col-sm-6">
+        <label class="form-label d-block">Colours</label>
+        <div class="d-flex align-items-center gap-2 flex-wrap">
+          <input type="color" id="qr-fg" class="form-control form-control-color" value="#000000" title="Code colour" aria-label="Code colour">
+          <input type="color" id="qr-bg" class="form-control form-control-color" value="#ffffff" title="Background colour" aria-label="Background colour">
+          <div class="form-check ms-1 mb-0">
+            <input class="form-check-input" type="checkbox" id="qr-transparent">
+            <label class="form-check-label" for="qr-transparent">Transparent</label>
+          </div>
+        </div>
+      </div>
+      <div class="g-col-12 g-col-sm-6">
+        <label for="qr-size" class="form-label">Image size: <span id="qr-size-out"></span></label>
+        <input type="range" id="qr-size" class="form-range" min="128" max="2048" step="32" value="1024">
+      </div>
+      <div class="g-col-12 g-col-sm-6">
+        <label for="qr-margin" class="form-label">Margin: <span id="qr-margin-out"></span></label>
+        <input type="range" id="qr-margin" class="form-range" min="0" max="10" step="1" value="4">
+      </div>
+      <div class="g-col-12">
+        <label for="qr-logo" class="form-label">Logo <span class="fw-normal opacity-75">(optional)</span></label>
+        <div class="d-flex gap-2">
+          <input type="file" id="qr-logo" class="form-control form-control-sm" accept="image/png,image/jpeg,image/svg+xml,image/webp,image/gif">
+          <button type="button" id="qr-logo-remove" class="btn btn-outline-danger btn-sm" hidden>Remove</button>
+        </div>
+        <div id="qr-logo-error" class="text-danger small mt-1"></div>
+      </div>
+      <div class="g-col-12 g-col-sm-6" data-logo-option hidden>
+        <label for="qr-logo-size" class="form-label">Logo size: <span id="qr-logo-size-out"></span></label>
+        <input type="range" id="qr-logo-size" class="form-range" title="Logo width, as a share of the code width" min="10" max="30" step="1" value="20">
+      </div>
+      <div class="g-col-12 g-col-sm-6" data-logo-option hidden>
+        <div class="form-check mt-sm-4">
+          <input class="form-check-input" type="checkbox" id="qr-logo-clear" checked>
+          <label class="form-check-label" for="qr-logo-clear">Clear space behind the logo</label>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="g-col-12 g-col-md-5">
+    <div id="qr-preview" class="qr-preview" aria-live="polite"></div>
+    <p id="qr-info" class="qr-info"></p>
+    <div id="qr-scan"></div>
+    <div id="qr-warn"></div>
+    <div class="d-flex flex-wrap justify-content-center gap-2">
+      <button type="button" id="qr-png" class="btn btn-primary btn-sm"><i class="bi bi-download"></i> PNG</button>
+      <button type="button" id="qr-svg" class="btn btn-primary btn-sm"><i class="bi bi-download"></i> SVG</button>
+      <button type="button" id="qr-copy" class="btn btn-outline-primary btn-sm"><i class="bi bi-clipboard"></i> Copy image</button>
+    </div>
+  </div>
+</div>
+
+<script src="media/qrcode/qrcode.js"></script>
+<script src="media/qrcode/qrcode-app.js"></script>
+```
+
+## About
+
+- **Private**: the QR code is computed entirely in your browser. Nothing you type is sent to a server or stored.
+- **Static and permanent**: the content is encoded directly in the image. The code does not go through any redirect service, never expires, and keeps working even if this page disappears, as long as the encoded URL itself stays online.
+- **Formats**: SVG is a vector image that scales to any size without blurring, making it ideal for posters and print; PNG works everywhere (slides, documents, messages).
+- **Error correction**: higher levels make the code more robust to damage, dirt or a logo placed on top, at the cost of a denser code. **Medium** is a good default; use **High** if you plan to cover part of it.
+- **Logo**: the image stays on your computer (it is never uploaded) and is embedded in the downloaded files. It hides part of the code, which scanners rebuild thanks to error correction, so **High** is selected automatically and the page checks that the code still decodes. Keep the logo small and always test-scan with a phone before printing.
+- **Scanning tips**: keep dark modules on a light background, with good contrast and a margin of about 4 modules around the code.
+
+QR codes are generated with [qrcode-generator](https://github.com/kazuhikoarase/qrcode-generator) by Kazuhiko Arase (MIT licence), and checked with [jsQR](https://github.com/cozmo/jsQR) (Apache 2.0 licence). "QR Code" is a registered trademark of DENSO WAVE INCORPORATED.
