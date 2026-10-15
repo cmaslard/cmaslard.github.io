@@ -1,18 +1,18 @@
 ---
-title: "Climate Change Dashboard"
-subtitle: "Key global warming indicators tracked with historical and up-to-date scientific data"
+title: "Climate & Biodiversity Dashboard"
+subtitle: "Key indicators of global warming and biodiversity loss, tracked with historical and up-to-date scientific data"
 format:
   html:
     page-layout: full
     code-fold: true
 author: Corentin Maslard
 date: 2026-06-28
-categories: [Climate, Environment, Data, Perso]
+categories: [Climate, Biodiversity, Environment, Data, Perso]
 editor_options:
   chunk_output_type: console
 ---
 
-As a biologist working on plant stress responses to heat and drought, understanding the broader trajectory of climate change is directly relevant to my research. This dashboard pulls three canonical climate indicators from major scientific agencies (NOAA, NASA), each updated regularly at their source. Data is fetched at render time, so this page reflects the most recent available records.
+As a biologist working on plant stress responses to heat and drought, understanding the broader trajectory of climate change is directly relevant to my research. This dashboard pulls canonical climate indicators from major scientific agencies (NOAA, NASA), alongside the main indicators of biodiversity loss (IUCN Red List, Living Planet Index), each updated regularly at their source. Data is fetched at render time, so this page reflects the most recent available records.
 
 ::: callout-note
 ## Data sources
@@ -20,12 +20,35 @@ As a biologist working on plant stress responses to heat and drought, understand
 -   **CO2**: [NOAA Global Monitoring Laboratory](https://gml.noaa.gov/ccgg/trends/) -- Mauna Loa Observatory, monthly mean atmospheric CO2 since 1958
 -   **Temperature**: [NASA GISTEMP v4](https://data.giss.nasa.gov/gistemp/) -- Global Land-Ocean Temperature Index, annual anomaly vs. 1951--1980 baseline
 -   **Warming stripes**: methodology from [Ed Hawkins](https://showyourstripes.info/s) (University of Reading), norm period 1961--1990
+-   **Biodiversity**: [IUCN Red List](https://www.iucnredlist.org/) and [Living Planet Index](https://www.livingplanetindex.org/) (WWF / ZSL), via [Our World in Data](https://ourworldindata.org/biodiversity)
+-   **Extinct species list**: [Wikidata](https://www.wikidata.org/) -- taxa whose IUCN status is *Extinct* or *Extinct in the Wild*
 :::
+
+```{=html}
+<style>
+/* Dark mode: plotly and DT default to dark ink on transparent backgrounds */
+body.quarto-dark .js-plotly-plot .main-svg text:not(.annotation-text) { fill: #e6e6e6 !important; }
+body.quarto-dark .js-plotly-plot .legend .bg,
+body.quarto-dark .js-plotly-plot .hoverlayer .hovertext path { fill: rgba(24, 24, 24, 0.85) !important; }
+body.quarto-dark .js-plotly-plot .gridlayer path { stroke: #3a3a3a !important; }
+body.quarto-dark .dataTables_wrapper,
+body.quarto-dark .dataTables_wrapper table.dataTable td,
+body.quarto-dark .dataTables_wrapper table.dataTable th,
+body.quarto-dark .dataTables_wrapper .dataTables_info,
+body.quarto-dark .dataTables_wrapper .dataTables_length,
+body.quarto-dark .dataTables_wrapper .dataTables_filter,
+body.quarto-dark .dataTables_wrapper .dataTables_paginate .paginate_button { color: #e6e6e6 !important; }
+body.quarto-dark .dataTables_wrapper input,
+body.quarto-dark .dataTables_wrapper select { background: #222; color: #e6e6e6; border: 1px solid #555; }
+</style>
+```
 
 ```{r setup, echo=FALSE, warning=FALSE, message=FALSE}
 library(readr)
 library(dplyr)
 library(plotly)
+library(httr)
+library(DT)
 ```
 
 ```{r data_load, echo=FALSE, warning=FALSE, message=FALSE}
@@ -53,6 +76,100 @@ temp <- tryCatch({
   # Re-centre to 1961-1990 norm for warming stripes
   ref_mean <- df |> filter(year >= 1961, year <= 1990) |> pull(anomaly) |> mean(na.rm = TRUE)
   df |> mutate(anomaly_stripes = anomaly - ref_mean)
+}, error = function(e) NULL)
+```
+
+```{r data_load_biodiv, echo=FALSE, warning=FALSE, message=FALSE}
+# ----- Biodiversity: IUCN Red List & Living Planet Index via Our World in Data -----
+owid <- function(slug) {
+  read_csv(paste0("https://ourworldindata.org/grapher/", slug,
+                  ".csv?v=1&csvType=full&useColumnShortNames=true"),
+           show_col_types = FALSE)
+}
+
+lpi <- tryCatch(owid("global-living-planet-index") |> filter(entity == "World"),
+                error = function(e) NULL)
+
+rli <- tryCatch({
+  df <- owid("red-list-index") |> filter(entity == "World")
+  df |> mutate(rli = df[[ncol(df)]]) |> select(year, rli)
+}, error = function(e) NULL)
+
+threatened <- tryCatch({
+  thr <- owid("number-species-threatened")
+  evl <- owid("number-species-evaluated-iucn")
+  inner_join(thr, evl, by = c("entity", "year")) |>
+    filter(year == max(year))
+}, error = function(e) NULL)
+threatened_all <- if (!is.null(threatened)) filter(threatened, entity == "All groups") else NULL
+if (!is.null(threatened)) {
+  threatened <- threatened |>
+    filter(!grepl("^All ", entity), threatened_species > 0) |>
+    mutate(share = round(100 * threatened_species / evaluated_species)) |>
+    arrange(threatened_species)
+}
+
+extinct <- tryCatch(owid("extinct-species-since-1500") |> filter(year == max(year)),
+                    error = function(e) NULL)
+extinct_all <- if (!is.null(extinct)) filter(extinct, entity == "All species") else NULL
+if (!is.null(extinct)) {
+  extinct <- extinct |>
+    filter(entity != "All species", ex + ew > 0) |>
+    arrange(ex + ew)
+}
+
+# ----- Extinct species list: Wikidata (IUCN status Extinct / Extinct in the Wild) -----
+wikidata <- function(query) {
+  res <- GET("https://query.wikidata.org/sparql",
+             query = list(query = query),
+             add_headers(Accept = "text/csv",
+                         `User-Agent` = "cmaslard-site/1.0 (https://cmaslard.xyz)"),
+             timeout(90))
+  stop_for_status(res)
+  read_csv(content(res, as = "text", encoding = "UTF-8"), show_col_types = FALSE)
+}
+
+# Groups in priority order: an item may match several ancestors (e.g. birds are within Reptilia)
+group_levels <- c("Mammals", "Birds", "Reptiles", "Amphibians", "Fishes", "Insects",
+                  "Arachnids", "Crustaceans", "Molluscs", "Other animals", "Plants", "Fungi", "Other")
+
+extinct_list <- tryCatch({
+  species <- wikidata('
+    SELECT ?item ?species ?common ?status ?iucn (MIN(YEAR(?d)) AS ?year) WHERE {
+      VALUES ?status { wd:Q237350 wd:Q239509 }
+      ?item wdt:P141 ?status ; wdt:P225 ?species .
+      OPTIONAL { ?item rdfs:label ?common FILTER(LANG(?common) = "en") }
+      OPTIONAL { ?item wdt:P627 ?iucn }
+      OPTIONAL { ?item wdt:P8556|wdt:P582 ?d }
+    } GROUP BY ?item ?species ?common ?status ?iucn')
+
+  groups <- wikidata('
+    SELECT ?item ?group WHERE {
+      VALUES ?status { wd:Q237350 wd:Q239509 }
+      ?item wdt:P141 ?status .
+      VALUES (?taxon ?group) {
+        (wd:Q7377 "Mammals") (wd:Q5113 "Birds") (wd:Q10811 "Reptiles") (wd:Q10908 "Amphibians")
+        (wd:Q127282 "Fishes") (wd:Q25371 "Fishes") (wd:Q1390 "Insects") (wd:Q1358 "Arachnids")
+        (wd:Q25364 "Crustaceans") (wd:Q25326 "Molluscs") (wd:Q729 "Other animals")
+        (wd:Q756 "Plants") (wd:Q764 "Fungi") }
+      ?item wdt:P171+ ?taxon .
+    }') |>
+    mutate(rank = match(group, group_levels)) |>
+    group_by(item) |>
+    slice_min(rank, n = 1, with_ties = FALSE) |>
+    ungroup() |>
+    select(item, group)
+
+  species |>
+    distinct(item, .keep_all = TRUE) |>
+    left_join(groups, by = "item") |>
+    mutate(
+      group  = factor(coalesce(group, "Other"), levels = group_levels),
+      status = ifelse(grepl("Q239509$", status), "Extinct in the Wild", "Extinct"),
+      common = ifelse(common == species, NA, common),
+      year   = ifelse(year > 1500 & year <= as.integer(format(Sys.Date(), "%Y")), year, NA)
+    ) |>
+    arrange(group, species)
 }, error = function(e) NULL)
 ```
 
@@ -193,6 +310,170 @@ if (!is.null(co2) && !is.null(temp)) {
     )
 } else {
   cat("Could not compute scatter (missing CO2 or temperature data).")
+}
+```
+
+## Biodiversity & Extinctions
+
+Climate change is now one of the main drivers of biodiversity loss, alongside land-use change, overexploitation, pollution and invasive species. The [IUCN Red List](https://www.iucnredlist.org/) classifies species from *Least Concern* to *Extinct*; a species is considered **threatened** when it is *Vulnerable*, *Endangered* or *Critically Endangered*. `r if (!is.null(threatened_all) && !is.null(extinct_all)) paste0("Of the **", format(threatened_all$evaluated_species, big.mark = ","), "** species assessed so far, **", format(threatened_all$threatened_species, big.mark = ","), "** (", round(100 * threatened_all$threatened_species / threatened_all$evaluated_species), "%) are threatened with extinction, and **", format(extinct_all$ex, big.mark = ","), "** are documented as extinct since 1500 (IUCN Red List ", threatened_all$year, ").") else ""`
+
+### Trends over time
+
+The **Living Planet Index** tracks the average change in size of monitored vertebrate populations since 1970 (1 = 1970 level). The **Red List Index** summarises the overall extinction risk of species groups that have been repeatedly assessed (1 = all species *Least Concern*, 0 = all species extinct).
+
+```{r lpi_plot, echo=FALSE, warning=FALSE, message=FALSE}
+if (!is.null(lpi)) {
+  last_lpi <- tail(lpi, 1)
+
+  plot_ly(lpi, x = ~year) |>
+    add_ribbons(ymin = ~ci_low, ymax = ~ci_high,
+                name = "95% confidence interval",
+                fillcolor = "rgba(42,157,143,0.2)", line = list(width = 0),
+                hoverinfo = "skip") |>
+    add_lines(y = ~lpi_final,
+              name = "Living Planet Index",
+              line = list(color = "#2A9D8F", width = 2.5),
+              hovertemplate = "<b>%{x}</b><br>Index: %{y:.2f}<extra></extra>") |>
+    add_annotations(
+      x = last_lpi$year, y = last_lpi$lpi_final,
+      text = paste0("<b>", round(100 * (last_lpi$lpi_final - 1)), "% since 1970</b>"),
+      xanchor = "right", showarrow = TRUE, arrowcolor = "#2A9D8F",
+      ax = -60, ay = -50,
+      font = list(color = "#2A9D8F", size = 13)
+    ) |>
+    layout(
+      title = list(text = "Living Planet Index -- monitored wildlife populations (WWF / ZSL)", x = 0),
+      xaxis = list(title = ""),
+      yaxis = list(title = "Index (1970 = 1)", rangemode = "tozero"),
+      legend = list(x = 0.6, y = 0.95, bgcolor = "rgba(255,255,255,0.7)"),
+      hovermode = "x unified",
+      plot_bgcolor  = "rgba(0,0,0,0)",
+      paper_bgcolor = "rgba(0,0,0,0)"
+    )
+} else {
+  cat("Could not fetch Living Planet Index data.")
+}
+```
+
+```{r rli_plot, echo=FALSE, warning=FALSE, message=FALSE}
+if (!is.null(rli)) {
+  plot_ly(rli, x = ~year, y = ~rli,
+          type = "scatter", mode = "lines+markers",
+          name = "Red List Index",
+          line = list(color = "#E76F51", width = 2.5),
+          marker = list(color = "#E76F51", size = 6),
+          hovertemplate = "<b>%{x}</b><br>Red List Index: %{y:.3f}<extra></extra>") |>
+    layout(
+      title = list(text = "Red List Index -- global extinction risk (IUCN, SDG 15.5.1)", x = 0),
+      xaxis = list(title = ""),
+      yaxis = list(title = "Red List Index (1 = no extinction risk)"),
+      showlegend = FALSE,
+      hovermode = "x unified",
+      plot_bgcolor  = "rgba(0,0,0,0)",
+      paper_bgcolor = "rgba(0,0,0,0)"
+    )
+} else {
+  cat("Could not fetch Red List Index data.")
+}
+```
+
+### Threatened and extinct species by group
+
+Number of threatened species (*Vulnerable*, *Endangered*, *Critically Endangered*) per group among the species assessed by the IUCN, and number of species documented as *Extinct* or *Extinct in the Wild* since 1500. Many groups (insects, fungi, plants) are still far from fully assessed, so these numbers are lower bounds.
+
+```{r threatened_plot, echo=FALSE, warning=FALSE, message=FALSE}
+if (!is.null(threatened)) {
+  plot_ly(threatened, height = 550,
+          x = ~threatened_species, y = ~entity,
+          type = "bar", orientation = "h",
+          marker = list(color = "#E63946"),
+          customdata = ~evaluated_species,
+          text = ~paste0(share, "%"),
+          textposition = "none",
+          hovertemplate = paste0("<b>%{y}</b><br>Threatened: %{x:,}",
+                                 "<br>Assessed: %{customdata:,}",
+                                 "<br>Share threatened: %{text}<extra></extra>")) |>
+    layout(
+      title = list(text = paste0("Threatened species by group -- IUCN Red List (", threatened_all$year, ")"), x = 0),
+      xaxis = list(title = "Number of threatened species"),
+      yaxis = list(title = "", categoryorder = "array", categoryarray = threatened$entity),
+      plot_bgcolor  = "rgba(0,0,0,0)",
+      paper_bgcolor = "rgba(0,0,0,0)"
+    )
+} else {
+  cat("Could not fetch threatened species data.")
+}
+```
+
+```{r extinct_plot, echo=FALSE, warning=FALSE, message=FALSE}
+if (!is.null(extinct)) {
+  plot_ly(extinct, y = ~entity, height = 450) |>
+    add_bars(x = ~ex, name = "Extinct",
+             marker = list(color = "#264653"),
+             hovertemplate = "<b>%{y}</b><br>Extinct: %{x}<extra></extra>") |>
+    add_bars(x = ~ew, name = "Extinct in the Wild",
+             marker = list(color = "#E9C46A"),
+             hovertemplate = "<b>%{y}</b><br>Extinct in the Wild: %{x}<extra></extra>") |>
+    layout(
+      title = list(text = paste0("Species extinct since 1500 by group -- IUCN Red List (", extinct_all$year, ")"), x = 0),
+      barmode = "stack",
+      xaxis = list(title = "Number of species"),
+      yaxis = list(title = "", categoryorder = "array", categoryarray = extinct$entity),
+      legend = list(x = 0.6, y = 0.1, bgcolor = "rgba(255,255,255,0.7)"),
+      plot_bgcolor  = "rgba(0,0,0,0)",
+      paper_bgcolor = "rgba(0,0,0,0)"
+    )
+} else {
+  cat("Could not fetch extinct species data.")
+}
+```
+
+### Extinct species list
+
+Species whose current IUCN status is *Extinct* or *Extinct in the Wild*, retrieved from Wikidata. The timeline shows the subset of species for which an extinction date is documented (often the last confirmed sighting); the table lists all of them and can be searched and filtered by group, status or year. Wikidata counts can differ slightly from the official IUCN totals above.
+
+```{r extinct_timeline, echo=FALSE, warning=FALSE, message=FALSE}
+if (!is.null(extinct_list) && any(!is.na(extinct_list$year))) {
+  dated <- extinct_list |> filter(!is.na(year)) |> mutate(group = droplevels(group))
+
+  plot_ly(dated,
+          x = ~year, y = ~group,
+          type = "scatter", mode = "markers",
+          marker = list(size = 9, color = "#264653", opacity = 0.7,
+                        line = list(color = "#ffffff", width = 1)),
+          text = ~ifelse(is.na(common), species, paste0(common, " (", species, ")")),
+          hovertemplate = "<b>%{text}</b><br>%{y} -- extinct around %{x}<extra></extra>") |>
+    layout(
+      title = list(text = paste0("Documented extinction dates (", nrow(dated), " of ",
+                                 nrow(extinct_list), " species, Wikidata)"), x = 0),
+      xaxis = list(title = ""),
+      yaxis = list(title = "", categoryorder = "array", categoryarray = rev(levels(dated$group))),
+      plot_bgcolor  = "rgba(0,0,0,0)",
+      paper_bgcolor = "rgba(0,0,0,0)"
+    )
+} else {
+  cat("Could not fetch the extinct species list from Wikidata.")
+}
+```
+
+```{r extinct_table, echo=FALSE, warning=FALSE, message=FALSE}
+if (!is.null(extinct_list)) {
+  extinct_list |>
+    mutate(
+      species = paste0("<i>", species, "</i>"),
+      links = paste0(
+        ifelse(is.na(iucn), "",
+               paste0('<a href="https://www.iucnredlist.org/details/', iucn, '/0" target="_blank">IUCN</a> &middot; ')),
+        '<a href="', item, '" target="_blank">Wikidata</a>')
+    ) |>
+    select(`Scientific name` = species, `Common name` = common, Group = group,
+           Status = status, `Extinction date` = year, Links = links) |>
+    datatable(
+      escape = FALSE, rownames = FALSE, filter = "top",
+      options = list(pageLength = 10, autoWidth = TRUE,
+                     order = list(list(4, "desc")),
+                     language = list(search = "Search:"))
+    )
 }
 ```
 :::
