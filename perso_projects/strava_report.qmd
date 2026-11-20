@@ -14,6 +14,13 @@ editor_options:
 image: "media/strava_report/heatmap_2024-09-03.png"
 ---
 
+```{=html}
+<style>
+/* Grayscale basemap so the colored tracks stand out */
+.strava-basemap { filter: grayscale(1) brightness(1.05) contrast(0.9); }
+</style>
+```
+
 ## Motivation
 
 There's nothing better than having fun with data that's close to your heart. For me, it's my Strava data (yes, I admit that sounds a bit silly). For my sanity and to decompress after work I like to spend my free time for hicking, running or cycling. It's also allowed me to learn more about APIs, graph creation...
@@ -107,10 +114,12 @@ lats.range <- c(46.98, 47.01) #(y)
 lons.range <- c(6.90, 6.97) #(x)
 lats.range <- c(46.97, 47.02) #(y)
 
-## tile options CartoDB.Positron , CartoDB.DarkMatter , Stamen.Toner  
+## OpenStreetMap tiles (no API key; CARTO basemaps now require one),
+## shown in grayscale (CSS class "strava-basemap") so the tracks stand out
 map <- leaflet(options = leafletOptions(zoomControl = TRUE)) %>%
-  addProviderTiles('CartoDB.Positron',
-                   options = providerTileOptions(noWrap = T, minZoom=0, maxZoom=50)) %>%
+  addProviderTiles('OpenStreetMap.Mapnik',
+                   options = providerTileOptions(noWrap = T, minZoom = 0, maxZoom = 19,
+                                                 className = "strava-basemap")) %>%
   fitBounds(lng1 = min(lons.range), lat1 = max(lats.range), lng2 <- max(lons.range), lat2 = min(lats.range))
 #map   #save using mapshot(map, file="sbmap.png")
 ```
@@ -184,10 +193,15 @@ act_data<- act_data %>%
 
 #test=act_data %>% dplyr::select(cumulative_duration_years,Hours,year,month)
 
-Years <- unique(act_data$Year)
+Years <- sort(unique(act_data$Year))
 
 n_years <- length(Years)
-my_gradient <- colorRampPalette(colors = c("#230007","#7F9CC7","#FFBA08", "#fc4c02"))(n_years)
+# One hue (Strava orange), light for older years -> dark for recent ones.
+# Interpolated in Lab space so the steps look evenly spaced.
+my_gradient <- setNames(
+  colorRampPalette(c("#F6A97A", "#D9480F", "#3D1100"), space = "Lab")(n_years),
+  Years
+)
 
 p1<-act_data %>% 
   ggplot(aes(x= as.Date(month,"%m-%d"),y=Hours, col=Year, group = Year))+
