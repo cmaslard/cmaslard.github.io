@@ -10,9 +10,9 @@
 # 2. From the project root: source("strava_auth.R")
 #    A browser tab opens on Strava: click "Authorize".
 #    (The app's "Authorization Callback Domain" must be: localhost)
-# 3. Copy the printed STRAVA_REFRESH_TOKEN=... line into ~/.Renviron,
-#    and add the three values as GitHub repository secrets
-#    (Settings > Secrets and variables > Actions).
+# 3. The refresh token is written to ~/.Renviron (STRAVA_REFRESH_TOKEN=...)
+#    automatically, without being printed. Then add the three values as
+#    GitHub repository secrets (Settings > Secrets and variables > Actions).
 
 creds <- Sys.getenv(c("STRAVA_CLIENT_ID", "STRAVA_CLIENT_SECRET"))
 if (any(!nzchar(creds))) {
@@ -27,4 +27,13 @@ tok <- rStrava::strava_oauth(
   cache = FALSE
 )
 
-cat("\nSTRAVA_REFRESH_TOKEN=", tok$credentials$refresh_token, "\n", sep = "")
+refresh <- tok$credentials$refresh_token
+if (!nzchar(refresh %||% "")) stop("Strava did not return a refresh token")
+
+# Save it in ~/.Renviron (replacing any previous one) and load it now
+renviron <- path.expand("~/.Renviron")
+lines <- if (file.exists(renviron)) readLines(renviron, warn = FALSE) else character()
+lines <- c(lines[!grepl("^STRAVA_REFRESH_TOKEN=", lines)], paste0("STRAVA_REFRESH_TOKEN=", refresh))
+writeLines(lines, renviron)
+readRenviron(renviron)
+message("STRAVA_REFRESH_TOKEN saved in ~/.Renviron")
