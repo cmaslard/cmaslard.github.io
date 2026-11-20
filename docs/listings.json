@@ -1,5 +1,14 @@
 [
   {
+    "listing": "/perso_projects.html",
+    "items": [
+      "/perso_projects/climate_change.html",
+      "/perso_projects/analyse_garden_v2.html",
+      "/perso_projects/strava_report.html",
+      "/perso_projects/analyse_garden.html"
+    ]
+  },
+  {
     "listing": "/tools.html",
     "items": [
       "/tools/qrcode.html",
@@ -35,15 +44,6 @@
       "/work_projects/FABER_2025.html",
       "/work_projects/PeaSulf_2025.html",
       "/work_projects/phd_soybean_2021_2024.html"
-    ]
-  },
-  {
-    "listing": "/perso_projects.html",
-    "items": [
-      "/perso_projects/climate_change.html",
-      "/perso_projects/analyse_garden_v2.html",
-      "/perso_projects/strava_report.html",
-      "/perso_projects/analyse_garden.html"
     ]
   }
 ]
