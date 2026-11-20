@@ -196,10 +196,10 @@ act_data<- act_data %>%
 Years <- sort(unique(act_data$Year))
 
 n_years <- length(Years)
-# One hue (Strava orange), light for older years -> dark for recent ones.
-# Interpolated in Lab space so the steps look evenly spaced.
+# Light for older years -> dark for recent ones ("mako": mint -> teal -> navy).
+# Perceptually uniform, and the slight hue shift keeps neighbouring years apart.
 my_gradient <- setNames(
-  colorRampPalette(c("#F6A97A", "#D9480F", "#3D1100"), space = "Lab")(n_years),
+  substr(viridisLite::mako(n_years, begin = 0.25, end = 0.85, direction = -1), 1, 7),
   Years
 )
 
