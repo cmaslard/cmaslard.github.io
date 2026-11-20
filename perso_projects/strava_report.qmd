@@ -196,12 +196,20 @@ act_data<- act_data %>%
 Years <- sort(unique(act_data$Year))
 
 n_years <- length(Years)
-# Light for older years -> dark for recent ones ("mako": mint -> teal -> navy).
-# Perceptually uniform, and the slight hue shift keeps neighbouring years apart.
-my_gradient <- setNames(
-  substr(viridisLite::mako(n_years, begin = 0.25, end = 0.85, direction = -1), 1, 7),
-  Years
-)
+# Strava orange for the current year; older years fade progressively toward a
+# warm gray (same hue, less vibrance). Built in Lab space so it stays orange.
+strava_fade <- function(n, from_L = 76, from_C = 6, gamma = 1.6) {
+  lab <- grDevices::convertColor(t(col2rgb("#FC4C02") / 255), from = "sRGB", to = "Lab")
+  h  <- atan2(lab[3], lab[2])
+  C1 <- sqrt(lab[2]^2 + lab[3]^2)
+  t  <- if (n > 1) seq(0, 1, length.out = n) else 1
+  L  <- from_L + (lab[1] - from_L) * t
+  C  <- from_C + (C1 - from_C) * t^gamma   # gamma > 1: vibrance rises late
+  rgb <- grDevices::convertColor(cbind(L, C * cos(h), C * sin(h)),
+                                 from = "Lab", to = "sRGB", clip = TRUE)
+  grDevices::rgb(rgb[, 1], rgb[, 2], rgb[, 3])
+}
+my_gradient <- setNames(strava_fade(n_years), Years)
 
 p1<-act_data %>% 
   ggplot(aes(x= as.Date(month,"%m-%d"),y=Hours, col=Year, group = Year))+
