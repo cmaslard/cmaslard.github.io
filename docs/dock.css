@@ -120,62 +120,175 @@
   transform: translateX(-50%) translateY(0);
 }
 
-@media (max-width: 575.98px) {
-  .cm-dock-panel {
-    position: fixed;
-    top: auto;
-    bottom: 14px;
-    left: 50%;
-    right: auto;
-    width: calc(100vw - 24px);
-    max-width: 340px;
-    max-height: calc(100vh - 28px);
-    max-height: calc(100dvh - 28px);
-    overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
-    flex-wrap: wrap;
-    justify-content: center;
-    padding: 10px 12px;
-    gap: 6px;
-    border-radius: 20px;
-    transform: translateX(-50%) translateY(10px);
-  }
+/* ---------- Mobile / touch: bottom sheet (built by dock.js) ---------- */
 
-  .cm-dock.open .cm-dock-panel {
-    transform: translateX(-50%) translateY(0);
-  }
+.cm-sheet-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s ease, visibility 0.2s;
+  z-index: 1080;
+}
 
-  .cm-dock-group {
-    flex-wrap: wrap;
-    justify-content: center;
-    flex: 1 1 100%;
-    width: 100%;
-  }
+.cm-sheet-backdrop.open {
+  opacity: 1;
+  visibility: visible;
+}
 
-  .cm-dock-sep {
-    width: 100%;
-    height: 1px;
-    margin: 2px 0;
-  }
+.cm-sheet {
+  box-sizing: border-box;
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: 0 auto;
+  width: 100%;
+  max-width: 560px;
+  max-height: 80vh;
+  max-height: 80dvh;
+  display: flex;
+  flex-direction: column;
+  background: #0c131f;
+  color: #fff;
+  border-radius: 20px 20px 0 0;
+  box-shadow: 0 -8px 30px rgba(0, 0, 0, 0.4);
+  padding-bottom: env(safe-area-inset-bottom);
+  transform: translateY(100%);
+  visibility: hidden;
+  transition: transform 0.25s ease, visibility 0.25s;
+  z-index: 1081;
+}
 
-  .cm-dock-item {
-    width: 30px;
-    height: 30px;
-  }
+.cm-sheet.open {
+  transform: translateY(0);
+  visibility: visible;
+}
 
-  .cm-dock-item svg,
-  .cm-dock-item img {
-    width: 16px;
-    height: 16px;
-  }
+.cm-sheet-handle {
+  flex-shrink: 0;
+  width: 40px;
+  height: 4px;
+  margin: 8px auto 0;
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.25);
+}
 
-  .cm-dock-item img {
-    width: 22px;
-    height: 22px;
-  }
+.cm-sheet-header {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 12px 4px 20px;
+}
 
-  /* Tooltips rely on hover, which mobile lacks; avoid clipping/offscreen artifacts. */
-  .cm-dock-item::after {
-    display: none;
+.cm-sheet-heading {
+  font-size: 1.05rem;
+  font-weight: 600;
+}
+
+.cm-sheet-close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+  font-size: 1rem;
+}
+
+.cm-sheet-body {
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+  padding: 0 16px 20px;
+}
+
+.cm-sheet-section + .cm-sheet-section {
+  margin-top: 10px;
+}
+
+.cm-sheet-title {
+  margin: 10px 4px 8px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.cm-sheet-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(76px, 1fr));
+  gap: 10px 6px;
+}
+
+.cm-sheet-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+  padding: 6px 2px;
+  border-radius: 12px;
+  color: #fff !important;
+  text-decoration: none !important;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.cm-sheet-item:active,
+.cm-sheet-item:focus-visible {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.cm-sheet-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  overflow: hidden;
+}
+
+.cm-sheet-icon svg {
+  width: 26px;
+  height: 26px;
+}
+
+.cm-sheet-icon img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: contain;
+}
+
+.cm-sheet-label {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  max-width: 100%;
+  font-size: 0.72rem;
+  line-height: 1.2;
+  text-align: center;
+  overflow-wrap: anywhere;
+}
+
+html.cm-sheet-open,
+html.cm-sheet-open body {
+  overflow: hidden;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cm-dock-panel,
+  .cm-sheet,
+  .cm-sheet-backdrop {
+    transition: none;
   }
 }
