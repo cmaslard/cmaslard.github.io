@@ -1,5 +1,32 @@
 [
   {
+    "listing": "/perso_projects.html",
+    "items": [
+      "/perso_projects/climate_change.html",
+      "/perso_projects/analyse_garden_v2.html",
+      "/perso_projects/strava_report.html",
+      "/perso_projects/analyse_garden.html"
+    ]
+  },
+  {
+    "listing": "/tools.html",
+    "items": [
+      "/tools/qrcode.html",
+      "/tools/AnnoTrain.html",
+      "/tools/DeepPlate.html",
+      "/tools/macro_angle.html",
+      "/tools/deep_learning_segmentation.html"
+    ]
+  },
+  {
+    "listing": "/teaching.html",
+    "items": [
+      "/teaching/bioinformatic_tools_course.html",
+      "/teaching/2025_plant_root_AI_basics.html",
+      "/teaching/Bioinformatic_tools_mcom_analyse.html"
+    ]
+  },
+  {
     "listing": "/work_projects.html",
     "items": [
       "/work_projects/AnnoTrain.html",
@@ -17,33 +44,6 @@
       "/work_projects/FABER_2025.html",
       "/work_projects/PeaSulf_2025.html",
       "/work_projects/phd_soybean_2021_2024.html"
-    ]
-  },
-  {
-    "listing": "/teaching.html",
-    "items": [
-      "/teaching/bioinformatic_tools_course.html",
-      "/teaching/2025_plant_root_AI_basics.html",
-      "/teaching/Bioinformatic_tools_mcom_analyse.html"
-    ]
-  },
-  {
-    "listing": "/tools.html",
-    "items": [
-      "/tools/qrcode.html",
-      "/tools/AnnoTrain.html",
-      "/tools/DeepPlate.html",
-      "/tools/macro_angle.html",
-      "/tools/deep_learning_segmentation.html"
-    ]
-  },
-  {
-    "listing": "/perso_projects.html",
-    "items": [
-      "/perso_projects/climate_change.html",
-      "/perso_projects/analyse_garden_v2.html",
-      "/perso_projects/strava_report.html",
-      "/perso_projects/analyse_garden.html"
     ]
   }
 ]

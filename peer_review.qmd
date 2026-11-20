@@ -1,0 +1,30 @@
+---
+title: "Peer review"
+toc: false
+number-sections: false
+execute:
+  echo: false
+  message: false
+  warning: false
+format:
+  html:
+      page-layout: full
+editor: visual
+editor_options:
+  chunk_output_type: console
+---
+
+```{r, echo=FALSE, warning=FALSE, message=F}
+source("src.R")
+```
+
+::: column-margin
+Peer review is confidential: only the journals are listed, never the manuscripts.\
+{{< iconify fa6-brands:orcid width="1.2em" height="1.2em" >}} Verified reviews on [ORCID](https://orcid.org/0000-0002-6951-1963)\
+{{< iconify line-md link width="1.2em" height="1.2em" >}}: Link of the journal\
+Last update on: **`r Sys.Date()`**
+:::
+
+Reviewer for international peer-reviewed journals.
+
+`r make_peer_review_list(peer_reviews)`

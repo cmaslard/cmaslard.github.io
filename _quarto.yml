@@ -46,6 +46,8 @@ website:
             href: awards.qmd
           - text: Grants
             href: grants.qmd
+          - text: Peer review
+            href: peer_review.qmd
           - text: Tools
             href: tools.qmd
           - text: Personal projects

@@ -1074,12 +1074,100 @@ title_to_html <- function(title) {
   return(HTML(glue::glue("<span>{rendered_title}</span>")))
 }
 
+############## Peer review ####################
+# Tab "peer_review" of the main Google Sheet, one row per manuscript reviewed.
+# Columns: date | journal | publisher | url_journal | url_verified | show_in_site
+#   - date: YYYY-MM-DD, YYYY-MM or YYYY (only the year is displayed)
+#   - url_verified: optional proof (ORCID / Web of Science review record)
+# Never put the manuscript title or authors: peer review is confidential.
+PEER_REVIEW_SHEET <- "peer_review"  # tab name (read by name, no gid needed)
+
+get_peer_reviews <- function(sheet = PEER_REVIEW_SHEET) {
+  empty <- data.frame(
+    date = character(), journal = character(), publisher = character(),
+    url_journal = character(), url_verified = character(),
+    show_in_site = logical(), stringsAsFactors = FALSE
+  )
+  pr <- tryCatch(
+    readr::read_csv(
+      glue::glue(
+        "https://docs.google.com/spreadsheets/d/1Cu1twyhPRdxY3Q4HBF6qmOK7BI_8a4qRav_IWI2n4eA/gviz/tq?tqx=out:csv&sheet={utils::URLencode(sheet)}"
+      ),
+      col_types = readr::cols(.default = readr::col_character()),
+      show_col_types = FALSE
+    ),
+    error = function(e) {
+      warning("Peer review sheet could not be read: ", conditionMessage(e))
+      empty
+    }
+  )
+  for (cc in setdiff(names(empty), names(pr))) pr[[cc]] <- NA
+  pr <- ensure_show_col(pr, "show_in_site", default = TRUE)
+  pr[pr$show_in_site & !is.na(pr$journal) & nzchar(trimws(pr$journal)), ]
+}
+
+summarise_peer_reviews <- function(pr) {
+  # year extracted by regex: Google may export dates as 2026-11-20 or 20/11/2026
+  pr$year <- as.integer(stringr::str_extract(as.character(pr$date), "(19|20)\\d{2}"))
+  pr %>%
+    dplyr::group_by(journal) %>%
+    dplyr::summarise(
+      publisher    = dplyr::first(na.omit(publisher)),
+      n            = dplyr::n(),
+      years        = paste(sort(unique(na.omit(year)), decreasing = TRUE), collapse = ", "),
+      last_year    = suppressWarnings(max(year, na.rm = TRUE)),
+      url_journal  = dplyr::first(na.omit(url_journal)),
+      url_verified = dplyr::first(na.omit(url_verified)),
+      .groups = "drop"
+    ) %>%
+    dplyr::arrange(dplyr::desc(last_year), dplyr::desc(n), journal)
+}
+
+make_peer_review1 <- function(j, index) {
+  meta <- c(
+    if (!is.na(j$publisher)) glue::glue("_{j$publisher}_"),
+    if (nzchar(j$years)) j$years,
+    glue::glue("**{j$n} review{ifelse(j$n > 1, 's', '')}**")
+  )
+  links <- c(
+    if (!is.na(j$url_journal)) make_url(j$url_journal),
+    if (!is.na(j$url_verified)) glue::glue(
+      '<a href="{j$url_verified}" target="_blank" style="font-size: 14px;">verified record</a>'
+    )
+  )
+  as.character(glue::glue(
+    '<div class="peer-review">
+     <div style="font-size: 18px; line-height: 1.1;">
+       <span style="font-weight: normal;">{index}|</span>
+       <span style="font-weight: bold; font-style: italic;">{j$journal}</span>
+     </div>
+     <div style="font-size: 15px; margin-top: 5px; margin-bottom: -10px; line-height: 1.1;">{markdown_to_html(paste(meta, collapse = " | "))}</div>
+     <div style="margin-top: 4px; display: flex; gap: 12px; align-items: center;">{paste(links, collapse = "")}</div>
+     <hr style="border: 1px solid #ccc;" />
+     </div>'
+  ))
+}
+
+make_peer_review_list <- function(pr) {
+  if (nrow(pr) == 0) {
+    return(htmltools::HTML("<p><em>No peer-review activity listed yet.</em></p>"))
+  }
+  x <- summarise_peer_reviews(pr)
+  intro <- glue::glue(
+    '<p style="font-size: 16px;">{nrow(pr)} manuscript{ifelse(nrow(pr) > 1, "s", "")} ',
+    'reviewed for {nrow(x)} journal{ifelse(nrow(x) > 1, "s", "")}.</p>'
+  )
+  items <- vapply(seq_len(nrow(x)), function(i) make_peer_review1(x[i, ], i), character(1))
+  htmltools::HTML(paste(c(intro, items), collapse = ""))
+}
+
 #get_pubs()
 pubs <- get_pubs()
 presentations <- get_presentations()
 awards <- get_awards()
 grants <- get_grants()
 advisees <- get_advisees()
+peer_reviews <- get_peer_reviews()
 
 # make_pub_list(pubs, "working")
 # make_pub_list(pubs, "peer_reviewed")
