@@ -70,7 +70,11 @@ Last update on: **`r Sys.Date()`**
 ::::: columns
 ::: {.column width="25%"}
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
-profile <- get_profile("TsztyiMAAAAJ&hl")
+profile <- scholar_cached(
+  "profile",
+  function() get_profile("TsztyiMAAAAJ&hl"),
+  valid = function(p) is.list(p) && length(p$h_index) == 1 && !is.na(p$h_index)
+)
 # Updated data
 metrics <- data.frame(
   Metric1 = c("H-Index", "Sum of Times Cited", "Publications"),
@@ -93,7 +97,11 @@ kable(metrics, col.names = c("", ""), align = "c", format = "html") %>%
 
 ::: {.column width="75%"}
 ```{r, echo=F, warning=FALSE, message=FALSE}
-df <-scholar::get_citation_history("TsztyiMAAAAJ&hl") %>%  # my_ID (find in URL)
+df <- scholar_cached(
+  "citation_history",
+  function() scholar::get_citation_history("TsztyiMAAAAJ&hl"),  # my_ID (find in URL)
+  valid = function(d) is.data.frame(d) && nrow(d) > 0
+) %>%
   mutate(Face=ifelse(year==format(Sys.Date(), "%Y"),"bold","plain"))
 
 ggplot(df,aes(x=year,y=cites))+

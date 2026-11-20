@@ -1161,6 +1161,30 @@ make_peer_review_list <- function(pr) {
   htmltools::HTML(paste(c(intro, items), collapse = ""))
 }
 
+############## Google Scholar with cache ####################
+# Google Scholar often blocks automated requests (e.g. GitHub Actions
+# runners). Keep the last successful answer on disk and reuse it when the
+# live request fails, so the render never breaks because of Scholar.
+# "_data/" starts with "_" so Quarto never publishes it.
+SCHOLAR_CACHE <- "_data/scholar_cache.rds"
+
+scholar_cached <- function(key, fetch, valid, cache = SCHOLAR_CACHE) {
+  path <- here::here(cache)
+  store <- if (file.exists(path)) readRDS(path) else list()
+  value <- tryCatch(suppressWarnings(fetch()), error = function(e) NULL)
+  if (!is.null(value) && isTRUE(valid(value))) {
+    store[[key]] <- value
+    dir.create(dirname(path), showWarnings = FALSE, recursive = TRUE)
+    saveRDS(store, path)
+    return(value)
+  }
+  if (!is.null(store[[key]])) {
+    message("Google Scholar unavailable: using cached '", key, "'")
+    return(store[[key]])
+  }
+  stop("Google Scholar unavailable and no cached value for '", key, "'")
+}
+
 #get_pubs()
 pubs <- get_pubs()
 presentations <- get_presentations()

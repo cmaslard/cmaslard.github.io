@@ -20,7 +20,7 @@ There's nothing better than having fun with data that's close to your heart. For
 
 The project is still a work in progress, but the first version already includes total mileage for hiking, biking, and running, as well as a heat map of all my activities.
 
-There are many more visualizations and features I'd love to add, but finding the time has been a challenge. For now, I manually retrieve new activities using the Strava API via the {rstrava} package, but I plan to automate this in the next version. Stay tuned!
+There are many more visualizations and features I'd love to add, but finding the time has been a challenge. New activities are now retrieved automatically from the Strava API via the {rstrava} package every time the site is rebuilt (once a week). Stay tuned!
 
 ::: callout-note
 ## Code written by me, Corentin Maslard and inspired by various websites:
@@ -48,30 +48,44 @@ library(plotly)
 
 ## Data importation
 
-Then I will enter my personal Strava API information which can be found [here](https://www.google.com/url?q=https%3A%2F%2Fwww.strava.com%2Fsettings%2Fapi&sa=D&sntz=1&usg=AOvVaw31ZF0z2iDuOYkdAVQ0AZFP) after you apply for API access.
+My personal Strava API information can be found [here](https://www.strava.com/settings/api) after you apply for API access. The credentials are never written in the code: they are read from environment variables (`~/.Renviron` on my computer, repository secrets on GitHub). The long-lived refresh token (obtained once with `strava_auth.R`) is exchanged for a fresh access token at every render, so the page updates automatically.
 
-```{r, eval=F}
-## Necessary info from Strava api https://www.strava.com/settings/api 
-app_name       <- 'website' # chosen by user
-app_client_id  <- '133545' # an integer, assigned by Strava
-app_secret     <- 'e606d239de2a102bf125357c62641af7b2c39e04' # an alphanumeric secret, assigned by Strava
+```{r}
+## Strava API credentials: STRAVA_CLIENT_ID, STRAVA_CLIENT_SECRET, STRAVA_REFRESH_TOKEN
+strava_token <- function() {
+  creds <- Sys.getenv(c("STRAVA_CLIENT_ID", "STRAVA_CLIENT_SECRET", "STRAVA_REFRESH_TOKEN"))
+  if (any(!nzchar(creds))) {
+    stop("Missing Strava credentials: run strava_auth.R once and set them in ~/.Renviron")
+  }
+  # Exchange the long-lived refresh token for a short-lived access token
+  res <- httr::POST(
+    "https://www.strava.com/oauth/token",
+    body = list(client_id = creds[[1]], client_secret = creds[[2]],
+                grant_type = "refresh_token", refresh_token = creds[[3]]),
+    encode = "form"
+  )
+  httr::stop_for_status(res, "refresh the Strava access token")
+  tok <- httr::content(res)
+  if (!identical(tok$refresh_token, creds[[3]])) {
+    cat("Strava issued a new refresh token: update STRAVA_REFRESH_TOKEN\n", file = stderr())
+  }
+  httr::add_headers(Authorization = paste("Bearer", tok$access_token))
+}
 
-stoken <- httr::config(token = rStrava::strava_oauth(app_name, app_client_id, app_secret, app_scope="activity:read_all"))
+stoken <- strava_token()
 ```
 
 Next, I load in my activity list and compile my activities into a data frame using the rStrava library.
 
-```{r, eval=F}
+```{r}
 ## Load my activities and compile activities with rStrava library
-my_data  <- rStrava::get_activity_list(stoken)
-act_data <- rStrava::compile_activities(my_data)
-save(my_data, act_data,stoken, file = "perso_projects/media/strava_report/data_strava.RData")
+my_acts_select <- rStrava::get_activity_list(stoken, after = as.Date('2021-01-01'))
+act_data <- rStrava::compile_activities(my_acts_select)
 ```
 
 The activity data contains 56 variables. We only need to keep two, the map data called 'map.summary_polyline' and the 'upload_id'.
 
 ```{r}
-load(here::here("perso_projects/media/strava_report/data_strava.RData"))
 ## Keep only activity id and map line
 keeps   <- c('map.summary_polyline', 'upload_id')
 my_acts <- dplyr::select(act_data, match(keeps, names(act_data)))
@@ -123,8 +137,7 @@ Below is a heat map of all my recorded activities, created using leaflet.
 Change color depending of the different activity
 
 ```{r map_creation, warning=FALSE, message=F}
-my_acts_select <- get_activity_list(stoken, after = as.Date('2021-01-01'))
-act_data <- compile_activities(my_acts_select) %>% 
+act_data <- compile_activities(my_acts_select) %>%
   dplyr::filter(map.summary_polyline!="") %>% 
   mutate(type2 = ifelse(type %in% c("Ride", "Run", "Hike"), type, "Other"))
 
@@ -154,8 +167,6 @@ map
 ```
 
 ```{r, message=F, warning=FALSE}
-#athl_fun(133545, trace = FALSE)
-my_acts_select <- get_activity_list(stoken, after = as.Date('2021-01-01'))
 act_data <- compile_activities(my_acts_select)
 act_data<- act_data %>%
   dplyr::filter(type %in% c("Hike","Ride","Run","Workout")) %>% 
